@@ -1,0 +1,15 @@
+C:\Users\DJMsu\source\repos\Class Scheduler\Class Scheduler\bin\Debug\Class Scheduler.exe.config
+C:\Users\DJMsu\source\repos\Class Scheduler\Class Scheduler\bin\Debug\Class Scheduler.exe
+C:\Users\DJMsu\source\repos\Class Scheduler\Class Scheduler\bin\Debug\Class Scheduler.pdb
+C:\Users\DJMsu\source\repos\Class Scheduler\Class Scheduler\obj\Debug\Class Scheduler.csprojAssemblyReference.cache
+C:\Users\DJMsu\source\repos\Class Scheduler\Class Scheduler\obj\Debug\Class_Scheduler.Properties.Resources.resources
+C:\Users\DJMsu\source\repos\Class Scheduler\Class Scheduler\obj\Debug\Class Scheduler.csproj.GenerateResource.cache
+C:\Users\DJMsu\source\repos\Class Scheduler\Class Scheduler\obj\Debug\Class Scheduler.csproj.CoreCompileInputs.cache
+C:\Users\DJMsu\source\repos\Class Scheduler\Class Scheduler\obj\Debug\Class Scheduler.exe
+C:\Users\DJMsu\source\repos\Class Scheduler\Class Scheduler\obj\Debug\Class Scheduler.pdb
+C:\Users\DJMsu\source\repos\Class Scheduler\Class Scheduler\obj\Debug\Class_Scheduler.CourseAdd.resources
+C:\Users\DJMsu\source\repos\Class Scheduler\Class Scheduler\obj\Debug\Class_Scheduler.SemesterAdd.resources
+C:\Users\DJMsu\source\repos\Class Scheduler\Class Scheduler\obj\Debug\Class_Scheduler.ElementViewer.resources
+C:\Users\DJMsu\source\repos\Class Scheduler\Class Scheduler\obj\Debug\Class_Scheduler.PromptWindow.resources
+C:\Users\DJMsu\source\repos\Class Scheduler\Class Scheduler\obj\Debug\Class_Scheduler.ScheduleResultView.resources
+C:\Users\DJMsu\source\repos\Class Scheduler\Class Scheduler\obj\Debug\Class_Scheduler.MainForm.resources
