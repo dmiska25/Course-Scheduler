@@ -113,14 +113,14 @@
             this.courseDependenciesTB.Location = new System.Drawing.Point(12, 252);
             this.courseDependenciesTB.Name = "courseDependenciesTB";
             this.courseDependenciesTB.Size = new System.Drawing.Size(374, 20);
-            this.courseDependenciesTB.TabIndex = 4;
+            this.courseDependenciesTB.TabIndex = 5;
             // 
             // addCourseButton
             // 
             this.addCourseButton.Location = new System.Drawing.Point(27, 423);
             this.addCourseButton.Name = "addCourseButton";
             this.addCourseButton.Size = new System.Drawing.Size(125, 23);
-            this.addCourseButton.TabIndex = 8;
+            this.addCourseButton.TabIndex = 9;
             this.addCourseButton.Text = "Add Course";
             this.addCourseButton.UseVisualStyleBackColor = true;
             this.addCourseButton.Click += new System.EventHandler(this.addCourseButton_Click);
@@ -131,7 +131,7 @@
             this.cancelButton.Location = new System.Drawing.Point(261, 423);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(125, 23);
-            this.cancelButton.TabIndex = 9;
+            this.cancelButton.TabIndex = 10;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
@@ -157,7 +157,7 @@
             this.validSemestersTB.Location = new System.Drawing.Point(12, 330);
             this.validSemestersTB.Name = "validSemestersTB";
             this.validSemestersTB.Size = new System.Drawing.Size(374, 20);
-            this.validSemestersTB.TabIndex = 6;
+            this.validSemestersTB.TabIndex = 7;
             // 
             // courseValidSemLabel
             // 
@@ -173,7 +173,7 @@
             this.courseCopendenciesTB.Location = new System.Drawing.Point(12, 291);
             this.courseCopendenciesTB.Name = "courseCopendenciesTB";
             this.courseCopendenciesTB.Size = new System.Drawing.Size(374, 20);
-            this.courseCopendenciesTB.TabIndex = 5;
+            this.courseCopendenciesTB.TabIndex = 6;
             // 
             // label4
             // 
@@ -199,14 +199,14 @@
             this.courseDescriptionTB.Multiline = true;
             this.courseDescriptionTB.Name = "courseDescriptionTB";
             this.courseDescriptionTB.Size = new System.Drawing.Size(374, 86);
-            this.courseDescriptionTB.TabIndex = 17;
+            this.courseDescriptionTB.TabIndex = 4;
             // 
             // advancedDetailsButton
             // 
             this.advancedDetailsButton.Location = new System.Drawing.Point(27, 356);
             this.advancedDetailsButton.Name = "advancedDetailsButton";
             this.advancedDetailsButton.Size = new System.Drawing.Size(125, 23);
-            this.advancedDetailsButton.TabIndex = 18;
+            this.advancedDetailsButton.TabIndex = 8;
             this.advancedDetailsButton.Text = "Advanced Details";
             this.advancedDetailsButton.UseVisualStyleBackColor = true;
             this.advancedDetailsButton.Click += new System.EventHandler(this.advancedDetailsButton_Click);

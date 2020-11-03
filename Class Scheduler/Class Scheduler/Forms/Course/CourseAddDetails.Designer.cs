@@ -70,7 +70,7 @@
             this.minimumCreditsCB.Location = new System.Drawing.Point(13, 26);
             this.minimumCreditsCB.Name = "minimumCreditsCB";
             this.minimumCreditsCB.Size = new System.Drawing.Size(164, 17);
-            this.minimumCreditsCB.TabIndex = 1;
+            this.minimumCreditsCB.TabIndex = 0;
             this.minimumCreditsCB.Text = "minimum credits requirement?";
             this.minimumCreditsCB.UseVisualStyleBackColor = true;
             this.minimumCreditsCB.CheckedChanged += new System.EventHandler(this.minimumCreditsCB_CheckedChanged);
@@ -92,7 +92,7 @@
             this.standingRequirementCB.Location = new System.Drawing.Point(12, 107);
             this.standingRequirementCB.Name = "standingRequirementCB";
             this.standingRequirementCB.Size = new System.Drawing.Size(130, 17);
-            this.standingRequirementCB.TabIndex = 3;
+            this.standingRequirementCB.TabIndex = 5;
             this.standingRequirementCB.Text = "standing requirement?";
             this.standingRequirementCB.UseVisualStyleBackColor = true;
             this.standingRequirementCB.CheckedChanged += new System.EventHandler(this.standingRequirementCB_CheckedChanged);
@@ -104,7 +104,7 @@
             this.courseTypeUGRB.Location = new System.Drawing.Point(29, 0);
             this.courseTypeUGRB.Name = "courseTypeUGRB";
             this.courseTypeUGRB.Size = new System.Drawing.Size(135, 17);
-            this.courseTypeUGRB.TabIndex = 4;
+            this.courseTypeUGRB.TabIndex = 10;
             this.courseTypeUGRB.TabStop = true;
             this.courseTypeUGRB.Text = "undergraduate course?";
             this.courseTypeUGRB.UseVisualStyleBackColor = true;
@@ -115,7 +115,7 @@
             this.courseTypeGRB.Location = new System.Drawing.Point(170, 0);
             this.courseTypeGRB.Name = "courseTypeGRB";
             this.courseTypeGRB.Size = new System.Drawing.Size(108, 17);
-            this.courseTypeGRB.TabIndex = 5;
+            this.courseTypeGRB.TabIndex = 11;
             this.courseTypeGRB.Text = "graduate course?";
             this.courseTypeGRB.UseVisualStyleBackColor = true;
             // 
@@ -125,7 +125,7 @@
             this.generalElectiveCB.Location = new System.Drawing.Point(12, 209);
             this.generalElectiveCB.Name = "generalElectiveCB";
             this.generalElectiveCB.Size = new System.Drawing.Size(101, 17);
-            this.generalElectiveCB.TabIndex = 6;
+            this.generalElectiveCB.TabIndex = 12;
             this.generalElectiveCB.Text = "general elective";
             this.generalElectiveCB.UseVisualStyleBackColor = true;
             // 
@@ -135,7 +135,7 @@
             this.degreeElectiveCB.Location = new System.Drawing.Point(12, 232);
             this.degreeElectiveCB.Name = "degreeElectiveCB";
             this.degreeElectiveCB.Size = new System.Drawing.Size(99, 17);
-            this.degreeElectiveCB.TabIndex = 7;
+            this.degreeElectiveCB.TabIndex = 13;
             this.degreeElectiveCB.Text = "degree elective";
             this.degreeElectiveCB.UseVisualStyleBackColor = true;
             // 
@@ -145,7 +145,7 @@
             this.dualCreditCB.Location = new System.Drawing.Point(11, 255);
             this.dualCreditCB.Name = "dualCreditCB";
             this.dualCreditCB.Size = new System.Drawing.Size(75, 17);
-            this.dualCreditCB.TabIndex = 8;
+            this.dualCreditCB.TabIndex = 14;
             this.dualCreditCB.Text = "dual credit";
             this.dualCreditCB.UseVisualStyleBackColor = true;
             // 
@@ -163,7 +163,7 @@
             this.saveButton.Location = new System.Drawing.Point(122, 289);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
-            this.saveButton.TabIndex = 10;
+            this.saveButton.TabIndex = 15;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
@@ -184,7 +184,7 @@
             this.yearBaseTB.Location = new System.Drawing.Point(77, 83);
             this.yearBaseTB.Name = "yearBaseTB";
             this.yearBaseTB.Size = new System.Drawing.Size(67, 20);
-            this.yearBaseTB.TabIndex = 12;
+            this.yearBaseTB.TabIndex = 3;
             // 
             // yearMultipleLabel
             // 
@@ -202,7 +202,7 @@
             this.yearMultipleTB.Location = new System.Drawing.Point(225, 83);
             this.yearMultipleTB.Name = "yearMultipleTB";
             this.yearMultipleTB.Size = new System.Drawing.Size(71, 20);
-            this.yearMultipleTB.TabIndex = 14;
+            this.yearMultipleTB.TabIndex = 4;
             // 
             // minimumCreditsLabel
             // 
@@ -220,7 +220,7 @@
             this.minimumCreditsRequiredTB.Location = new System.Drawing.Point(150, 43);
             this.minimumCreditsRequiredTB.Name = "minimumCreditsRequiredTB";
             this.minimumCreditsRequiredTB.Size = new System.Drawing.Size(124, 20);
-            this.minimumCreditsRequiredTB.TabIndex = 16;
+            this.minimumCreditsRequiredTB.TabIndex = 1;
             // 
             // standingFreshmenRB
             // 
@@ -230,7 +230,7 @@
             this.standingFreshmenRB.Location = new System.Drawing.Point(22, 130);
             this.standingFreshmenRB.Name = "standingFreshmenRB";
             this.standingFreshmenRB.Size = new System.Drawing.Size(71, 17);
-            this.standingFreshmenRB.TabIndex = 17;
+            this.standingFreshmenRB.TabIndex = 6;
             this.standingFreshmenRB.TabStop = true;
             this.standingFreshmenRB.Text = "Freshman";
             this.standingFreshmenRB.UseVisualStyleBackColor = true;
@@ -242,7 +242,7 @@
             this.standingSophmoreRB.Location = new System.Drawing.Point(122, 130);
             this.standingSophmoreRB.Name = "standingSophmoreRB";
             this.standingSophmoreRB.Size = new System.Drawing.Size(79, 17);
-            this.standingSophmoreRB.TabIndex = 18;
+            this.standingSophmoreRB.TabIndex = 7;
             this.standingSophmoreRB.Text = "Sophomore";
             this.standingSophmoreRB.UseVisualStyleBackColor = true;
             // 
@@ -253,7 +253,7 @@
             this.standingJuniorRB.Location = new System.Drawing.Point(22, 150);
             this.standingJuniorRB.Name = "standingJuniorRB";
             this.standingJuniorRB.Size = new System.Drawing.Size(53, 17);
-            this.standingJuniorRB.TabIndex = 19;
+            this.standingJuniorRB.TabIndex = 8;
             this.standingJuniorRB.Text = "Junior";
             this.standingJuniorRB.UseVisualStyleBackColor = true;
             // 
@@ -264,7 +264,7 @@
             this.standingSeniorRB.Location = new System.Drawing.Point(122, 150);
             this.standingSeniorRB.Name = "standingSeniorRB";
             this.standingSeniorRB.Size = new System.Drawing.Size(55, 17);
-            this.standingSeniorRB.TabIndex = 20;
+            this.standingSeniorRB.TabIndex = 9;
             this.standingSeniorRB.Text = "Senior";
             this.standingSeniorRB.UseVisualStyleBackColor = true;
             // 
