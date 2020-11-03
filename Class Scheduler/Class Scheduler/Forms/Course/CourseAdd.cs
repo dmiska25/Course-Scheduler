@@ -1,4 +1,5 @@
-﻿using Class_Scheduler.Objects;
+﻿using Class_Scheduler.Forms.Course;
+using Class_Scheduler.Objects;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,7 +19,9 @@ namespace Class_Scheduler
         //Variables
         protected Course course;
         protected List<Course> courses;
+        protected CourseAddDetails detailsForm;
         public Course NewCourse { get { return course; } }
+        
 
         public CourseAdd(ref List<Course> courses)
         {
@@ -32,7 +35,8 @@ namespace Class_Scheduler
 
         private void CourseAdd_Load(object sender, EventArgs e)
         {
-
+            //initiate CourseDetailsForm
+            detailsForm = new CourseAddDetails();
         }
 
         protected virtual void addCourseButton_Click(object sender, EventArgs e)
@@ -40,12 +44,12 @@ namespace Class_Scheduler
             try
             {
                 //Attempt to create course object
-                StringCourseBuilder builder = new Course.StringCourseBuilder(courseNameTB.Text, coursePrefixTB.Text,
-                   courseIDTB.Text, courseCreditsTB.Text, courses);
+                StringCourseBuilder builder = new Course.StringCourseBuilder(courseNameTB.Text, courseDescriptionTB.Text, 
+                    coursePrefixTB.Text, courseIDTB.Text, courseCreditsTB.Text, courses);
+                builder.CourseDetails = detailsForm.courseDetails;
                 builder.ValidTerms = validSemestersTB.Text;
                 builder.Dependencies = courseDependenciesTB.Text;
                 builder.Copendencies = courseCopendenciesTB.Text;
-                builder.IsGraduate = gradClassCB.Checked.ToString();
                 course = builder.build();
 
                 //check to make sure course ref does not exist
@@ -63,11 +67,22 @@ namespace Class_Scheduler
             }
         }
 
+
+        //advanced details button
+        protected virtual void advancedDetailsButton_Click(object sender, EventArgs e)
+        {
+            detailsForm.ShowDialog();
+        }
+
+
+
+
+
+
         private void cancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-        
     }
 }
  

@@ -13,3 +13,19 @@ C:\Users\DJMsu\source\repos\Class Scheduler\Class Scheduler\obj\Debug\Class_Sche
 C:\Users\DJMsu\source\repos\Class Scheduler\Class Scheduler\obj\Debug\Class_Scheduler.PromptWindow.resources
 C:\Users\DJMsu\source\repos\Class Scheduler\Class Scheduler\obj\Debug\Class_Scheduler.ScheduleResultView.resources
 C:\Users\DJMsu\source\repos\Class Scheduler\Class Scheduler\obj\Debug\Class_Scheduler.MainForm.resources
+D:\Git Repos\Course-Scheduler\Class Scheduler\Class Scheduler\obj\Debug\Class Scheduler.csprojAssemblyReference.cache
+D:\Git Repos\Course-Scheduler\Class Scheduler\Class Scheduler\obj\Debug\Class_Scheduler.CourseAdd.resources
+D:\Git Repos\Course-Scheduler\Class Scheduler\Class Scheduler\obj\Debug\Class_Scheduler.Forms.Course.CourseAddDetails.resources
+D:\Git Repos\Course-Scheduler\Class Scheduler\Class Scheduler\obj\Debug\Class_Scheduler.ElementViewer.resources
+D:\Git Repos\Course-Scheduler\Class Scheduler\Class Scheduler\obj\Debug\Class_Scheduler.MainForm.resources
+D:\Git Repos\Course-Scheduler\Class Scheduler\Class Scheduler\obj\Debug\Class_Scheduler.PromptWindow.resources
+D:\Git Repos\Course-Scheduler\Class Scheduler\Class Scheduler\obj\Debug\Class_Scheduler.Properties.Resources.resources
+D:\Git Repos\Course-Scheduler\Class Scheduler\Class Scheduler\obj\Debug\Class_Scheduler.ScheduleResultView.resources
+D:\Git Repos\Course-Scheduler\Class Scheduler\Class Scheduler\obj\Debug\Class_Scheduler.SemesterAdd.resources
+D:\Git Repos\Course-Scheduler\Class Scheduler\Class Scheduler\obj\Debug\Class Scheduler.csproj.GenerateResource.cache
+D:\Git Repos\Course-Scheduler\Class Scheduler\Class Scheduler\obj\Debug\Class Scheduler.csproj.CoreCompileInputs.cache
+D:\Git Repos\Course-Scheduler\Class Scheduler\Class Scheduler\obj\Debug\Class Scheduler.exe
+D:\Git Repos\Course-Scheduler\Class Scheduler\Class Scheduler\obj\Debug\Class Scheduler.pdb
+D:\Git Repos\Course-Scheduler\Class Scheduler\Class Scheduler\bin\Debug\Class Scheduler.exe.config
+D:\Git Repos\Course-Scheduler\Class Scheduler\Class Scheduler\bin\Debug\Class Scheduler.exe
+D:\Git Repos\Course-Scheduler\Class Scheduler\Class Scheduler\bin\Debug\Class Scheduler.pdb

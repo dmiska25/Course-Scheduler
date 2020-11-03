@@ -1,4 +1,5 @@
-﻿using Class_Scheduler.Objects;
+﻿using Class_Scheduler.Forms.Course;
+using Class_Scheduler.Objects;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,7 @@ namespace Class_Scheduler
     {
         private Course editCourse;
         private List<Course> courses;
+        private CourseAddDetails detailsEditForm;
 
         public CourseEdit(ref List<Course> courses, Course editCourse) : base(ref courses)
         {
@@ -51,10 +53,19 @@ namespace Class_Scheduler
             coursePrefixTB.Text = editCourse.coursePrefix;
             courseIDTB.Text = editCourse.courseID.ToString();
             courseCreditsTB.Text = editCourse.credits.ToString();
+            courseDescriptionTB.Text = editCourse.courseDescription;
             validSemestersTB.Text = terms;
             courseDependenciesTB.Text = dependencies;
             courseCopendenciesTB.Text = copendencies;
-            gradClassCB.Checked = editCourse.isGraduate;
+
+            //set all course details text boxes to editCourse values
+            detailsEditForm = new CourseAddDetails();
+            detailsEditForm.courseDetails = editCourse.courseDetails;
+        }
+
+        protected override void advancedDetailsButton_Click(object sender, EventArgs e)
+        {
+            detailsEditForm.ShowDialog();
         }
 
         protected override void OnPaint(PaintEventArgs pe)
@@ -67,12 +78,12 @@ namespace Class_Scheduler
             try
             {
                 //Attempt to create course object
-                StringCourseBuilder builder = new Course.StringCourseBuilder(courseNameTB.Text, coursePrefixTB.Text, courseIDTB.Text,
-                    courseCreditsTB.Text, courses);
+                StringCourseBuilder builder = new Course.StringCourseBuilder(courseNameTB.Text, courseDescriptionTB.Text,
+                    coursePrefixTB.Text, courseIDTB.Text, courseCreditsTB.Text, courses);
                 builder.ValidTerms = validSemestersTB.Text;
                 builder.Dependencies = courseDependenciesTB.Text;
                 builder.Copendencies = courseCopendenciesTB.Text;
-                builder.IsGraduate = gradClassCB.Checked.ToString();
+                builder.CourseDetails = detailsEditForm.courseDetails;
                 Course editedCourse = builder.build();
 
                 //check to ensure course ref is the same

@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\Course\CourseAddDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Course\CourseAddDetails.Designer.cs">
+      <DependentUpon>CourseAddDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\miscellaneous\ScheduleResultView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +112,9 @@
     <Compile Include="StaticClasses\tools.cs" />
     <EmbeddedResource Include="Forms\Course\CourseAdd.resx">
       <DependentUpon>CourseAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Course\CourseAddDetails.resx">
+      <DependentUpon>CourseAddDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\miscellaneous\ElementViewer.resx">
       <DependentUpon>ElementViewer.cs</DependentUpon>
