@@ -7,6 +7,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Class_Scheduler.Objects.Course;
 
 namespace Class_Scheduler.Objects
 {
@@ -202,7 +203,7 @@ namespace Class_Scheduler.Objects
                     // clear the check lists
                     dependeesToCheck.Clear();
                     copendeesToCheck.Clear();
-
+                
 
 
 
@@ -212,10 +213,24 @@ namespace Class_Scheduler.Objects
                         pendeeDepth(course, semester, semesters);
                     }
 
-                    //Add valid current courses to courseLineup
+                    // Add valid current courses to courseLineup
+                    // ie: Ensure the course coresponds to the correct term and year
                     foreach (CourseContainer course in currentCourses)
                     {
-                        if (course.Course.validTerms.Contains(semester.Term))
+                        // Get course details
+                        CourseDetails details = course.Course.courseDetails;
+                        int yearRemainder;
+                        bool valid = true;
+
+                        // calculate year 
+                        if (details.YearBase.HasValue)
+                        {
+                            yearRemainder = semester.Year - details.YearBase.Value;
+                            if (yearRemainder % details.YearMultiple != 0)
+                                valid = false;
+                        }
+
+                        if (course.Course.validTerms.Contains(semester.Term) && valid)
                         {
                             courseLineup.Add(course, course);
                         }
@@ -408,6 +423,20 @@ namespace Class_Scheduler.Objects
                 if (!scheduledCourses.Contains(copendent) && !currentCourses.Contains(copendent))
                     return false;
             }
+
+            // check addtional details
+            CourseDetails details = course.Course.courseDetails;
+
+            // sum previously scheduled courses
+            int total = 0;
+            foreach (CourseContainer scheduledCourse in scheduledCourses)
+            {
+                total += scheduledCourse.Course.credits;
+            }
+
+            // check to ensure credit requirment or standing requirement
+            if (details.CreditsRequired < total)
+                return false;
 
             //if requrirements met, return true
             return true;
