@@ -228,63 +228,17 @@ namespace Class_Scheduler
         //- Double Click Course View element
         private void CourseView_DoubleClick(object sender, EventArgs e)
         {
-            List<String> elements = new List<string>();
             int index = CourseView.SelectedItems[0].Index;
             Course course = courseList[index];
-
-            //get dependencies
-            String dependencies = "";
-            foreach (Course dependency in course.dependencies) { dependencies += dependency.courseReference + ", "; }
-            dependencies = dependencies.Trim(' ',',');
-
-            //get copendencies
-            String copendencies = "";
-            foreach (Course copendency in course.copendencies) { copendencies += copendency.courseReference + ", "; }
-            copendencies = copendencies.Trim(' ', ',');
-
-            //get valid terms
-            String terms = "";
-            foreach(TermEnums term in course.validTerms) { terms += term.ToString() + ", "; }
-            terms = terms.Trim(' ', ',');
-
-
-
-            //add all the courses elements to a list of strings
-            elements.Add("Course Name: " + course.courseName);
-            elements.Add("Course Prefix: " + course.coursePrefix);
-            elements.Add("Course ID: " + course.courseID);
-            elements.Add("Credit hours: " + course.credits);
-            elements.Add("Dependencies: " + dependencies);
-            elements.Add("Copendencies: " + copendencies);
-            elements.Add("Valid Terms: " + terms);
-            elements.Add("Graduate Level: " + course.isGraduate.ToString());
-
-            //open a new element viewer
-            this.SuspendLayout();
-            ElementViewer courseDetails = 
-                new ElementViewer(ref elements, course.courseReference);
-            courseDetails.ShowDialog();
+            courseViewer(course);
         }
 
         //- Double Click Semester View element
         private void SemesterViewer_DoubleClick(object sender, EventArgs e)
         {
-            List<String> elements = new List<String>();
             int index = SemesterViewer.SelectedItems[0].Index;
             Semester semester = semesterList[index];
-
-
-            //add all the semester elements to a list of strings
-            elements.Add("Year: " + semester.Year);
-            elements.Add("Term: " + semester.Term.ToString());
-            elements.Add("Minimum Credits: " + semester.MinCredits);
-            elements.Add("Maximum Credits: " + semester.MaxCredits);
-
-            //open a new elment viewer
-            this.SuspendLayout();
-            ElementViewer semesterDetails =
-                new ElementViewer(ref elements, semester.SemesterReference);
-            semesterDetails.ShowDialog();
+            semesterViewer(semester);
         }
 
 
@@ -480,6 +434,96 @@ namespace Class_Scheduler
             //add elements to viewer
             foreach (Semester semester in semesterList) { SemesterViewer.Items.Add(semester.SemesterReference); }
         }
+
+        private void courseViewer(Course course)
+        {
+            // elements list
+            List<String> elements = new List<string>();
+
+            //get dependencies
+            String dependencies = "";
+            foreach (Course dependency in course.dependencies) { dependencies += dependency.courseReference + ", "; }
+            dependencies = dependencies.Trim(' ', ',');
+
+            //get copendencies
+            String copendencies = "";
+            foreach (Course copendency in course.copendencies) { copendencies += copendency.courseReference + ", "; }
+            copendencies = copendencies.Trim(' ', ',');
+
+            //get valid terms
+            String terms = "";
+            foreach (TermEnums term in course.validTerms) { terms += term.ToString() + ", "; }
+            terms = terms.Trim(' ', ',');
+
+
+
+            //add all the courses elements to a list of strings
+            elements.Add("Course Name: " + course.courseName);
+            elements.Add("Course Description: " + course.courseDescription);
+            elements.Add("Course Prefix: " + course.coursePrefix);
+            elements.Add("Course ID: " + course.courseID);
+            elements.Add("Credit hours: " + course.credits);
+            elements.Add("Dependencies: " + dependencies);
+            elements.Add("Copendencies: " + copendencies);
+            elements.Add("Valid Terms: " + terms);
+
+            // print additional course details
+            elements.Add("Additional details: ");
+
+            if (course.courseDetails.UndergraduateLevel.Value)
+                elements.Add("-Course Level: " + "Undergraduate");
+            else
+                elements.Add("-Course Level: " + "Graduate");
+
+            if (course.courseDetails.CreditsRequired.HasValue)
+                elements.Add("-Required taken Credits: " + course.courseDetails.CreditsRequired);
+            if (course.courseDetails.YearBase.HasValue) {
+                elements.Add("-Year Rotation Base: " + course.courseDetails.YearBase);
+                elements.Add("-Year Rotation Multiplier: " + course.courseDetails.YearMultiple);
+            }
+            if (!course.courseDetails.RequiredStanding.Equals(Objects.Standing.FRESHMAN))
+                elements.Add("-Required standing level: " + course.courseDetails.RequiredStanding.ToString());
+            if (course.courseDetails.GeneralElective.Value)
+                elements.Add("-Fullfills general elective requirements");
+            if (course.courseDetails.DegreeElective.Value)
+                elements.Add("-Fullfills degree elective requirements");
+            if (course.courseDetails.DualCredit.Value)
+                elements.Add("-Fullfills dual credit");
+
+            //open a new element viewer
+            this.SuspendLayout();
+            ElementViewer courseDetails =
+                new ElementViewer(ref elements, course.courseReference);
+            courseDetails.ShowDialog();
+        }
+
+        private void semesterViewer(Semester semester)
+        {
+            // elements list
+            List<String> elements = new List<String>();
+
+            //add all the semester elements to a list of strings
+            elements.Add("Year: " + semester.Year);
+            elements.Add("Term: " + semester.Term.ToString());
+            elements.Add("Minimum Credits: " + semester.MinCredits);
+            elements.Add("Maximum Credits: " + semester.MaxCredits);
+
+            //open a new elment viewer
+            this.SuspendLayout();
+            ElementViewer semesterDetails =
+                new ElementViewer(ref elements, semester.SemesterReference);
+            semesterDetails.ShowDialog();
+        }
+
+
+
+
+
+
+
+
+
+
 
 
     }
