@@ -13,18 +13,28 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Collections.ObjectModel;
 using Class_Scheduler.Comparers;
+using Class_Scheduler.Forms.MiscellaneousForms;
+using Class_Scheduler.Forms.CourseForms;
+using Class_Scheduler.Forms.SemesterForms;
 
-namespace Class_Scheduler
+namespace Class_Scheduler.Forms
 {
     public partial class MainForm : Form
     {
         //variables
-        private List<Course> courseList = new List<Course>();
-        private List<Semester> semesterList = new List<Semester>();
+        private List<Course> courseList;
+        private List<Semester> semesterList;
+        private HashSet<String> coursePrefixes;
 
         public MainForm()
         {
             InitializeComponent();
+            courseList = new List<Course>();
+            semesterList = new List<Semester>();
+            coursePrefixes = new HashSet<string>();
+
+
+
         }
 
         //main load
@@ -44,7 +54,9 @@ namespace Class_Scheduler
             Console.WriteLine("\nBegining Scheduleing test...");
 
             //generate schedule and add course containers to semesters
-            bool result = ScheduleGenerator.scheduleSemesters(processed, semesterList);
+            bool result = ScheduleGenerator.scheduleSemesters(processed, semesterList,
+                new CustumCoursePriority(true, new List<string>())
+                );
             
 
 
@@ -409,12 +421,40 @@ namespace Class_Scheduler
             }
         }
 
+        // form behavior
+
+        private void prioritizePrefixesCB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (prioritizePrefixesCB.Checked)
+            {
+                prefixPrioritiesFormButton.Enabled = true;
+            }
+            else
+            {
+                prefixPrioritiesFormButton.Enabled = false;
+            }
+        }
+
+        private void prefixPrioritiesFormButton_Click(object sender, EventArgs e)
+        {
+            PriorityViewer<String> viewer = new PriorityViewer<String>(coursePrefixes);
+            this.SuspendLayout();
+            viewer.ShowDialog();
+        }
+
 
         // Helper Methods
         private void updateCourseViewer()
         {
             //sort the course list
             courseList.Sort(new ClassViewCompare());
+
+            //update coursePrefix list
+            coursePrefixes.Clear();
+            foreach(Course course in courseList)
+            {
+                coursePrefixes.Add(course.coursePrefix);
+            }
 
             //clear the viewer
             CourseView.Items.Clear();
@@ -514,17 +554,6 @@ namespace Class_Scheduler
                 new ElementViewer(ref elements, semester.SemesterReference);
             semesterDetails.ShowDialog();
         }
-
-
-
-
-
-
-
-
-
-
-
 
     }
 }

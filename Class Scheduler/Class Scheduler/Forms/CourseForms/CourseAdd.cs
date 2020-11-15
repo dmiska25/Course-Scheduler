@@ -1,4 +1,4 @@
-﻿using Class_Scheduler.Forms.Course;
+﻿using Class_Scheduler.Forms.CourseForms;
 using Class_Scheduler.Objects;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using static Class_Scheduler.Objects.Course;
 
-namespace Class_Scheduler
+namespace Class_Scheduler.Forms.CourseForms
 {
     public partial class CourseAdd : Form
     {

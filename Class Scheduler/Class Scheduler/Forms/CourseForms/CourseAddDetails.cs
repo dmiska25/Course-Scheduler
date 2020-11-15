@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Class_Scheduler.Objects.Course;
 
-namespace Class_Scheduler.Forms.Course
+namespace Class_Scheduler.Forms.CourseForms
 {
     public partial class CourseAddDetails : Form
     {

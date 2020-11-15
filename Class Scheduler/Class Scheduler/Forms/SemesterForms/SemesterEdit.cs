@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Class_Scheduler.Comparers
+namespace Class_Scheduler.Forms.SemesterForms
 {
     public partial class SemesterEdit : SemesterAdd
     {

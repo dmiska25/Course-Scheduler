@@ -1,6 +1,6 @@
-﻿namespace Class_Scheduler
+﻿namespace Class_Scheduler.Forms.SemesterForms
 {
-    partial class CourseEdit
+    partial class SemesterEdit
     {
         /// <summary>
         /// Required designer variable.

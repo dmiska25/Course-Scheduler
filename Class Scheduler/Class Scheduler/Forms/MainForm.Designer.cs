@@ -1,4 +1,4 @@
-﻿namespace Class_Scheduler
+﻿namespace Class_Scheduler.Forms
 {
     partial class MainForm
     {
@@ -29,14 +29,19 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.optionsMenu = new System.Windows.Forms.GroupBox();
+            this.prefixPrioritiesFormButton = new System.Windows.Forms.Button();
+            this.prioritizePrefixesCB = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.delayGradCoursesCB = new System.Windows.Forms.CheckBox();
+            this.gradCoursesLabel = new System.Windows.Forms.Label();
+            this.PriorityLabel = new System.Windows.Forms.Label();
             this.genSchedules = new System.Windows.Forms.Button();
             this.CourseView = new System.Windows.Forms.ListView();
             this.EditElementMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.semesterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.semesterToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.classToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,19 +56,89 @@
             this.label1 = new System.Windows.Forms.Label();
             this.openFileWindow = new System.Windows.Forms.OpenFileDialog();
             this.saveFileWindow = new System.Windows.Forms.SaveFileDialog();
-            this.EditElementMenuStrip.SuspendLayout();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.addStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionsMenu.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // optionsMenu
             // 
-            this.groupBox1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.groupBox1.Location = new System.Drawing.Point(588, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 363);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Options";
+            this.optionsMenu.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.optionsMenu.Controls.Add(this.prefixPrioritiesFormButton);
+            this.optionsMenu.Controls.Add(this.prioritizePrefixesCB);
+            this.optionsMenu.Controls.Add(this.label2);
+            this.optionsMenu.Controls.Add(this.delayGradCoursesCB);
+            this.optionsMenu.Controls.Add(this.gradCoursesLabel);
+            this.optionsMenu.Controls.Add(this.PriorityLabel);
+            this.optionsMenu.Location = new System.Drawing.Point(588, 12);
+            this.optionsMenu.Name = "optionsMenu";
+            this.optionsMenu.Size = new System.Drawing.Size(200, 363);
+            this.optionsMenu.TabIndex = 0;
+            this.optionsMenu.TabStop = false;
+            this.optionsMenu.Text = "Options";
+            // 
+            // prefixPrioritiesFormButton
+            // 
+            this.prefixPrioritiesFormButton.Enabled = false;
+            this.prefixPrioritiesFormButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.prefixPrioritiesFormButton.Location = new System.Drawing.Point(133, 49);
+            this.prefixPrioritiesFormButton.Name = "prefixPrioritiesFormButton";
+            this.prefixPrioritiesFormButton.Size = new System.Drawing.Size(59, 18);
+            this.prefixPrioritiesFormButton.TabIndex = 5;
+            this.prefixPrioritiesFormButton.Text = "priorities";
+            this.prefixPrioritiesFormButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.prefixPrioritiesFormButton.UseVisualStyleBackColor = true;
+            this.prefixPrioritiesFormButton.Click += new System.EventHandler(this.prefixPrioritiesFormButton_Click);
+            // 
+            // prioritizePrefixesCB
+            // 
+            this.prioritizePrefixesCB.AutoSize = true;
+            this.prioritizePrefixesCB.Location = new System.Drawing.Point(112, 50);
+            this.prioritizePrefixesCB.Name = "prioritizePrefixesCB";
+            this.prioritizePrefixesCB.Size = new System.Drawing.Size(15, 14);
+            this.prioritizePrefixesCB.TabIndex = 4;
+            this.prioritizePrefixesCB.UseVisualStyleBackColor = true;
+            this.prioritizePrefixesCB.CheckedChanged += new System.EventHandler(this.prioritizePrefixesCB_CheckedChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(13, 50);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(92, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Prioritize Prefixes?";
+            // 
+            // delayGradCoursesCB
+            // 
+            this.delayGradCoursesCB.AutoSize = true;
+            this.delayGradCoursesCB.Location = new System.Drawing.Point(174, 33);
+            this.delayGradCoursesCB.Name = "delayGradCoursesCB";
+            this.delayGradCoursesCB.Size = new System.Drawing.Size(15, 14);
+            this.delayGradCoursesCB.TabIndex = 2;
+            this.delayGradCoursesCB.UseVisualStyleBackColor = true;
+            // 
+            // gradCoursesLabel
+            // 
+            this.gradCoursesLabel.AutoSize = true;
+            this.gradCoursesLabel.Location = new System.Drawing.Point(10, 33);
+            this.gradCoursesLabel.Name = "gradCoursesLabel";
+            this.gradCoursesLabel.Size = new System.Drawing.Size(157, 13);
+            this.gradCoursesLabel.TabIndex = 1;
+            this.gradCoursesLabel.Text = "Delay Graduate Level Courses?";
+            // 
+            // PriorityLabel
+            // 
+            this.PriorityLabel.AutoSize = true;
+            this.PriorityLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PriorityLabel.Location = new System.Drawing.Point(7, 16);
+            this.PriorityLabel.Name = "PriorityLabel";
+            this.PriorityLabel.Size = new System.Drawing.Size(60, 13);
+            this.PriorityLabel.TabIndex = 0;
+            this.PriorityLabel.Text = "Priorities:";
             // 
             // genSchedules
             // 
@@ -90,77 +165,43 @@
             // 
             // EditElementMenuStrip
             // 
-            this.EditElementMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.viewToolStripMenuItem,
-            this.editToolStripMenuItem,
-            this.deleteToolStripMenuItem});
             this.EditElementMenuStrip.Name = "EditElementMenuStrip";
-            this.EditElementMenuStrip.Size = new System.Drawing.Size(118, 70);
+            this.EditElementMenuStrip.Size = new System.Drawing.Size(61, 4);
             // 
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.viewToolStripMenuItem.Text = "View";
             this.viewToolStripMenuItem.Click += new System.EventHandler(this.viewToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.deleteToolStripMenuItem.Text = "Remove";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
-            // 
-            // menuStrip
-            // 
-            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.semesterToolStripMenuItem,
-            this.loadToolStripMenuItem,
-            this.saveToolStripMenuItem});
-            this.menuStrip.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(800, 24);
-            this.menuStrip.TabIndex = 3;
-            this.menuStrip.Text = "Add...";
-            // 
-            // semesterToolStripMenuItem
-            // 
-            this.semesterToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.semesterToolStripMenuItem1,
-            this.classToolStripMenuItem});
-            this.semesterToolStripMenuItem.Name = "semesterToolStripMenuItem";
-            this.semesterToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
-            this.semesterToolStripMenuItem.Text = "Add...";
             // 
             // semesterToolStripMenuItem1
             // 
             this.semesterToolStripMenuItem1.Name = "semesterToolStripMenuItem1";
-            this.semesterToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.semesterToolStripMenuItem1.Size = new System.Drawing.Size(122, 22);
             this.semesterToolStripMenuItem1.Text = "Semester";
             this.semesterToolStripMenuItem1.Click += new System.EventHandler(this.semesterToolStripMenuItem1_Click);
             // 
             // classToolStripMenuItem
             // 
             this.classToolStripMenuItem.Name = "classToolStripMenuItem";
-            this.classToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.classToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.classToolStripMenuItem.Text = "Course";
             this.classToolStripMenuItem.Click += new System.EventHandler(this.classToolStripMenuItem_Click);
-            // 
-            // loadToolStripMenuItem
-            // 
-            this.loadToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.classListFromTxtFileToolStripMenuItem,
-            this.semesterListFromTxtFileToolStripMenuItem});
-            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
-            this.loadToolStripMenuItem.Text = "load...";
             // 
             // classListFromTxtFileToolStripMenuItem
             // 
@@ -175,15 +216,6 @@
             this.semesterListFromTxtFileToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.semesterListFromTxtFileToolStripMenuItem.Text = "Semester list from txt file";
             this.semesterListFromTxtFileToolStripMenuItem.Click += new System.EventHandler(this.semesterListFromTxtFileToolStripMenuItem_Click);
-            // 
-            // saveToolStripMenuItem
-            // 
-            this.saveToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.classListToTxtFileToolStripMenuItem,
-            this.semesterListToTxtFileToolStripMenuItem});
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
-            this.saveToolStripMenuItem.Text = "Save...";
             // 
             // classListToTxtFileToolStripMenuItem
             // 
@@ -236,6 +268,44 @@
             // 
             this.openFileWindow.FileName = "openFileDialog1";
             // 
+            // menuStrip
+            // 
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addStripMenuItem,
+            this.saveStripMenuItem,
+            this.loadStripMenuItem});
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip.TabIndex = 7;
+            // 
+            // addStripMenuItem
+            //
+            this.addStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.semesterToolStripMenuItem1,
+            this.classToolStripMenuItem});
+            this.addStripMenuItem.Name = "addStripMenuItem";
+            this.addStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.addStripMenuItem.Text = "Add...";
+            // 
+            // saveStripMenuItem
+            //
+            this.saveStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.classListToTxtFileToolStripMenuItem,
+            this.semesterListToTxtFileToolStripMenuItem});
+            this.saveStripMenuItem.Name = "saveStripMenuItem";
+            this.saveStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.saveStripMenuItem.Text = "Save...";
+            // 
+            // loadStripMenuItem
+            // 
+            this.loadStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.classListFromTxtFileToolStripMenuItem,
+            this.semesterListFromTxtFileToolStripMenuItem});
+            this.loadStripMenuItem.Name = "loadStripMenuItem";
+            this.loadStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.loadStripMenuItem.Text = "Load...";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -246,13 +316,14 @@
             this.Controls.Add(this.SemesterViewer);
             this.Controls.Add(this.CourseView);
             this.Controls.Add(this.genSchedules);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.optionsMenu);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainForm";
             this.Text = "Class Scheduler";
             this.Load += new System.EventHandler(this.Main_Load);
-            this.EditElementMenuStrip.ResumeLayout(false);
+            this.optionsMenu.ResumeLayout(false);
+            this.optionsMenu.PerformLayout();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -262,10 +333,9 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox optionsMenu;
         private System.Windows.Forms.Button genSchedules;
         private System.Windows.Forms.ListView CourseView;
-        private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem semesterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem semesterToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem classToolStripMenuItem;
@@ -284,6 +354,16 @@
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.Button prefixPrioritiesFormButton;
+        private System.Windows.Forms.CheckBox prioritizePrefixesCB;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox delayGradCoursesCB;
+        private System.Windows.Forms.Label gradCoursesLabel;
+        private System.Windows.Forms.Label PriorityLabel;
+        private System.Windows.Forms.MenuStrip menuStrip;
+        private System.Windows.Forms.ToolStripMenuItem addStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadStripMenuItem;
     }
 }
 
