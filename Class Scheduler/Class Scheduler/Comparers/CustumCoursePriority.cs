@@ -52,11 +52,11 @@ namespace Class_Scheduler.Comparers
 
             // if graduate class, delay
             else if ( delayGraduate &&
-                x.Course.courseDetails.GraduateLevel.Value.
-                CompareTo(y.Course.courseDetails.GraduateLevel.Value) != 0)
+                x.Course.courseDetails.GraduateLevel.
+                CompareTo(y.Course.courseDetails.GraduateLevel) != 0)
             {
-                return x.Course.courseDetails.GraduateLevel.Value
-                    .CompareTo(y.Course.courseDetails.GraduateLevel.Value);
+                return x.Course.courseDetails.GraduateLevel
+                    .CompareTo(y.Course.courseDetails.GraduateLevel);
             } 
 
             // if prioritize prefixes

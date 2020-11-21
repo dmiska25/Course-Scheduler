@@ -25,6 +25,7 @@ namespace Class_Scheduler.Forms
         private List<Course> courseList;
         private List<Semester> semesterList;
         private HashSet<String> coursePrefixes;
+        private List<String> prioritisedCoursePrefixes;
 
         public MainForm()
         {
@@ -32,7 +33,8 @@ namespace Class_Scheduler.Forms
             courseList = new List<Course>();
             semesterList = new List<Semester>();
             coursePrefixes = new HashSet<string>();
-
+            prioritisedCoursePrefixes = new List<string>();
+            
 
 
         }
@@ -53,9 +55,11 @@ namespace Class_Scheduler.Forms
 
             Console.WriteLine("\nBegining Scheduleing test...");
 
+
+
             //generate schedule and add course containers to semesters
             bool result = ScheduleGenerator.scheduleSemesters(processed, semesterList,
-                new CustumCoursePriority(true, new List<string>())
+                new CustumCoursePriority(delayGradCoursesCB.Checked, prioritisedCoursePrefixes)
                 );
             
 
@@ -132,6 +136,9 @@ namespace Class_Scheduler.Forms
 
             //update viewer
             updateCourseViewer();
+
+            //update prefixes
+            updatePrefixes();
         }
 
         //--add semester from menu
@@ -173,6 +180,9 @@ namespace Class_Scheduler.Forms
 
                 //update viewer
                 updateCourseViewer();
+
+                //update prefixes
+                updatePrefixes();
             }
             catch(Exception ex)
             {
@@ -323,6 +333,9 @@ namespace Class_Scheduler.Forms
 
                 //update viewer
                 updateCourseViewer();
+
+                //update prefixes
+                updatePrefixes();
             }
             //semester
             else if (SemesterViewer.SelectedItems.Count == 1)
@@ -405,6 +418,9 @@ namespace Class_Scheduler.Forms
 
                 //update course view
                 updateCourseViewer();
+
+                //update prefixes
+                updatePrefixes();
             }
             //semester
             else if (SemesterViewer.SelectedItems.Count == 1)
@@ -427,17 +443,23 @@ namespace Class_Scheduler.Forms
         {
             if (prioritizePrefixesCB.Checked)
             {
+                //enable form button
                 prefixPrioritiesFormButton.Enabled = true;
             }
             else
             {
+                //disable form button
                 prefixPrioritiesFormButton.Enabled = false;
+
+                //clear list
+                prioritisedCoursePrefixes.Clear();
             }
         }
 
         private void prefixPrioritiesFormButton_Click(object sender, EventArgs e)
         {
-            PriorityViewer<String> viewer = new PriorityViewer<String>(coursePrefixes);
+            PriorityViewer<String> viewer = 
+                new PriorityViewer<String>(coursePrefixes, prioritisedCoursePrefixes);
             this.SuspendLayout();
             viewer.ShowDialog();
         }
@@ -448,13 +470,6 @@ namespace Class_Scheduler.Forms
         {
             //sort the course list
             courseList.Sort(new ClassViewCompare());
-
-            //update coursePrefix list
-            coursePrefixes.Clear();
-            foreach(Course course in courseList)
-            {
-                coursePrefixes.Add(course.coursePrefix);
-            }
 
             //clear the viewer
             CourseView.Items.Clear();
@@ -510,7 +525,7 @@ namespace Class_Scheduler.Forms
             // print additional course details
             elements.Add("Additional details: ");
 
-            if (course.courseDetails.UndergraduateLevel.Value)
+            if (course.courseDetails.UndergraduateLevel)
                 elements.Add("-Course Level: " + "Undergraduate");
             else
                 elements.Add("-Course Level: " + "Graduate");
@@ -523,11 +538,11 @@ namespace Class_Scheduler.Forms
             }
             if (!course.courseDetails.RequiredStanding.Equals(Objects.Standing.FRESHMAN))
                 elements.Add("-Required standing level: " + course.courseDetails.RequiredStanding.ToString());
-            if (course.courseDetails.GeneralElective.Value)
+            if (course.courseDetails.GeneralElective)
                 elements.Add("-Fullfills general elective requirements");
-            if (course.courseDetails.DegreeElective.Value)
+            if (course.courseDetails.DegreeElective)
                 elements.Add("-Fullfills degree elective requirements");
-            if (course.courseDetails.DualCredit.Value)
+            if (course.courseDetails.DualCredit)
                 elements.Add("-Fullfills dual credit");
 
             //open a new element viewer
@@ -555,5 +570,23 @@ namespace Class_Scheduler.Forms
             semesterDetails.ShowDialog();
         }
 
+        private void updatePrefixes()
+        {
+            //update coursePrefix list
+            coursePrefixes.Clear();
+            foreach (Course course in courseList)
+            {
+                coursePrefixes.Add(course.coursePrefix);
+            }
+
+            //remove any removed prefixes from priority list
+            List<String> removeList = new List<string>();
+            foreach(String prefix in prioritisedCoursePrefixes)
+            {
+                if (!coursePrefixes.Contains(prefix))
+                    removeList.Add(prefix);
+            }
+            prioritisedCoursePrefixes.RemoveAll(t=>removeList.Contains(t));
+        }
     }
 }

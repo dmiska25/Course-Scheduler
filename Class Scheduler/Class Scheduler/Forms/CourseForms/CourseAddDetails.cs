@@ -66,14 +66,14 @@ namespace Class_Scheduler.Forms.CourseForms
                     }
                 }
 
-                if (_courseDetails.GraduateLevel.GetValueOrDefault())
+                if (_courseDetails.GraduateLevel)
                     this.courseTypeGRB.Checked = true;
 
-                if (_courseDetails.GeneralElective.GetValueOrDefault())
+                if (_courseDetails.GeneralElective)
                     this.generalElectiveCB.Checked = true;
-                if (_courseDetails.DegreeElective.GetValueOrDefault())
+                if (_courseDetails.DegreeElective)
                     this.degreeElectiveCB.Checked = true;
-                if (_courseDetails.DualCredit.GetValueOrDefault())
+                if (_courseDetails.DualCredit)
                     this.dualCreditCB.Checked = true;
             }
             

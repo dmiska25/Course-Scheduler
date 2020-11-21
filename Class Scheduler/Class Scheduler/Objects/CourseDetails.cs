@@ -23,11 +23,11 @@ namespace Class_Scheduler.Objects
             private int? _yearMultiple;
             private int? _yearBase;
             // Course Type/Details
-            private bool? _undergraduate;
-            private bool? _graduate;
-            private bool? _generalElective;
-            private bool? _degreeElective;
-            private bool? _dualCredit;
+            private bool _undergraduate;
+            private bool _graduate;
+            private bool _generalElective;
+            private bool _degreeElective;
+            private bool _dualCredit;
 
 
 
@@ -66,11 +66,11 @@ namespace Class_Scheduler.Objects
 
             public int? YearBase { get => _yearBase; set { _yearBase = value; } }
             public int? YearMultiple { get => _yearMultiple; set { _yearMultiple = value; } }
-            public bool? UndergraduateLevel { get => _undergraduate; set { _undergraduate = value; } }
-            public bool? GraduateLevel { get => _graduate; set { _graduate = value; } }
-            public bool? GeneralElective { get => _generalElective; set { _generalElective = value; } }
-            public bool? DegreeElective { get => _degreeElective; set { _degreeElective = value; } }
-            public bool? DualCredit { get => _dualCredit; set { _dualCredit = value; } }
+            public bool UndergraduateLevel { get => _undergraduate; set { _undergraduate = value; } }
+            public bool GraduateLevel { get => _graduate; set { _graduate = value; } }
+            public bool GeneralElective { get => _generalElective; set { _generalElective = value; } }
+            public bool DegreeElective { get => _degreeElective; set { _degreeElective = value; } }
+            public bool DualCredit { get => _dualCredit; set { _dualCredit = value; } }
 
             //String properties
             public String StrCreditsRequired

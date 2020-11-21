@@ -83,10 +83,10 @@ namespace Class_Scheduler.Objects
                 return -this.TotalPendees.CompareTo(other.TotalPendees);
 
             // if graduate class, delay
-            else if (this.Course.courseDetails.GraduateLevel.Value.
-                CompareTo(other.Course.courseDetails.GraduateLevel.Value) != 0)
-                return this.Course.courseDetails.GraduateLevel.Value
-                    .CompareTo(other.Course.courseDetails.GraduateLevel.Value);
+            else if (this.Course.courseDetails.GraduateLevel.
+                CompareTo(other.Course.courseDetails.GraduateLevel) != 0)
+                return this.Course.courseDetails.GraduateLevel
+                    .CompareTo(other.Course.courseDetails.GraduateLevel);
 
             // 
 

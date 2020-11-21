@@ -42,25 +42,26 @@
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.semesterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.semesterToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.classToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.classListFromTxtFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.semesterListFromTxtFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.classListToTxtFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.semesterListToTxtFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.classListFromTxtFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.semesterListFromTxtFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.semesterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SemesterViewer = new System.Windows.Forms.ListView();
             this.classViewLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.openFileWindow = new System.Windows.Forms.OpenFileDialog();
             this.saveFileWindow = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
-            this.addStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsMenu.SuspendLayout();
+            this.EditElementMenuStrip.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -165,29 +166,42 @@
             // 
             // EditElementMenuStrip
             // 
+            this.EditElementMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewToolStripMenuItem,
+            this.editToolStripMenuItem,
+            this.deleteToolStripMenuItem});
             this.EditElementMenuStrip.Name = "EditElementMenuStrip";
-            this.EditElementMenuStrip.Size = new System.Drawing.Size(61, 4);
+            this.EditElementMenuStrip.Size = new System.Drawing.Size(118, 70);
             // 
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.viewToolStripMenuItem.Text = "View";
             this.viewToolStripMenuItem.Click += new System.EventHandler(this.viewToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.deleteToolStripMenuItem.Text = "Remove";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
+            // addStripMenuItem
+            // 
+            this.addStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.semesterToolStripMenuItem1,
+            this.classToolStripMenuItem});
+            this.addStripMenuItem.Name = "addStripMenuItem";
+            this.addStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.addStripMenuItem.Text = "Add...";
             // 
             // semesterToolStripMenuItem1
             // 
@@ -203,19 +217,14 @@
             this.classToolStripMenuItem.Text = "Course";
             this.classToolStripMenuItem.Click += new System.EventHandler(this.classToolStripMenuItem_Click);
             // 
-            // classListFromTxtFileToolStripMenuItem
+            // saveStripMenuItem
             // 
-            this.classListFromTxtFileToolStripMenuItem.Name = "classListFromTxtFileToolStripMenuItem";
-            this.classListFromTxtFileToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
-            this.classListFromTxtFileToolStripMenuItem.Text = "Course list from txt file";
-            this.classListFromTxtFileToolStripMenuItem.Click += new System.EventHandler(this.classListFromTxtFileToolStripMenuItem_Click);
-            // 
-            // semesterListFromTxtFileToolStripMenuItem
-            // 
-            this.semesterListFromTxtFileToolStripMenuItem.Name = "semesterListFromTxtFileToolStripMenuItem";
-            this.semesterListFromTxtFileToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
-            this.semesterListFromTxtFileToolStripMenuItem.Text = "Semester list from txt file";
-            this.semesterListFromTxtFileToolStripMenuItem.Click += new System.EventHandler(this.semesterListFromTxtFileToolStripMenuItem_Click);
+            this.saveStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.classListToTxtFileToolStripMenuItem,
+            this.semesterListToTxtFileToolStripMenuItem});
+            this.saveStripMenuItem.Name = "saveStripMenuItem";
+            this.saveStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.saveStripMenuItem.Text = "Save...";
             // 
             // classListToTxtFileToolStripMenuItem
             // 
@@ -230,6 +239,44 @@
             this.semesterListToTxtFileToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.semesterListToTxtFileToolStripMenuItem.Text = "Semester list to txt file";
             this.semesterListToTxtFileToolStripMenuItem.Click += new System.EventHandler(this.semesterListToTxtFileToolStripMenuItem_Click);
+            // 
+            // loadStripMenuItem
+            // 
+            this.loadStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.classListFromTxtFileToolStripMenuItem,
+            this.semesterListFromTxtFileToolStripMenuItem});
+            this.loadStripMenuItem.Name = "loadStripMenuItem";
+            this.loadStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.loadStripMenuItem.Text = "Load...";
+            // 
+            // classListFromTxtFileToolStripMenuItem
+            // 
+            this.classListFromTxtFileToolStripMenuItem.Name = "classListFromTxtFileToolStripMenuItem";
+            this.classListFromTxtFileToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.classListFromTxtFileToolStripMenuItem.Text = "Course list from txt file";
+            this.classListFromTxtFileToolStripMenuItem.Click += new System.EventHandler(this.classListFromTxtFileToolStripMenuItem_Click);
+            // 
+            // semesterListFromTxtFileToolStripMenuItem
+            // 
+            this.semesterListFromTxtFileToolStripMenuItem.Name = "semesterListFromTxtFileToolStripMenuItem";
+            this.semesterListFromTxtFileToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.semesterListFromTxtFileToolStripMenuItem.Text = "Semester list from txt file";
+            this.semesterListFromTxtFileToolStripMenuItem.Click += new System.EventHandler(this.semesterListFromTxtFileToolStripMenuItem_Click);
+            // 
+            // semesterToolStripMenuItem
+            // 
+            this.semesterToolStripMenuItem.Name = "semesterToolStripMenuItem";
+            this.semesterToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
+            // 
+            // loadToolStripMenuItem
+            // 
+            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
             // 
             // SemesterViewer
             // 
@@ -279,44 +326,17 @@
             this.menuStrip.Size = new System.Drawing.Size(800, 24);
             this.menuStrip.TabIndex = 7;
             // 
-            // addStripMenuItem
-            //
-            this.addStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.semesterToolStripMenuItem1,
-            this.classToolStripMenuItem});
-            this.addStripMenuItem.Name = "addStripMenuItem";
-            this.addStripMenuItem.Size = new System.Drawing.Size(50, 20);
-            this.addStripMenuItem.Text = "Add...";
-            // 
-            // saveStripMenuItem
-            //
-            this.saveStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.classListToTxtFileToolStripMenuItem,
-            this.semesterListToTxtFileToolStripMenuItem});
-            this.saveStripMenuItem.Name = "saveStripMenuItem";
-            this.saveStripMenuItem.Size = new System.Drawing.Size(52, 20);
-            this.saveStripMenuItem.Text = "Save...";
-            // 
-            // loadStripMenuItem
-            // 
-            this.loadStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.classListFromTxtFileToolStripMenuItem,
-            this.semesterListFromTxtFileToolStripMenuItem});
-            this.loadStripMenuItem.Name = "loadStripMenuItem";
-            this.loadStripMenuItem.Size = new System.Drawing.Size(54, 20);
-            this.loadStripMenuItem.Text = "Load...";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.optionsMenu);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.classViewLabel);
             this.Controls.Add(this.SemesterViewer);
             this.Controls.Add(this.CourseView);
             this.Controls.Add(this.genSchedules);
-            this.Controls.Add(this.optionsMenu);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainForm";
@@ -324,6 +344,7 @@
             this.Load += new System.EventHandler(this.Main_Load);
             this.optionsMenu.ResumeLayout(false);
             this.optionsMenu.PerformLayout();
+            this.EditElementMenuStrip.ResumeLayout(false);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
