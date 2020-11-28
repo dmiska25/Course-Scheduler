@@ -75,6 +75,10 @@ namespace Class_Scheduler.Forms.CourseForms
                     this.degreeElectiveCB.Checked = true;
                 if (_courseDetails.DualCredit)
                     this.dualCreditCB.Checked = true;
+                if (_courseDetails.Capstone)
+                    this.capstoneCB.Checked = true;
+                if (_courseDetails.LabPair)
+                    this.labPairCB.Checked = true;
             }
             
         }
@@ -125,16 +129,14 @@ namespace Class_Scheduler.Forms.CourseForms
             //other details
             if (generalElectiveCB.Checked)
                 _courseDetails.GeneralElective = true;
-            else
-                _courseDetails.GeneralElective = false;
             if (degreeElectiveCB.Checked)
                 _courseDetails.DegreeElective = true;
-            else
-                _courseDetails.DegreeElective = false;
             if (dualCreditCB.Checked)
                 _courseDetails.DualCredit = true;
-            else
-                _courseDetails.DualCredit = false;
+            if (capstoneCB.Checked)
+                _courseDetails.Capstone = true;
+            if (labPairCB.Checked)
+                _courseDetails.LabPair = true;
 
             //close the form
             this.Close();

@@ -52,6 +52,8 @@
             this.segment1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.courseTypeGB = new System.Windows.Forms.GroupBox();
+            this.capstoneCB = new System.Windows.Forms.CheckBox();
+            this.labPairCB = new System.Windows.Forms.CheckBox();
             this.courseTypeGB.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -160,7 +162,7 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(122, 289);
+            this.saveButton.Location = new System.Drawing.Point(122, 338);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 15;
@@ -298,11 +300,33 @@
             this.courseTypeGB.TabIndex = 23;
             this.courseTypeGB.TabStop = false;
             // 
+            // capstoneCB
+            // 
+            this.capstoneCB.AutoSize = true;
+            this.capstoneCB.Location = new System.Drawing.Point(11, 278);
+            this.capstoneCB.Name = "capstoneCB";
+            this.capstoneCB.Size = new System.Drawing.Size(107, 17);
+            this.capstoneCB.TabIndex = 24;
+            this.capstoneCB.Text = "Capstone Course";
+            this.capstoneCB.UseVisualStyleBackColor = true;
+            // 
+            // labPairCB
+            // 
+            this.labPairCB.AutoSize = true;
+            this.labPairCB.Location = new System.Drawing.Point(11, 301);
+            this.labPairCB.Name = "labPairCB";
+            this.labPairCB.Size = new System.Drawing.Size(65, 17);
+            this.labPairCB.TabIndex = 25;
+            this.labPairCB.Text = "Lab Pair";
+            this.labPairCB.UseVisualStyleBackColor = true;
+            // 
             // CourseAddDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(312, 329);
+            this.ClientSize = new System.Drawing.Size(312, 373);
+            this.Controls.Add(this.labPairCB);
+            this.Controls.Add(this.capstoneCB);
             this.Controls.Add(this.standingSeniorRB);
             this.Controls.Add(this.standingJuniorRB);
             this.Controls.Add(this.standingSophmoreRB);
@@ -362,5 +386,7 @@
         private System.Windows.Forms.Label segment1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox courseTypeGB;
+        private System.Windows.Forms.CheckBox capstoneCB;
+        private System.Windows.Forms.CheckBox labPairCB;
     }
 }

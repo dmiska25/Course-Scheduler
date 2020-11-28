@@ -29,41 +29,44 @@
         private void InitializeComponent()
         {
             this.scheduleViewer = new System.Windows.Forms.TreeView();
-            this.label1 = new System.Windows.Forms.Label();
+            this.potentialScheduleLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // scheduleViewer
             // 
             this.scheduleViewer.Location = new System.Drawing.Point(12, 24);
+            this.scheduleViewer.MinimumSize = new System.Drawing.Size(350, 405);
             this.scheduleViewer.Name = "scheduleViewer";
             this.scheduleViewer.Size = new System.Drawing.Size(350, 405);
             this.scheduleViewer.TabIndex = 0;
             // 
-            // label1
+            // potentialScheduleLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(135, 8);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(96, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Potential Schedule";
+            this.potentialScheduleLabel.AutoSize = true;
+            this.potentialScheduleLabel.Location = new System.Drawing.Point(135, 8);
+            this.potentialScheduleLabel.Name = "potentialScheduleLabel";
+            this.potentialScheduleLabel.Size = new System.Drawing.Size(96, 13);
+            this.potentialScheduleLabel.TabIndex = 1;
+            this.potentialScheduleLabel.Text = "Potential Schedule";
             // 
             // ScheduleResultView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(376, 441);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.potentialScheduleLabel);
             this.Controls.Add(this.scheduleViewer);
+            this.MinimumSize = new System.Drawing.Size(392, 480);
             this.Name = "ScheduleResultView";
             this.Text = "ScheduleResultView";
+            this.ResizeEnd += new System.EventHandler(this.ScheduleResultView_ResizeEnd);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label potentialScheduleLabel;
         public System.Windows.Forms.TreeView scheduleViewer;
     }
 }

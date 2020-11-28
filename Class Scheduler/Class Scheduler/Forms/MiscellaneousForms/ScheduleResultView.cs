@@ -16,5 +16,20 @@ namespace Class_Scheduler.Forms.MiscellaneousForms
         {
             InitializeComponent();
         }
+
+        private void ScheduleResultView_ResizeEnd(object sender, EventArgs e)
+        {
+            //on resize, also resize tree view and reposition label
+
+            //first move label
+            potentialScheduleLabel.SetBounds(this.Width / 2 - potentialScheduleLabel.Size.Width / 2,
+                potentialScheduleLabel.Size.Height / 2,
+                potentialScheduleLabel.Size.Width, potentialScheduleLabel.Size.Height);
+
+            //then resize tree view
+            scheduleViewer.SetBounds(10, potentialScheduleLabel.Size.Height * 2,
+                this.Width - 40, this.Height - 50 - potentialScheduleLabel.Size.Height * 2);
+
+        }
     }
 }

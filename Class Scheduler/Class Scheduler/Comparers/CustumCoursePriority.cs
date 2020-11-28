@@ -11,15 +11,21 @@ namespace Class_Scheduler.Comparers
     {
         // Properties
         bool delayGraduate;
+        bool prioritizeLowerLevel;
         bool prioritizePrefixes;
+        bool labPairGrouping;
         List<String> prefixes;
 
 
 
         // Constructor
-        public CustumCoursePriority(bool delayGrad, List<String> priorityPrefixes)
+        public CustumCoursePriority(
+            bool delayGrad, bool prioritizeLowerLevel,
+            bool labPairGrouping, List<String> priorityPrefixes)
         {
             delayGraduate = delayGrad;
+            this.prioritizeLowerLevel = prioritizeLowerLevel;
+            this.labPairGrouping = labPairGrouping;
             if (priorityPrefixes.Count != 0)
             {
                 prioritizePrefixes = true;
@@ -42,25 +48,40 @@ namespace Class_Scheduler.Comparers
             if (x.PendeeDepth == null || y.PendeeDepth == null)
                 throw new Exception("Uncalculated dependee depth!");
 
+            //check if labpair course
+            if (labPairGrouping &&
+                (x.Course.courseDetails.LabPair ||
+                y.Course.courseDetails.LabPair) &&
+                x.Course.courseDetails.LabPair.CompareTo(
+                    y.Course.courseDetails.LabPair) != 0)
+            {
+                return x.Course.courseDetails.LabPair.CompareTo(
+                    y.Course.courseDetails.LabPair);
+            }
+
             //begin compare (Dependee Depth > Valid Terms > Total Dependees
             if (x.PendeeDepth.Value.CompareTo(y.PendeeDepth.Value) != 0)
                 return -x.PendeeDepth.Value.CompareTo(y.PendeeDepth.Value);
             else if (compareTerms(x, y) != 0)
+            {
                 return compareTerms(x, y);
+            }  
             else if (x.TotalPendees.CompareTo(y.TotalPendees) != 0)
+            {
                 return -x.TotalPendees.CompareTo(y.TotalPendees);
+            }
 
             // if graduate class, delay
-            else if ( delayGraduate &&
+            else if (delayGraduate &&
                 x.Course.courseDetails.GraduateLevel.
                 CompareTo(y.Course.courseDetails.GraduateLevel) != 0)
             {
                 return x.Course.courseDetails.GraduateLevel
                     .CompareTo(y.Course.courseDetails.GraduateLevel);
-            } 
+            }
 
             // if prioritize prefixes
-            else if ( prioritizePrefixes &&
+            else if (prioritizePrefixes &&
                 (prefixes.Contains(x.Course.coursePrefix) ||
                 prefixes.Contains(y.Course.coursePrefix)))
             {
@@ -77,9 +98,19 @@ namespace Class_Scheduler.Comparers
                 }
             }
 
+            // if prioritize lower level
+            else if (prioritizeLowerLevel &&
+                x.Course.coursePrefix.Equals(y.Course.coursePrefix))
+            {
+                return x.Course.courseID.CompareTo(y.Course.courseID);
+            }
+
             else
+            {
                 //if they are truly equivelent, give way to y course
                 return 1;
+            }
+                
         }
 
 

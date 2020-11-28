@@ -57,9 +57,15 @@ namespace Class_Scheduler.Forms
 
 
 
-            //generate schedule and add course containers to semesters
+            //generate schedule and add course containers to semesters.
+            //Add options to customCoursePriority comparer
             bool result = ScheduleGenerator.scheduleSemesters(processed, semesterList,
-                new CustumCoursePriority(delayGradCoursesCB.Checked, prioritisedCoursePrefixes)
+                new CustumCoursePriority(
+                    delayGradCoursesCB.Checked,
+                    lowerLevelCB.Checked,
+                    labPairGroupingCB.Checked,
+                    prioritisedCoursePrefixes
+                    )
                 );
             
 

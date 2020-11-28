@@ -60,6 +60,10 @@
             this.openFileWindow = new System.Windows.Forms.OpenFileDialog();
             this.saveFileWindow = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.prioritizeLowerLevelCourcesLabel = new System.Windows.Forms.Label();
+            this.lowerLevelCB = new System.Windows.Forms.CheckBox();
+            this.labpairLabel = new System.Windows.Forms.Label();
+            this.labPairGroupingCB = new System.Windows.Forms.CheckBox();
             this.optionsMenu.SuspendLayout();
             this.EditElementMenuStrip.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -68,6 +72,10 @@
             // optionsMenu
             // 
             this.optionsMenu.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.optionsMenu.Controls.Add(this.labPairGroupingCB);
+            this.optionsMenu.Controls.Add(this.labpairLabel);
+            this.optionsMenu.Controls.Add(this.lowerLevelCB);
+            this.optionsMenu.Controls.Add(this.prioritizeLowerLevelCourcesLabel);
             this.optionsMenu.Controls.Add(this.prefixPrioritiesFormButton);
             this.optionsMenu.Controls.Add(this.prioritizePrefixesCB);
             this.optionsMenu.Controls.Add(this.label2);
@@ -326,6 +334,42 @@
             this.menuStrip.Size = new System.Drawing.Size(800, 24);
             this.menuStrip.TabIndex = 7;
             // 
+            // prioritizeLowerLevelCourcesLabel
+            // 
+            this.prioritizeLowerLevelCourcesLabel.AutoSize = true;
+            this.prioritizeLowerLevelCourcesLabel.Location = new System.Drawing.Point(13, 67);
+            this.prioritizeLowerLevelCourcesLabel.Name = "prioritizeLowerLevelCourcesLabel";
+            this.prioritizeLowerLevelCourcesLabel.Size = new System.Drawing.Size(154, 13);
+            this.prioritizeLowerLevelCourcesLabel.TabIndex = 6;
+            this.prioritizeLowerLevelCourcesLabel.Text = "Prioritize Lower Level Courses?";
+            // 
+            // lowerLevelCB
+            // 
+            this.lowerLevelCB.AutoSize = true;
+            this.lowerLevelCB.Location = new System.Drawing.Point(173, 67);
+            this.lowerLevelCB.Name = "lowerLevelCB";
+            this.lowerLevelCB.Size = new System.Drawing.Size(15, 14);
+            this.lowerLevelCB.TabIndex = 7;
+            this.lowerLevelCB.UseVisualStyleBackColor = true;
+            // 
+            // labpairLabel
+            // 
+            this.labpairLabel.AutoSize = true;
+            this.labpairLabel.Location = new System.Drawing.Point(13, 80);
+            this.labpairLabel.Name = "labpairLabel";
+            this.labpairLabel.Size = new System.Drawing.Size(140, 13);
+            this.labpairLabel.TabIndex = 8;
+            this.labpairLabel.Text = "Prioritize Lab Pair Grouping?";
+            // 
+            // labPairGroupingCB
+            // 
+            this.labPairGroupingCB.AutoSize = true;
+            this.labPairGroupingCB.Location = new System.Drawing.Point(159, 80);
+            this.labPairGroupingCB.Name = "labPairGroupingCB";
+            this.labPairGroupingCB.Size = new System.Drawing.Size(15, 14);
+            this.labPairGroupingCB.TabIndex = 9;
+            this.labPairGroupingCB.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -385,6 +429,10 @@
         private System.Windows.Forms.ToolStripMenuItem addStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadStripMenuItem;
+        private System.Windows.Forms.CheckBox lowerLevelCB;
+        private System.Windows.Forms.Label prioritizeLowerLevelCourcesLabel;
+        private System.Windows.Forms.CheckBox labPairGroupingCB;
+        private System.Windows.Forms.Label labpairLabel;
     }
 }
 
