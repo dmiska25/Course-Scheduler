@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Class_Scheduler.Comparers;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -119,7 +120,8 @@ namespace Class_Scheduler.Objects
 
 
 
-        public static bool scheduleSemesters(List<CourseContainer> courseList, List<Semester> semesters)
+        public static bool scheduleSemesters(List<CourseContainer> courseList, List<Semester> semesters,
+            CustumCoursePriority priority)
         {
             try
             {
@@ -127,7 +129,7 @@ namespace Class_Scheduler.Objects
                 List<CourseContainer> futureCourses = new List<CourseContainer>(courseList);
                 List<CourseContainer> currentCourses = new List<CourseContainer>();
                 SortedList<CourseContainer, CourseContainer> courseLineup =
-                    new SortedList<CourseContainer, CourseContainer>();
+                    new SortedList<CourseContainer, CourseContainer>(priority);
                 HashSet<CourseContainer> scheduledCourses = new HashSet<CourseContainer>();
                 HashSet<CourseContainer> dependeesToCheck = new HashSet<CourseContainer>();
                 HashSet<CourseContainer> copendeesToCheck = new HashSet<CourseContainer>();

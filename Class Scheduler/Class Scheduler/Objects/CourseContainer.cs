@@ -81,6 +81,18 @@ namespace Class_Scheduler.Objects
                 return compareTerms(other);
             else if (this.TotalPendees.CompareTo(other.TotalPendees) != 0)
                 return -this.TotalPendees.CompareTo(other.TotalPendees);
+
+            // if graduate class, delay
+            else if (this.Course.courseDetails.GraduateLevel.
+                CompareTo(other.Course.courseDetails.GraduateLevel) != 0)
+                return this.Course.courseDetails.GraduateLevel
+                    .CompareTo(other.Course.courseDetails.GraduateLevel);
+
+            // 
+
+
+
+
             else
                 //if they are truly equivelent, give way to other course
                 return 1;

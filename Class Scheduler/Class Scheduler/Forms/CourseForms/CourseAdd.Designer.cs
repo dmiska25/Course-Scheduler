@@ -1,4 +1,4 @@
-﻿namespace Class_Scheduler
+﻿namespace Class_Scheduler.Forms.CourseForms
 {
     partial class CourseAdd
     {

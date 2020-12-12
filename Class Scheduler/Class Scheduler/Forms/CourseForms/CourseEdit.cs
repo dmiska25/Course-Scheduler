@@ -1,4 +1,5 @@
-﻿using Class_Scheduler.Forms.Course;
+﻿using Class_Scheduler.Forms.CourseForms;
+using Class_Scheduler.Forms.MiscellaneousForms;
 using Class_Scheduler.Objects;
 using System;
 using System.Collections.Generic;
@@ -11,12 +12,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Class_Scheduler.Objects.Course;
 
-namespace Class_Scheduler
+namespace Class_Scheduler.Forms.CourseForms
 {
     public partial class CourseEdit : CourseAdd
     {
         private Course editCourse;
-        private List<Course> courses;
+        new private List<Course> courses;
         private CourseAddDetails detailsEditForm;
 
         public CourseEdit(ref List<Course> courses, Course editCourse) : base(ref courses)

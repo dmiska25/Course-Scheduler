@@ -1,4 +1,4 @@
-﻿namespace Class_Scheduler
+﻿namespace Class_Scheduler.Forms.MiscellaneousForms
 {
     partial class ElementViewer
     {

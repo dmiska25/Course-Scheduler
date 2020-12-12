@@ -23,11 +23,13 @@ namespace Class_Scheduler.Objects
             private int? _yearMultiple;
             private int? _yearBase;
             // Course Type/Details
-            private bool? _undergraduate;
-            private bool? _graduate;
-            private bool? _generalElective;
-            private bool? _degreeElective;
-            private bool? _dualCredit;
+            private bool _undergraduate;
+            private bool _graduate;
+            private bool _generalElective;
+            private bool _degreeElective;
+            private bool _dualCredit;
+            private bool _labPair;
+            private bool _capstone;
 
 
 
@@ -66,11 +68,13 @@ namespace Class_Scheduler.Objects
 
             public int? YearBase { get => _yearBase; set { _yearBase = value; } }
             public int? YearMultiple { get => _yearMultiple; set { _yearMultiple = value; } }
-            public bool? UndergraduateLevel { get => _undergraduate; set { _undergraduate = value; } }
-            public bool? GraduateLevel { get => _graduate; set { _graduate = value; } }
-            public bool? GeneralElective { get => _generalElective; set { _generalElective = value; } }
-            public bool? DegreeElective { get => _degreeElective; set { _degreeElective = value; } }
-            public bool? DualCredit { get => _dualCredit; set { _dualCredit = value; } }
+            public bool UndergraduateLevel { get => _undergraduate; set { _undergraduate = value; } }
+            public bool GraduateLevel { get => _graduate; set { _graduate = value; } }
+            public bool GeneralElective { get => _generalElective; set { _generalElective = value; } }
+            public bool DegreeElective { get => _degreeElective; set { _degreeElective = value; } }
+            public bool DualCredit { get => _dualCredit; set { _dualCredit = value; } }
+            public bool Capstone { get => _capstone; set { _capstone = value; } }
+            public bool LabPair { get => _labPair; set { _labPair = value; } }
 
             //String properties
             public String StrCreditsRequired
@@ -141,6 +145,24 @@ namespace Class_Scheduler.Objects
                     if (!bool.TryParse(value, out temp)) throw new Exception("Dual Credit string is invalid!");
                     _dualCredit = temp;
                 } }
+            public String StrCapstone
+            {
+                set
+                {
+                    bool temp;
+                    if (!bool.TryParse(value, out temp)) throw new Exception("Capstone string is invalid!");
+                    _capstone = temp;
+                }
+            }
+            public String StrLabPair
+            {
+                set
+                {
+                    bool temp;
+                    if (!bool.TryParse(value, out temp)) throw new Exception("Lab Pair string is invalid!");
+                    _labPair = temp;
+                }
+            }
 
 
 
@@ -151,6 +173,6 @@ namespace Class_Scheduler.Objects
 
 
 
-            }
+        }
     }
 }
