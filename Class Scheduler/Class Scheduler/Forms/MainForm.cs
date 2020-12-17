@@ -16,6 +16,7 @@ using Class_Scheduler.Comparers;
 using Class_Scheduler.Forms.MiscellaneousForms;
 using Class_Scheduler.Forms.CourseForms;
 using Class_Scheduler.Forms.SemesterForms;
+using Class_Scheduler.StaticClasses;
 
 namespace Class_Scheduler.Forms
 {
@@ -85,6 +86,12 @@ namespace Class_Scheduler.Forms
             Console.WriteLine("Total Credits Scheduled: " + totalScheduled);
 
             if (!result) { return; }
+
+
+            //testing schedule optimizer
+            ScheduleOptimizer.checkOverflow(semesterList);
+
+
 
             //create new form
             ScheduleResultView schedule = new ScheduleResultView();
@@ -487,7 +494,7 @@ namespace Class_Scheduler.Forms
         private void updateSemesterViewer()
         {
             //sort the semester list
-            semesterList.Sort(new SemesterViewCompare());
+            semesterList.Sort(new SemesterCompare());
 
             //clear the viewerr
             SemesterViewer.Items.Clear();

@@ -36,6 +36,9 @@ namespace Class_Scheduler.Forms.SemesterForms
             termTB.Text = editSemester.Term.ToString();
             minCreditsTB.Text = editSemester.MinCredits.ToString();
             maxCreditsTB.Text = editSemester.MaxCredits.ToString();
+
+            //set overloadableCB
+            overloadableCB.Checked = editSemester.IsOverloadable;
         }
 
         protected override void OnPaint(PaintEventArgs pe)
@@ -65,6 +68,7 @@ namespace Class_Scheduler.Forms.SemesterForms
                 editedSemester = new Semester(year, term);
                 editedSemester.MaxCredits = maxCredits;
                 editedSemester.MinCredits = minCredits;
+                editedSemester.IsOverloadable = overloadableCB.Checked;
 
                 //check that the semester does not already exist, if reference change 
                 if (!editedSemester.Equals(editSemester))

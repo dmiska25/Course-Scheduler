@@ -14,6 +14,8 @@ namespace Class_Scheduler.Objects
         private int _year;
         private TermEnums _term;
         private HashSet<CourseContainer> _courses;
+        private HashSet<CourseContainer> _overflowCourses;
+        private bool _isOverloadable;
         private int _maxCredits;
         private int _minCredits;
         private int _currentCreditsTotal;
@@ -22,6 +24,8 @@ namespace Class_Scheduler.Objects
         public int Year { get { return _year; } }
         public TermEnums Term { get { return _term; } }
         public HashSet<CourseContainer> Courses { get { return new HashSet<CourseContainer>(_courses); } }
+        public HashSet<CourseContainer> OverflowCourses { get { return new HashSet<CourseContainer>(_overflowCourses); } }
+        public bool IsOverloadable { get => _isOverloadable; set { _isOverloadable = value; } }
         public String SemesterReference { get { return Year.ToString() + ' ' + Term.ToString(); } }
         public int MaxCredits { get { return _maxCredits; } set { _maxCredits = value; } }
         public int MinCredits { get { return _minCredits; } set { _minCredits = value; } }
@@ -33,6 +37,8 @@ namespace Class_Scheduler.Objects
             _year = year;
             _term = term;
             _courses = new HashSet<CourseContainer>();
+            _overflowCourses = new HashSet<CourseContainer>();
+            _isOverloadable = true;
             _minCredits = 12;
             _maxCredits = 15;
         }
@@ -52,6 +58,18 @@ namespace Class_Scheduler.Objects
             _currentCreditsTotal += course.Course.credits;
         }
 
+
+        public void addOverflowCourse(CourseContainer course)
+        {
+            if (_overflowCourses.Count > 0)
+                throw new Exception("Overflow capacity exceeded!");
+            else if (!_isOverloadable)
+                throw new Exception("Overflow is not allowed for this semester!");
+
+            _overflowCourses.Add(course);
+            _currentCreditsTotal += course.Course.credits;
+        }
+
         /// <summary>
         /// removeCourse will accept a course reference and determine if the course is in the listing
         /// if so, it will remove the course from the semester internal list and return true.
@@ -67,12 +85,19 @@ namespace Class_Scheduler.Objects
                 _currentCreditsTotal -= course.Course.credits;
                 return true;
             }
+            else if(_overflowCourses.Contains(course))
+            {
+                _overflowCourses.Remove(course);
+                _currentCreditsTotal -= course.Course.credits;
+                return true;
+            }
             return false;
         }
 
         public void removeAllCourses()
         {
             _courses.Clear();
+            _overflowCourses.Clear();
             _currentCreditsTotal = 0;
         }
 
@@ -105,6 +130,7 @@ namespace Class_Scheduler.Objects
             info.AddValue("Term", _term);
             info.AddValue("MaxCredits", _maxCredits);
             info.AddValue("MinCredits", _minCredits);
+            info.AddValue("IsOverloadable", _isOverloadable);
         }
 
         public Semester(SerializationInfo info, StreamingContext context)
@@ -112,8 +138,17 @@ namespace Class_Scheduler.Objects
             _year = info.GetInt32("Year");
             _term = (TermEnums)info.GetValue("Term", typeof(TermEnums));
             _courses = new HashSet<CourseContainer>();
+            _overflowCourses = new HashSet<CourseContainer>();
             _maxCredits = info.GetInt32("MaxCredits");
             _minCredits = info.GetInt32("MinCredits");
+            try
+            {
+                _isOverloadable = info.GetBoolean("IsOverloadable");
+            }
+            catch(Exception ex)
+            {
+                _isOverloadable = false;
+            }
         }
     }
 }

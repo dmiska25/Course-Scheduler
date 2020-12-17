@@ -38,6 +38,7 @@
             this.minCreditsLabel = new System.Windows.Forms.Label();
             this.maxCreditsTB = new System.Windows.Forms.TextBox();
             this.minCreditsTB = new System.Windows.Forms.TextBox();
+            this.overloadableCB = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // addSemesterButton
@@ -125,6 +126,16 @@
             this.minCreditsTB.Size = new System.Drawing.Size(100, 20);
             this.minCreditsTB.TabIndex = 3;
             // 
+            // overloadableCB
+            // 
+            this.overloadableCB.AutoSize = true;
+            this.overloadableCB.Location = new System.Drawing.Point(31, 153);
+            this.overloadableCB.Name = "overloadableCB";
+            this.overloadableCB.Size = new System.Drawing.Size(89, 17);
+            this.overloadableCB.TabIndex = 8;
+            this.overloadableCB.Text = "Overloadable";
+            this.overloadableCB.UseVisualStyleBackColor = true;
+            // 
             // SemesterAdd
             // 
             this.AcceptButton = this.addSemesterButton;
@@ -132,6 +143,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(336, 383);
+            this.Controls.Add(this.overloadableCB);
             this.Controls.Add(this.minCreditsTB);
             this.Controls.Add(this.maxCreditsTB);
             this.Controls.Add(this.minCreditsLabel);
@@ -161,5 +173,6 @@
         protected System.Windows.Forms.TextBox termTB;
         protected System.Windows.Forms.TextBox maxCreditsTB;
         protected System.Windows.Forms.TextBox minCreditsTB;
+        protected System.Windows.Forms.CheckBox overloadableCB;
     }
 }

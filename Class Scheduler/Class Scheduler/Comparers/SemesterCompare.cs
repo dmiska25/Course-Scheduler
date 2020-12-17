@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Class_Scheduler.Comparers
 {
-    class SemesterViewCompare : Comparer<Semester>
+    class SemesterCompare : Comparer<Semester>
     {
         public override int Compare(Semester x, Semester y)
         {
