@@ -30,6 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             this.optionsMenu = new System.Windows.Forms.GroupBox();
+            this.labPairGroupingCB = new System.Windows.Forms.CheckBox();
+            this.labpairLabel = new System.Windows.Forms.Label();
+            this.lowerLevelCB = new System.Windows.Forms.CheckBox();
+            this.prioritizeLowerLevelCourcesLabel = new System.Windows.Forms.Label();
             this.prefixPrioritiesFormButton = new System.Windows.Forms.Button();
             this.prioritizePrefixesCB = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -60,10 +64,8 @@
             this.openFileWindow = new System.Windows.Forms.OpenFileDialog();
             this.saveFileWindow = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
-            this.prioritizeLowerLevelCourcesLabel = new System.Windows.Forms.Label();
-            this.lowerLevelCB = new System.Windows.Forms.CheckBox();
-            this.labpairLabel = new System.Windows.Forms.Label();
-            this.labPairGroupingCB = new System.Windows.Forms.CheckBox();
+            this.overloadableCB = new System.Windows.Forms.CheckBox();
+            this.overloadableLabel = new System.Windows.Forms.Label();
             this.optionsMenu.SuspendLayout();
             this.EditElementMenuStrip.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -72,6 +74,8 @@
             // optionsMenu
             // 
             this.optionsMenu.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.optionsMenu.Controls.Add(this.overloadableLabel);
+            this.optionsMenu.Controls.Add(this.overloadableCB);
             this.optionsMenu.Controls.Add(this.labPairGroupingCB);
             this.optionsMenu.Controls.Add(this.labpairLabel);
             this.optionsMenu.Controls.Add(this.lowerLevelCB);
@@ -88,6 +92,42 @@
             this.optionsMenu.TabIndex = 0;
             this.optionsMenu.TabStop = false;
             this.optionsMenu.Text = "Options";
+            // 
+            // labPairGroupingCB
+            // 
+            this.labPairGroupingCB.AutoSize = true;
+            this.labPairGroupingCB.Location = new System.Drawing.Point(159, 80);
+            this.labPairGroupingCB.Name = "labPairGroupingCB";
+            this.labPairGroupingCB.Size = new System.Drawing.Size(15, 14);
+            this.labPairGroupingCB.TabIndex = 9;
+            this.labPairGroupingCB.UseVisualStyleBackColor = true;
+            // 
+            // labpairLabel
+            // 
+            this.labpairLabel.AutoSize = true;
+            this.labpairLabel.Location = new System.Drawing.Point(13, 80);
+            this.labpairLabel.Name = "labpairLabel";
+            this.labpairLabel.Size = new System.Drawing.Size(140, 13);
+            this.labpairLabel.TabIndex = 8;
+            this.labpairLabel.Text = "Prioritize Lab Pair Grouping?";
+            // 
+            // lowerLevelCB
+            // 
+            this.lowerLevelCB.AutoSize = true;
+            this.lowerLevelCB.Location = new System.Drawing.Point(173, 67);
+            this.lowerLevelCB.Name = "lowerLevelCB";
+            this.lowerLevelCB.Size = new System.Drawing.Size(15, 14);
+            this.lowerLevelCB.TabIndex = 7;
+            this.lowerLevelCB.UseVisualStyleBackColor = true;
+            // 
+            // prioritizeLowerLevelCourcesLabel
+            // 
+            this.prioritizeLowerLevelCourcesLabel.AutoSize = true;
+            this.prioritizeLowerLevelCourcesLabel.Location = new System.Drawing.Point(13, 67);
+            this.prioritizeLowerLevelCourcesLabel.Name = "prioritizeLowerLevelCourcesLabel";
+            this.prioritizeLowerLevelCourcesLabel.Size = new System.Drawing.Size(154, 13);
+            this.prioritizeLowerLevelCourcesLabel.TabIndex = 6;
+            this.prioritizeLowerLevelCourcesLabel.Text = "Prioritize Lower Level Courses?";
             // 
             // prefixPrioritiesFormButton
             // 
@@ -334,41 +374,24 @@
             this.menuStrip.Size = new System.Drawing.Size(800, 24);
             this.menuStrip.TabIndex = 7;
             // 
-            // prioritizeLowerLevelCourcesLabel
+            // overloadableCB
             // 
-            this.prioritizeLowerLevelCourcesLabel.AutoSize = true;
-            this.prioritizeLowerLevelCourcesLabel.Location = new System.Drawing.Point(13, 67);
-            this.prioritizeLowerLevelCourcesLabel.Name = "prioritizeLowerLevelCourcesLabel";
-            this.prioritizeLowerLevelCourcesLabel.Size = new System.Drawing.Size(154, 13);
-            this.prioritizeLowerLevelCourcesLabel.TabIndex = 6;
-            this.prioritizeLowerLevelCourcesLabel.Text = "Prioritize Lower Level Courses?";
+            this.overloadableCB.AutoSize = true;
+            this.overloadableCB.Location = new System.Drawing.Point(172, 92);
+            this.overloadableCB.Name = "overloadableCB";
+            this.overloadableCB.Size = new System.Drawing.Size(15, 14);
+            this.overloadableCB.TabIndex = 10;
+            this.overloadableCB.UseVisualStyleBackColor = true;
             // 
-            // lowerLevelCB
+            // overloadableLabel
             // 
-            this.lowerLevelCB.AutoSize = true;
-            this.lowerLevelCB.Location = new System.Drawing.Point(173, 67);
-            this.lowerLevelCB.Name = "lowerLevelCB";
-            this.lowerLevelCB.Size = new System.Drawing.Size(15, 14);
-            this.lowerLevelCB.TabIndex = 7;
-            this.lowerLevelCB.UseVisualStyleBackColor = true;
-            // 
-            // labpairLabel
-            // 
-            this.labpairLabel.AutoSize = true;
-            this.labpairLabel.Location = new System.Drawing.Point(13, 80);
-            this.labpairLabel.Name = "labpairLabel";
-            this.labpairLabel.Size = new System.Drawing.Size(140, 13);
-            this.labpairLabel.TabIndex = 8;
-            this.labpairLabel.Text = "Prioritize Lab Pair Grouping?";
-            // 
-            // labPairGroupingCB
-            // 
-            this.labPairGroupingCB.AutoSize = true;
-            this.labPairGroupingCB.Location = new System.Drawing.Point(159, 80);
-            this.labPairGroupingCB.Name = "labPairGroupingCB";
-            this.labPairGroupingCB.Size = new System.Drawing.Size(15, 14);
-            this.labPairGroupingCB.TabIndex = 9;
-            this.labPairGroupingCB.UseVisualStyleBackColor = true;
+            this.overloadableLabel.AutoSize = true;
+            this.overloadableLabel.Location = new System.Drawing.Point(13, 93);
+            this.overloadableLabel.Name = "overloadableLabel";
+            this.overloadableLabel.Size = new System.Drawing.Size(153, 13);
+            this.overloadableLabel.TabIndex = 11;
+            this.overloadableLabel.Tag = "";
+            this.overloadableLabel.Text = "Enable Semester Overloading?";
             // 
             // MainForm
             // 
@@ -433,6 +456,8 @@
         private System.Windows.Forms.Label prioritizeLowerLevelCourcesLabel;
         private System.Windows.Forms.CheckBox labPairGroupingCB;
         private System.Windows.Forms.Label labpairLabel;
+        private System.Windows.Forms.Label overloadableLabel;
+        private System.Windows.Forms.CheckBox overloadableCB;
     }
 }
 

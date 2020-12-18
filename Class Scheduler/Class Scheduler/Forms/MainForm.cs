@@ -16,6 +16,7 @@ using Class_Scheduler.Comparers;
 using Class_Scheduler.Forms.MiscellaneousForms;
 using Class_Scheduler.Forms.CourseForms;
 using Class_Scheduler.Forms.SemesterForms;
+using Class_Scheduler.StaticClasses;
 
 namespace Class_Scheduler.Forms
 {
@@ -26,6 +27,8 @@ namespace Class_Scheduler.Forms
         private List<Semester> semesterList;
         private HashSet<String> coursePrefixes;
         private List<String> prioritisedCoursePrefixes;
+        ToolTip overloadable;
+
 
         public MainForm()
         {
@@ -44,6 +47,14 @@ namespace Class_Scheduler.Forms
         {
             //diable menu strip
             EditElementMenuStrip.Enabled = false;
+
+            //tool tip laod
+            overloadable = new ToolTip();
+            overloadable.SetToolTip(overloadableLabel,
+                "Enabling Overloading will attempt to push up to one course into each semester\n" +
+                "going beyond the set maximum credits set for the semester. This will occur post\n" +
+                "schedule creation and can serve to balance the schedule if many simpler courses\n" +
+                "have been added to the end of the curiculum. Only valid for overloadable semesters.\n");
         }
 
 
@@ -85,6 +96,14 @@ namespace Class_Scheduler.Forms
             Console.WriteLine("Total Credits Scheduled: " + totalScheduled);
 
             if (!result) { return; }
+
+
+            //testing schedule optimizer
+            if (overloadableCB.Checked)
+            {
+                ScheduleOptimizer.checkOverflow(semesterList);
+            }
+
 
             //create new form
             ScheduleResultView schedule = new ScheduleResultView();
@@ -487,9 +506,9 @@ namespace Class_Scheduler.Forms
         private void updateSemesterViewer()
         {
             //sort the semester list
-            semesterList.Sort(new SemesterViewCompare());
+            semesterList.Sort(new SemesterCompare());
 
-            //clear the viewerr
+            //clear the viewer
             SemesterViewer.Items.Clear();
 
             //add elements to viewer
@@ -568,6 +587,7 @@ namespace Class_Scheduler.Forms
             elements.Add("Term: " + semester.Term.ToString());
             elements.Add("Minimum Credits: " + semester.MinCredits);
             elements.Add("Maximum Credits: " + semester.MaxCredits);
+            elements.Add("Overloadable: " + semester.IsOverloadable.ToString());
 
             //open a new elment viewer
             this.SuspendLayout();

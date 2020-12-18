@@ -63,6 +63,9 @@ namespace Class_Scheduler.Forms.SemesterForms
                     throw new Exception("The Semester already exists!");
                 }
 
+                //set overloadable
+                semester.IsOverloadable = overloadableCB.Checked;
+
                 this.Close();
             }
             catch(Exception ex)

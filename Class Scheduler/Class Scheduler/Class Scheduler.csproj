@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Comparers\CourseIntCompare.cs" />
     <Compile Include="Comparers\CustumCoursePriority.cs" />
     <Compile Include="Forms\CourseForms\CourseAddDetails.cs">
       <SubType>Form</SubType>
@@ -71,7 +72,7 @@
     <Compile Include="Forms\SemesterForms\SemesterEdit.Designer.cs">
       <DependentUpon>SemesterEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Comparers\SemesterViewCompare.cs" />
+    <Compile Include="Comparers\SemesterCompare.cs" />
     <Compile Include="Forms\CourseForms\CourseAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +117,7 @@
     <Compile Include="Forms\SemesterForms\SemesterAdd.Designer.cs">
       <DependentUpon>SemesterAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="StaticClasses\ScheduleOptimizer.cs" />
     <Compile Include="StaticClasses\tools.cs" />
     <EmbeddedResource Include="Forms\CourseForms\CourseAdd.resx">
       <DependentUpon>CourseAdd.cs</DependentUpon>
