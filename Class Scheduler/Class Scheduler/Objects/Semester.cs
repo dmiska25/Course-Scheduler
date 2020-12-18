@@ -23,7 +23,7 @@ namespace Class_Scheduler.Objects
         //properties
         public int Year { get { return _year; } }
         public TermEnums Term { get { return _term; } }
-        public HashSet<CourseContainer> Courses { get { return new HashSet<CourseContainer>(_courses); } }
+        public HashSet<CourseContainer> Courses { get { return new HashSet<CourseContainer>(_courses.Union(_overflowCourses)); } }
         public HashSet<CourseContainer> OverflowCourses { get { return new HashSet<CourseContainer>(_overflowCourses); } }
         public bool IsOverloadable { get => _isOverloadable; set { _isOverloadable = value; } }
         public String SemesterReference { get { return Year.ToString() + ' ' + Term.ToString(); } }
