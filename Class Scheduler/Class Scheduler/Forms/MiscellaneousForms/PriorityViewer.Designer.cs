@@ -123,13 +123,12 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox itemList1;
-        private System.Windows.Forms.ListBox itemList2;
         private System.Windows.Forms.Button moveRightButton;
         private System.Windows.Forms.Button moveLeftButton;
         private System.Windows.Forms.Button closeButton;
-        private System.Windows.Forms.Button upButton;
-        private System.Windows.Forms.Button downButton;
+        public System.Windows.Forms.Button upButton;
+        public System.Windows.Forms.Button downButton;
+        protected System.Windows.Forms.ListBox itemList1;
+        protected System.Windows.Forms.ListBox itemList2;
     }
 }

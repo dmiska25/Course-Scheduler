@@ -14,8 +14,8 @@ namespace Class_Scheduler.Forms.MiscellaneousForms
     public partial class PriorityViewer<T> : Form
     {
         //variables
-        private List<T> _nonPrioritizedItems;
-        private List<T> _priorityList;
+        protected List<T> _nonPrioritizedItems;
+        protected List<T> _priorityList;
 
         //field
         public List<T> PriorityList { get { return new List<T>(_priorityList); } }
@@ -32,7 +32,7 @@ namespace Class_Scheduler.Forms.MiscellaneousForms
 
         }
 
-        private void moveRightButton_Click(object sender, EventArgs e)
+        protected virtual void moveRightButton_Click(object sender, EventArgs e)
         {
             int index;
             if (itemList1.SelectedIndex != -1)
@@ -45,7 +45,7 @@ namespace Class_Scheduler.Forms.MiscellaneousForms
             _nonPrioritizedItems.RemoveAt(index);
         }
 
-        private void moveLeftButton_Click(object sender, EventArgs e)
+        protected virtual void moveLeftButton_Click(object sender, EventArgs e)
         {
             int index;
             if (itemList2.SelectedIndex != -1)
@@ -56,6 +56,24 @@ namespace Class_Scheduler.Forms.MiscellaneousForms
             itemList2.Items.RemoveAt(index);
             _nonPrioritizedItems.Add(_priorityList[index]);
             _priorityList.RemoveAt(index);
+        }
+
+        protected T getSelectedItem()
+        {
+            int index;
+            if (itemList1.SelectedIndex != -1)
+            {
+                index = itemList1.SelectedIndex;
+                return _nonPrioritizedItems[index];
+            }
+            else if (itemList2.SelectedIndex != -1)
+            {
+                index = itemList2.SelectedIndex;
+                return _priorityList[index];
+            }
+            else
+                throw new Exception("No Item Selected!");
+
         }
 
         private void upButton_Click(object sender, EventArgs e)

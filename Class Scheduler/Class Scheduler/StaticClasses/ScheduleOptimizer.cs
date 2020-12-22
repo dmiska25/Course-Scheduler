@@ -11,7 +11,7 @@ namespace Class_Scheduler.StaticClasses
     public static class ScheduleOptimizer
     {
 
-        public static void checkOverflow(List<Semester> semesterList)
+        public static void checkOverflow(List<Semester> semesterList, Dictionary<Semester, List<Course>> dictionary)
         {
             Console.WriteLine("Begining Optimization algorithm");
 
@@ -59,6 +59,17 @@ namespace Class_Scheduler.StaticClasses
             bool failed = false;
             while (!failed)
             {
+                // if the semester contains a manually added course, cancel
+                List<Course> semManualListing = new List<Course>();
+                dictionary.TryGetValue(finalSemester, out semManualListing);
+                if (semManualListing.Count != 0)
+                {
+                    failed = true;
+                    break;
+                }
+
+
+
                 // find first semester that contains dependency for every course in final semester
                 // and add the course and the semester to a dicitionary.
                 Dictionary<CourseContainer, Semester> moveTo = new Dictionary<CourseContainer, Semester>();

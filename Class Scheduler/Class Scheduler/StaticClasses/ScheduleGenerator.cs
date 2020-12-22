@@ -121,7 +121,7 @@ namespace Class_Scheduler.Objects
 
 
         public static bool scheduleSemesters(List<CourseContainer> courseList, List<Semester> semesters,
-            CustumCoursePriority priority)
+            Dictionary<Semester, List<Course>> manualAddDictIn, CustumCoursePriority priority)
         {
             try
             {
@@ -133,6 +133,24 @@ namespace Class_Scheduler.Objects
                 HashSet<CourseContainer> scheduledCourses = new HashSet<CourseContainer>();
                 HashSet<CourseContainer> dependeesToCheck = new HashSet<CourseContainer>();
                 HashSet<CourseContainer> copendeesToCheck = new HashSet<CourseContainer>();
+                Dictionary<Semester, List<CourseContainer>> manualAddDict =
+                    new Dictionary<Semester, List<CourseContainer>>();
+
+                //convert the dictionary, and remove all manual add courses from future courses
+                foreach(Semester sem in manualAddDictIn.Keys)
+                {
+                    List<Course> semList = new List<Course>();
+                    manualAddDictIn.TryGetValue(sem, out semList);
+                    List<CourseContainer> output = new List<CourseContainer>();
+                    foreach(Course course in semList)
+                    {
+                        CourseContainer courseCont = getCourseContainer(course, courseList);
+                        output.Add(courseCont);
+                        futureCourses.Remove(courseCont);
+                    }
+                    manualAddDict.Add(sem, output);
+                }
+
 
 
                 // initialize by adding all courses that can be scheduled to current courses list
@@ -195,7 +213,7 @@ namespace Class_Scheduler.Objects
 
 
                     //ensure there are remaining courses to schedule
-                    if (currentCourses.Count == 0 && futureCourses.Count == 0) { continue; }
+                    if (currentCourses.Count == 0 && futureCourses.Count == 0) { break; }
 
                     //null all course current and future course dependee depths
                     foreach (CourseContainer course in currentCourses) { course.PendeeDepth = null; }
@@ -247,13 +265,44 @@ namespace Class_Scheduler.Objects
                     //debug: print course lineup
                     System.Console.WriteLine(Course.CourseListString("pre add list: ", courseLineup.Values));
 
+                    //get the manual add list for the semester
+                    List<CourseContainer> semesterManualAdd = new List<CourseContainer>();
+
+                    //get manual add list for the semester
+                    manualAddDict.TryGetValue(semester, out semesterManualAdd);
+
+
+                    // add manualy scheduled courses
+                    while (semesterManualAdd.Count != 0)
+                    {
+                        CourseContainer course = semesterManualAdd[0];
+
+                        semester.addCourse(course); //add the manual course
+                        scheduledCourses.Add(course); // add course to list of scheduled courses
+                        semesterManualAdd.RemoveAt(0); //remove the course from the manual add list
+
+                        // add the courses dependees and their copendees to HashSets respectivly. This is done to check if these courses
+                        // requirements are satisfied and such be added to currentCourses list.
+                        foreach (CourseContainer dependee in course.Dependees)
+                        {
+                            dependeesToCheck.Add(dependee);     //add the dependee
+                            foreach (CourseContainer copendee in dependee.Copendees)
+                            {
+                                copendeesToCheck.Add(copendee);     //add the copendee
+                            }
+                        }
+                    }
+
+
 
 
                     // Attempt to add courses to the current semester
                     while (semester.TotalCredits < semester.MaxCredits && courseLineup.Count != 0)
                     {
+                        CourseContainer course;
+
                         //get next course from upcoming courses
-                        CourseContainer course = courseLineup.First().Value;
+                        course = courseLineup.First().Value;
 
                         //if there are free credits in the semester add the next priority course
                         if (semester.TotalCredits + course.Course.credits <= semester.MaxCredits)
@@ -442,6 +491,18 @@ namespace Class_Scheduler.Objects
 
             //if requrirements met, return true
             return true;
+        }
+
+        public static CourseContainer getCourseContainer(Course course, List<CourseContainer> containerList)
+        {
+
+            foreach (CourseContainer cont in containerList)
+            {
+                if (cont.Course.Equals(course))
+                    return cont;
+            }
+            return null;
+
         }
 
     }

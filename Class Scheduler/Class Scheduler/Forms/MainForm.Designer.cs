@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.optionsMenu = new System.Windows.Forms.GroupBox();
+            this.overloadableLabel = new System.Windows.Forms.Label();
+            this.overloadableCB = new System.Windows.Forms.CheckBox();
             this.labPairGroupingCB = new System.Windows.Forms.CheckBox();
             this.labpairLabel = new System.Windows.Forms.Label();
             this.lowerLevelCB = new System.Windows.Forms.CheckBox();
@@ -64,8 +66,7 @@
             this.openFileWindow = new System.Windows.Forms.OpenFileDialog();
             this.saveFileWindow = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
-            this.overloadableCB = new System.Windows.Forms.CheckBox();
-            this.overloadableLabel = new System.Windows.Forms.Label();
+            this.scheduleCoursesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsMenu.SuspendLayout();
             this.EditElementMenuStrip.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -92,6 +93,25 @@
             this.optionsMenu.TabIndex = 0;
             this.optionsMenu.TabStop = false;
             this.optionsMenu.Text = "Options";
+            // 
+            // overloadableLabel
+            // 
+            this.overloadableLabel.AutoSize = true;
+            this.overloadableLabel.Location = new System.Drawing.Point(13, 93);
+            this.overloadableLabel.Name = "overloadableLabel";
+            this.overloadableLabel.Size = new System.Drawing.Size(153, 13);
+            this.overloadableLabel.TabIndex = 11;
+            this.overloadableLabel.Tag = "";
+            this.overloadableLabel.Text = "Enable Semester Overloading?";
+            // 
+            // overloadableCB
+            // 
+            this.overloadableCB.AutoSize = true;
+            this.overloadableCB.Location = new System.Drawing.Point(172, 92);
+            this.overloadableCB.Name = "overloadableCB";
+            this.overloadableCB.Size = new System.Drawing.Size(15, 14);
+            this.overloadableCB.TabIndex = 10;
+            this.overloadableCB.UseVisualStyleBackColor = true;
             // 
             // labPairGroupingCB
             // 
@@ -217,28 +237,29 @@
             this.EditElementMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.viewToolStripMenuItem,
             this.editToolStripMenuItem,
-            this.deleteToolStripMenuItem});
+            this.deleteToolStripMenuItem,
+            this.scheduleCoursesToolStripMenuItem});
             this.EditElementMenuStrip.Name = "EditElementMenuStrip";
-            this.EditElementMenuStrip.Size = new System.Drawing.Size(118, 70);
+            this.EditElementMenuStrip.Size = new System.Drawing.Size(181, 114);
             // 
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.viewToolStripMenuItem.Text = "View";
             this.viewToolStripMenuItem.Click += new System.EventHandler(this.viewToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.deleteToolStripMenuItem.Text = "Remove";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -374,24 +395,12 @@
             this.menuStrip.Size = new System.Drawing.Size(800, 24);
             this.menuStrip.TabIndex = 7;
             // 
-            // overloadableCB
+            // scheduleCoursesToolStripMenuItem
             // 
-            this.overloadableCB.AutoSize = true;
-            this.overloadableCB.Location = new System.Drawing.Point(172, 92);
-            this.overloadableCB.Name = "overloadableCB";
-            this.overloadableCB.Size = new System.Drawing.Size(15, 14);
-            this.overloadableCB.TabIndex = 10;
-            this.overloadableCB.UseVisualStyleBackColor = true;
-            // 
-            // overloadableLabel
-            // 
-            this.overloadableLabel.AutoSize = true;
-            this.overloadableLabel.Location = new System.Drawing.Point(13, 93);
-            this.overloadableLabel.Name = "overloadableLabel";
-            this.overloadableLabel.Size = new System.Drawing.Size(153, 13);
-            this.overloadableLabel.TabIndex = 11;
-            this.overloadableLabel.Tag = "";
-            this.overloadableLabel.Text = "Enable Semester Overloading?";
+            this.scheduleCoursesToolStripMenuItem.Name = "scheduleCoursesToolStripMenuItem";
+            this.scheduleCoursesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.scheduleCoursesToolStripMenuItem.Text = "Schedule Courses";
+            this.scheduleCoursesToolStripMenuItem.Click += new System.EventHandler(this.scheduleCoursesToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -458,6 +467,7 @@
         private System.Windows.Forms.Label labpairLabel;
         private System.Windows.Forms.Label overloadableLabel;
         private System.Windows.Forms.CheckBox overloadableCB;
+        private System.Windows.Forms.ToolStripMenuItem scheduleCoursesToolStripMenuItem;
     }
 }
 

@@ -27,8 +27,8 @@ namespace Class_Scheduler.Forms
         private List<Semester> semesterList;
         private HashSet<String> coursePrefixes;
         private List<String> prioritisedCoursePrefixes;
-        ToolTip overloadable;
-
+        private Dictionary<Semester, List<Course>> preScheduleDict;
+        private ToolTip overloadable;
 
         public MainForm()
         {
@@ -37,8 +37,8 @@ namespace Class_Scheduler.Forms
             semesterList = new List<Semester>();
             coursePrefixes = new HashSet<string>();
             prioritisedCoursePrefixes = new List<string>();
+            preScheduleDict = new Dictionary<Semester, List<Course>>();
             
-
 
         }
 
@@ -55,6 +55,7 @@ namespace Class_Scheduler.Forms
                 "going beyond the set maximum credits set for the semester. This will occur post\n" +
                 "schedule creation and can serve to balance the schedule if many simpler courses\n" +
                 "have been added to the end of the curiculum. Only valid for overloadable semesters.\n");
+
         }
 
 
@@ -70,7 +71,7 @@ namespace Class_Scheduler.Forms
 
             //generate schedule and add course containers to semesters.
             //Add options to customCoursePriority comparer
-            bool result = ScheduleGenerator.scheduleSemesters(processed, semesterList,
+            bool result = ScheduleGenerator.scheduleSemesters(processed, semesterList, preScheduleDict,
                 new CustumCoursePriority(
                     delayGradCoursesCB.Checked,
                     lowerLevelCB.Checked,
@@ -101,7 +102,7 @@ namespace Class_Scheduler.Forms
             //testing schedule optimizer
             if (overloadableCB.Checked)
             {
-                ScheduleOptimizer.checkOverflow(semesterList);
+                ScheduleOptimizer.checkOverflow(semesterList, preScheduleDict);
             }
 
 
@@ -183,6 +184,9 @@ namespace Class_Scheduler.Forms
             //add new semester object to semester list
             semesterList.Add(semester);
 
+            //create dictionary entry for prescheduleing
+            preScheduleDict.Add(semester, new List<Course>());
+
             //update viewer
             updateSemesterViewer();
         }
@@ -228,6 +232,12 @@ namespace Class_Scheduler.Forms
                 //load courses into form list
                 semesterList = (List<Semester>)bf.Deserialize(stream);
                 stream.Close();
+
+                //create dictionary entrys for prescheduleing 
+                foreach(Semester semester in semesterList)
+                {
+                    preScheduleDict.Add(semester, new List<Course>());
+                }
 
                 //update viewer
                 updateSemesterViewer();
@@ -298,11 +308,15 @@ namespace Class_Scheduler.Forms
             {
                 //enable menu
                 EditElementMenuStrip.Enabled = true;
+                scheduleCoursesToolStripMenuItem.Enabled = false;
+                scheduleCoursesToolStripMenuItem.Visible = false;
             }
             else
             {
                 //disable menu
                 EditElementMenuStrip.Enabled = false;
+                scheduleCoursesToolStripMenuItem.Enabled = false;
+                scheduleCoursesToolStripMenuItem.Visible = false;
             }
         }
         //--Define when menu strip can be used for semesterView
@@ -312,11 +326,15 @@ namespace Class_Scheduler.Forms
             {
                 //enable menu
                 EditElementMenuStrip.Enabled = true;
+                scheduleCoursesToolStripMenuItem.Enabled = true;
+                scheduleCoursesToolStripMenuItem.Visible = true;
             }
             else
             {
                 //disable menu
                 EditElementMenuStrip.Enabled = false;
+                scheduleCoursesToolStripMenuItem.Enabled = false;
+                scheduleCoursesToolStripMenuItem.Visible = false;
             }
         }
 
@@ -433,6 +451,7 @@ namespace Class_Scheduler.Forms
                         foreach (Course course in toDelete)
                         {
                             courseList.Remove(course);
+                            removePrescheduledCourse(course);
                         }
                     }
                     else { return; }
@@ -440,6 +459,7 @@ namespace Class_Scheduler.Forms
 
                 //remove the course from the list
                 courseList.Remove(deleteCourse);
+                removePrescheduledCourse(deleteCourse);
 
                 //update course view
                 updateCourseViewer();
@@ -461,6 +481,56 @@ namespace Class_Scheduler.Forms
                 throw new Exception("Not Allowed!");
             }
         }
+
+
+        private void scheduleCoursesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //ensure only one selection
+            if (SemesterViewer.SelectedItems.Count == 1)
+            {
+
+
+
+                //generate remaining courses
+                List<Course> remainingCourses = new List<Course>(courseList);
+                foreach (List<Course> courses in preScheduleDict.Values)
+                {
+                    foreach (Course course in courses)
+                    {
+                        remainingCourses.Remove(course);
+                    }
+                }
+
+                //get semester at selected index
+                Semester semester = semesterList[SemesterViewer.SelectedItems[0].Index];
+
+                //retrieve prescheduledCourses List coresponding to the semester
+                List<Course> prescheduledCourses = new List<Course>();
+                preScheduleDict.TryGetValue(semester, out prescheduledCourses);
+
+                //create viewer
+                PrescheduleViewer prescheduleSemesterViewer =
+                    new PrescheduleViewer(courseList, prescheduledCourses,
+                    semesterList, preScheduleDict, semester);
+
+                //modify viewer
+                prescheduleSemesterViewer.upButton.Visible = false;
+                prescheduleSemesterViewer.downButton.Visible = false;
+                prescheduleSemesterViewer.Name = "Semester Manual Scheduling";
+
+
+                //open viewer
+                prescheduleSemesterViewer.ShowDialog();
+
+                //update list
+                updateCourseViewer();
+            }
+            else
+            {
+                throw new Exception("Not Allowed!");
+            }
+        }
+
 
         // form behavior
 
@@ -614,5 +684,21 @@ namespace Class_Scheduler.Forms
             }
             prioritisedCoursePrefixes.RemoveAll(t=>removeList.Contains(t));
         }
+
+        private void removePrescheduledCourse(Course courseToDelete)
+        {
+            foreach(List<Course> courses in preScheduleDict.Values)
+            {
+                foreach(Course course in courses)
+                {
+                    if (course.Equals(courseToDelete))
+                    {
+                        courses.Remove(courseToDelete);
+                        return;
+                    } 
+                }
+            }
+        }
+
     }
 }

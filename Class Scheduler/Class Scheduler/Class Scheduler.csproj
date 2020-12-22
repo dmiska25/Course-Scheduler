@@ -54,6 +54,12 @@
     <Compile Include="Forms\CourseForms\CourseAddDetails.Designer.cs">
       <DependentUpon>CourseAddDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\MiscellaneousForms\PrescheduleViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MiscellaneousForms\PrescheduleViewer.Designer.cs">
+      <DependentUpon>PrescheduleViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MiscellaneousForms\PriorityViewer.cs">
       <SubType>Form</SubType>
     </Compile>
