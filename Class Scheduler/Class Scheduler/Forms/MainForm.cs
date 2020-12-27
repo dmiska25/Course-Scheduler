@@ -17,6 +17,7 @@ using Class_Scheduler.Forms.MiscellaneousForms;
 using Class_Scheduler.Forms.CourseForms;
 using Class_Scheduler.Forms.SemesterForms;
 using Class_Scheduler.StaticClasses;
+using Class_Scheduler.Forms.AutoGen;
 
 namespace Class_Scheduler.Forms
 {
@@ -266,6 +267,45 @@ namespace Class_Scheduler.Forms
             //write data to file
             bf.Serialize(stream, semesterList);
             stream.Close();
+        }
+
+
+
+
+        //- Auto Generating
+
+        //-- Auto Generating Semesters
+
+        private void semestersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // open a new form
+            AutoGenSemesters genSemWindow = new AutoGenSemesters();
+            genSemWindow.ShowDialog();
+
+            // add all generated semesters to Semester List and reload
+            if (genSemWindow.GeneratedSemesterList is null) return;
+            foreach(Semester sem in genSemWindow.GeneratedSemesterList)
+            {
+                if(semesterList.Contains(sem))
+                {
+                    MessageBox.Show("Duplicate semester detected while attempting to add generated" +
+                        "Semesters to List! Ensure no duplicated semesters!");
+                    return;
+                }
+            }
+            foreach(Semester sem in genSemWindow.GeneratedSemesterList)
+            {
+                semesterList.Add(sem);
+            }
+            updateSemesterViewer();
+        }
+
+
+        //-- Auto Generating Electives
+
+        private void electivesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
 
 
@@ -614,5 +654,7 @@ namespace Class_Scheduler.Forms
             }
             prioritisedCoursePrefixes.RemoveAll(t=>removeList.Contains(t));
         }
+
+
     }
 }
