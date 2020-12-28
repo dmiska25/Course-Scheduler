@@ -26,6 +26,7 @@ namespace Class_Scheduler.Forms.AutoGen
             InitializeComponent();
         }
 
+        // attempting to set generate semesters
         private void autoGenSemButton_Click(object sender, EventArgs e)
         {
             try
@@ -157,6 +158,7 @@ namespace Class_Scheduler.Forms.AutoGen
             this.Close();
         }
 
+        // form behavior
         private void includeSumTermCB_CheckedChanged(object sender, EventArgs e)
         {
             if(includeSumTermCB.Checked)

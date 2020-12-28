@@ -165,6 +165,7 @@ namespace Class_Scheduler.Forms.AutoGen
             // fallRB
             // 
             this.fallRB.AutoSize = true;
+            this.fallRB.Checked = true;
             this.fallRB.Location = new System.Drawing.Point(92, 63);
             this.fallRB.Name = "fallRB";
             this.fallRB.Size = new System.Drawing.Size(41, 17);
@@ -180,7 +181,6 @@ namespace Class_Scheduler.Forms.AutoGen
             this.springRB.Name = "springRB";
             this.springRB.Size = new System.Drawing.Size(55, 17);
             this.springRB.TabIndex = 15;
-            this.springRB.TabStop = true;
             this.springRB.Text = "Spring";
             this.springRB.UseVisualStyleBackColor = true;
             // 
@@ -191,7 +191,6 @@ namespace Class_Scheduler.Forms.AutoGen
             this.summerRB.Name = "summerRB";
             this.summerRB.Size = new System.Drawing.Size(63, 17);
             this.summerRB.TabIndex = 16;
-            this.summerRB.TabStop = true;
             this.summerRB.Text = "Summer";
             this.summerRB.UseVisualStyleBackColor = true;
             // 

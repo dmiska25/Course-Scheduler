@@ -305,7 +305,38 @@ namespace Class_Scheduler.Forms
 
         private void electivesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // open a new form
+            AutoGenElectives genElectWindow = new AutoGenElectives(courseList);
+            genElectWindow.ShowDialog();
 
+            // override bool
+            bool containsDuplicates = false;
+
+            // check if generated electives already exist
+            if (genElectWindow.GeneratedElectives is null) return;
+            foreach(Course elective in genElectWindow.GeneratedElectives)
+            {
+                if (courseList.Contains(elective))
+                    containsDuplicates = true;
+            }
+
+            // if gened electives already exist, prompt to override
+            if (containsDuplicates)
+            {
+                // open prompt form
+                PromptWindow prompt = new PromptWindow("Generated Electives of this type already exist.\n" +
+                    "Override existing?");
+                prompt.ShowDialog();
+                if (!prompt.Result)
+                    return;
+            }
+
+            // add all generated electives to Course list and reload
+            foreach(Course elective in genElectWindow.GeneratedElectives)
+            {
+                courseList.Add(elective);
+            }
+            updateCourseViewer();
         }
 
 
