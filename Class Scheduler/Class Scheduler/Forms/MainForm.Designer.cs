@@ -66,7 +66,13 @@
             this.openFileWindow = new System.Windows.Forms.OpenFileDialog();
             this.saveFileWindow = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
+<<<<<<< HEAD
             this.scheduleCoursesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+=======
+            this.generateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.semestersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.electivesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+>>>>>>> master
             this.optionsMenu.SuspendLayout();
             this.EditElementMenuStrip.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -390,17 +396,44 @@
             this.addStripMenuItem,
             this.saveStripMenuItem,
             this.loadStripMenuItem});
+            this.loadStripMenuItem,
+            this.generateToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(800, 24);
             this.menuStrip.TabIndex = 7;
             // 
+<<<<<<< HEAD
             // scheduleCoursesToolStripMenuItem
             // 
             this.scheduleCoursesToolStripMenuItem.Name = "scheduleCoursesToolStripMenuItem";
             this.scheduleCoursesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.scheduleCoursesToolStripMenuItem.Text = "Schedule Courses";
             this.scheduleCoursesToolStripMenuItem.Click += new System.EventHandler(this.scheduleCoursesToolStripMenuItem_Click);
+=======
+            // generateToolStripMenuItem
+            // 
+            this.generateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.semestersToolStripMenuItem,
+            this.electivesToolStripMenuItem});
+            this.generateToolStripMenuItem.Name = "generateToolStripMenuItem";
+            this.generateToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
+            this.generateToolStripMenuItem.Text = "Generate...";
+            // 
+            // semestersToolStripMenuItem
+            // 
+            this.semestersToolStripMenuItem.Name = "semestersToolStripMenuItem";
+            this.semestersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.semestersToolStripMenuItem.Text = "Semesters";
+            this.semestersToolStripMenuItem.Click += new System.EventHandler(this.semestersToolStripMenuItem_Click);
+            // 
+            // electivesToolStripMenuItem
+            // 
+            this.electivesToolStripMenuItem.Name = "electivesToolStripMenuItem";
+            this.electivesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.electivesToolStripMenuItem.Text = "Electives";
+            this.electivesToolStripMenuItem.Click += new System.EventHandler(this.electivesToolStripMenuItem_Click);
+>>>>>>> master
             // 
             // MainForm
             // 
@@ -467,7 +500,13 @@
         private System.Windows.Forms.Label labpairLabel;
         private System.Windows.Forms.Label overloadableLabel;
         private System.Windows.Forms.CheckBox overloadableCB;
+<<<<<<< HEAD
         private System.Windows.Forms.ToolStripMenuItem scheduleCoursesToolStripMenuItem;
+=======
+        private System.Windows.Forms.ToolStripMenuItem generateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem semestersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem electivesToolStripMenuItem;
+>>>>>>> master
     }
 }
 

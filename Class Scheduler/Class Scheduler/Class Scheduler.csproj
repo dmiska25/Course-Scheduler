@@ -48,6 +48,18 @@
   <ItemGroup>
     <Compile Include="Comparers\CourseIntCompare.cs" />
     <Compile Include="Comparers\CustumCoursePriority.cs" />
+    <Compile Include="Forms\AutoGen\AutoGenElectives.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AutoGen\AutoGenElectives.Designer.cs">
+      <DependentUpon>AutoGenElectives.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AutoGen\AutoGenSemesters.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AutoGen\AutoGenSemesters.Designer.cs">
+      <DependentUpon>AutoGenSemesters.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\CourseForms\CourseAddDetails.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,6 +137,12 @@
     </Compile>
     <Compile Include="StaticClasses\ScheduleOptimizer.cs" />
     <Compile Include="StaticClasses\tools.cs" />
+    <EmbeddedResource Include="Forms\AutoGen\AutoGenElectives.resx">
+      <DependentUpon>AutoGenElectives.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AutoGen\AutoGenSemesters.resx">
+      <DependentUpon>AutoGenSemesters.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\CourseForms\CourseAdd.resx">
       <DependentUpon>CourseAdd.cs</DependentUpon>
     </EmbeddedResource>
