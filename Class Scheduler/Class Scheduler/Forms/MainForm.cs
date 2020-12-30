@@ -283,7 +283,7 @@ namespace Class_Scheduler.Forms
 
         //-- Auto Generating Semesters
 
-        private void semestersToolStripMenuItem_Click(object sender, EventArgs e)
+        private void semestersToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             // open a new form
             AutoGenSemesters genSemWindow = new AutoGenSemesters();
@@ -310,7 +310,7 @@ namespace Class_Scheduler.Forms
 
         //-- Auto Generating Electives
 
-        private void electivesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void electivesToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             // open a new form
             AutoGenElectives genElectWindow = new AutoGenElectives(courseList);
@@ -766,6 +766,7 @@ namespace Class_Scheduler.Forms
                 }
             }
         }
+
 
     }
 }
