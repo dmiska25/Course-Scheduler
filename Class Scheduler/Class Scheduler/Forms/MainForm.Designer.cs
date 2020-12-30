@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.optionsMenu = new System.Windows.Forms.GroupBox();
+            this.overloadableLabel = new System.Windows.Forms.Label();
+            this.overloadableCB = new System.Windows.Forms.CheckBox();
             this.labPairGroupingCB = new System.Windows.Forms.CheckBox();
             this.labpairLabel = new System.Windows.Forms.Label();
             this.lowerLevelCB = new System.Windows.Forms.CheckBox();
@@ -64,8 +66,9 @@
             this.openFileWindow = new System.Windows.Forms.OpenFileDialog();
             this.saveFileWindow = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
-            this.overloadableCB = new System.Windows.Forms.CheckBox();
-            this.overloadableLabel = new System.Windows.Forms.Label();
+            this.generateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.semestersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.electivesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsMenu.SuspendLayout();
             this.EditElementMenuStrip.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -92,6 +95,25 @@
             this.optionsMenu.TabIndex = 0;
             this.optionsMenu.TabStop = false;
             this.optionsMenu.Text = "Options";
+            // 
+            // overloadableLabel
+            // 
+            this.overloadableLabel.AutoSize = true;
+            this.overloadableLabel.Location = new System.Drawing.Point(13, 93);
+            this.overloadableLabel.Name = "overloadableLabel";
+            this.overloadableLabel.Size = new System.Drawing.Size(153, 13);
+            this.overloadableLabel.TabIndex = 11;
+            this.overloadableLabel.Tag = "";
+            this.overloadableLabel.Text = "Enable Semester Overloading?";
+            // 
+            // overloadableCB
+            // 
+            this.overloadableCB.AutoSize = true;
+            this.overloadableCB.Location = new System.Drawing.Point(172, 92);
+            this.overloadableCB.Name = "overloadableCB";
+            this.overloadableCB.Size = new System.Drawing.Size(15, 14);
+            this.overloadableCB.TabIndex = 10;
+            this.overloadableCB.UseVisualStyleBackColor = true;
             // 
             // labPairGroupingCB
             // 
@@ -368,30 +390,35 @@
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addStripMenuItem,
             this.saveStripMenuItem,
-            this.loadStripMenuItem});
+            this.loadStripMenuItem,
+            this.generateToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(800, 24);
             this.menuStrip.TabIndex = 7;
             // 
-            // overloadableCB
+            // generateToolStripMenuItem
             // 
-            this.overloadableCB.AutoSize = true;
-            this.overloadableCB.Location = new System.Drawing.Point(172, 92);
-            this.overloadableCB.Name = "overloadableCB";
-            this.overloadableCB.Size = new System.Drawing.Size(15, 14);
-            this.overloadableCB.TabIndex = 10;
-            this.overloadableCB.UseVisualStyleBackColor = true;
+            this.generateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.semestersToolStripMenuItem,
+            this.electivesToolStripMenuItem});
+            this.generateToolStripMenuItem.Name = "generateToolStripMenuItem";
+            this.generateToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
+            this.generateToolStripMenuItem.Text = "Generate...";
             // 
-            // overloadableLabel
+            // semestersToolStripMenuItem
             // 
-            this.overloadableLabel.AutoSize = true;
-            this.overloadableLabel.Location = new System.Drawing.Point(13, 93);
-            this.overloadableLabel.Name = "overloadableLabel";
-            this.overloadableLabel.Size = new System.Drawing.Size(153, 13);
-            this.overloadableLabel.TabIndex = 11;
-            this.overloadableLabel.Tag = "";
-            this.overloadableLabel.Text = "Enable Semester Overloading?";
+            this.semestersToolStripMenuItem.Name = "semestersToolStripMenuItem";
+            this.semestersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.semestersToolStripMenuItem.Text = "Semesters";
+            this.semestersToolStripMenuItem.Click += new System.EventHandler(this.semestersToolStripMenuItem_Click);
+            // 
+            // electivesToolStripMenuItem
+            // 
+            this.electivesToolStripMenuItem.Name = "electivesToolStripMenuItem";
+            this.electivesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.electivesToolStripMenuItem.Text = "Electives";
+            this.electivesToolStripMenuItem.Click += new System.EventHandler(this.electivesToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -458,6 +485,9 @@
         private System.Windows.Forms.Label labpairLabel;
         private System.Windows.Forms.Label overloadableLabel;
         private System.Windows.Forms.CheckBox overloadableCB;
+        private System.Windows.Forms.ToolStripMenuItem generateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem semestersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem electivesToolStripMenuItem;
     }
 }
 

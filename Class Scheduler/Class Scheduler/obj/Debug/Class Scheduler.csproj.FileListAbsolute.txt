@@ -30,3 +30,5 @@ D:\Git Repos\Course-Scheduler\Class Scheduler\Class Scheduler\obj\Debug\Class_Sc
 D:\Git Repos\Course-Scheduler\Class Scheduler\Class Scheduler\obj\Debug\Class_Scheduler.Forms.MiscellaneousForms.ScheduleResultView.resources
 D:\Git Repos\Course-Scheduler\Class Scheduler\Class Scheduler\obj\Debug\Class_Scheduler.Forms.SemesterForms.SemesterAdd.resources
 D:\Git Repos\Course-Scheduler\Class Scheduler\Class Scheduler\obj\Debug\Class_Scheduler.Forms.MainForm.resources
+D:\Git Repos\Course-Scheduler\Class Scheduler\Class Scheduler\obj\Debug\Class_Scheduler.Forms.AutoGen.AutoGenElectives.resources
+D:\Git Repos\Course-Scheduler\Class Scheduler\Class Scheduler\obj\Debug\Class_Scheduler.Forms.AutoGen.AutoGenSemesters.resources
