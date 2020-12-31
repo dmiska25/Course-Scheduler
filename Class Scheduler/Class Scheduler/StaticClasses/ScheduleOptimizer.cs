@@ -11,7 +11,8 @@ namespace Class_Scheduler.StaticClasses
     public static class ScheduleOptimizer
     {
 
-        public static void checkOverflow(List<Semester> semesterList, Dictionary<Semester, List<Course>> dictionary)
+        public static void checkOverflow(List<Semester> semesterList, Dictionary<Semester, List<Course>> dictionary,
+            List<Course> previouslyCompletedCourses)
         {
             Console.WriteLine("Begining Optimization algorithm");
 
@@ -83,10 +84,28 @@ namespace Class_Scheduler.StaticClasses
                     }
 
 
+                    // check if all course dependents and copendents are in previously completed courses list
+                    bool satisfied = true;
+                    foreach(CourseContainer pendent in course.Copendents.Union(course.Dependents))
+                    {
+                        if (!previouslyCompletedCourses.Contains(pendent.Course))
+                        {
+                            satisfied = false;
+                            break;
+                        }  
+                    }
+                    // if course only contains pendents that have been completed, set its first dependency to the first semester
+                    if(satisfied)
+                    {
+                        moveTo.Add(course, sortedSemesterList.Values[0]);
+                        continue;
+                    }
+
+
                     //begin looking through each semester to find a semester that contains a dependenet of the course
                     found = false;
                     counter = sortedSemesterList.Values.IndexOf(finalSemester) - 1;
-                    while (!found && 0 < counter)
+                    while (!found && 0 <= counter)
                     {
                         //look through every dependent for the given course in the given semester and determine if it contains a course dependent.
                         bool SemContainsPendent = false;
@@ -107,6 +126,10 @@ namespace Class_Scheduler.StaticClasses
                         //reduce counter by 1
                         counter--;
                     }
+
+                    // throw exception if failed
+                    if (counter == -1)
+                        throw new Exception("Failed to find valid semester that contains course pendent!");
 
                 }
 

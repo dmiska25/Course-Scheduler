@@ -80,7 +80,7 @@ namespace Class_Scheduler.Forms
                     lowerLevelCB.Checked,
                     labPairGroupingCB.Checked,
                     prioritisedCoursePrefixes
-                    )
+                    ), previousCompletedCourses
                 );
             
 
@@ -105,12 +105,23 @@ namespace Class_Scheduler.Forms
             //testing schedule optimizer
             if (overloadableCB.Checked)
             {
-                ScheduleOptimizer.checkOverflow(semesterList, preScheduleDict);
+                ScheduleOptimizer.checkOverflow(semesterList, preScheduleDict, previousCompletedCourses);
             }
 
 
             //create new form
             ScheduleResultView schedule = new ScheduleResultView();
+
+            // add previously completed courses to first result, if any
+            if(previousCompletedCourses.Count != 0)
+            {
+                schedule.scheduleViewer.Nodes.Add("Previously Completed Courses");
+                foreach (Course course in previousCompletedCourses)
+                {
+                    schedule.scheduleViewer.Nodes[0].Nodes.Add(course.courseReference);
+                }
+            }
+
 
             foreach(Semester semester in semesterList)
             {
@@ -600,7 +611,7 @@ namespace Class_Scheduler.Forms
                 //create viewer
                 PrescheduleViewer prescheduleSemesterViewer =
                     new PrescheduleViewer(courseList, prescheduledCourses,
-                    semesterList, preScheduleDict, semester);
+                    semesterList, preScheduleDict, semester, previousCompletedCourses);
 
                 //modify viewer
                 prescheduleSemesterViewer.upButton.Visible = false;
