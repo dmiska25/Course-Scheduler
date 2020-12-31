@@ -25,6 +25,7 @@ namespace Class_Scheduler.Forms
     {
         //variables
         private List<Course> courseList;
+        private List<Course> previousCompletedCourses;
         private List<Semester> semesterList;
         private HashSet<String> coursePrefixes;
         private List<String> prioritisedCoursePrefixes;
@@ -35,6 +36,7 @@ namespace Class_Scheduler.Forms
         {
             InitializeComponent();
             courseList = new List<Course>();
+            previousCompletedCourses = new List<Course>();
             semesterList = new List<Semester>();
             coursePrefixes = new HashSet<string>();
             prioritisedCoursePrefixes = new List<string>();
@@ -375,15 +377,27 @@ namespace Class_Scheduler.Forms
             {
                 //enable menu
                 EditElementMenuStrip.Enabled = true;
+                //disable pre-scheduling option
                 scheduleCoursesToolStripMenuItem.Enabled = false;
                 scheduleCoursesToolStripMenuItem.Visible = false;
+                //enable prior completion mark option and change the name
+                if (previousCompletedCourses.Contains(courseList[CourseView.SelectedItems[0].Index]))
+                    markAsCompletedToolStripMenuItem.Text = "Mark as Uncompleted";
+                else
+                    markAsCompletedToolStripMenuItem.Text = "Mark as Completed";
+                markAsCompletedToolStripMenuItem.Enabled = true;
+                markAsCompletedToolStripMenuItem.Visible = true;
             }
             else
             {
                 //disable menu
                 EditElementMenuStrip.Enabled = false;
+                //disable pre-scheduling option
                 scheduleCoursesToolStripMenuItem.Enabled = false;
                 scheduleCoursesToolStripMenuItem.Visible = false;
+                //disable prior completion mark option
+                markAsCompletedToolStripMenuItem.Enabled = false;
+                markAsCompletedToolStripMenuItem.Visible = false;
             }
         }
         //--Define when menu strip can be used for semesterView
@@ -393,15 +407,23 @@ namespace Class_Scheduler.Forms
             {
                 //enable menu
                 EditElementMenuStrip.Enabled = true;
+                //enable pre-scheduling option
                 scheduleCoursesToolStripMenuItem.Enabled = true;
                 scheduleCoursesToolStripMenuItem.Visible = true;
+                //disable prior completion mark option
+                markAsCompletedToolStripMenuItem.Enabled = false;
+                markAsCompletedToolStripMenuItem.Visible = false;
             }
             else
             {
                 //disable menu
                 EditElementMenuStrip.Enabled = false;
+                //disable pre-scheduling option
                 scheduleCoursesToolStripMenuItem.Enabled = false;
                 scheduleCoursesToolStripMenuItem.Visible = false;
+                //disable prior completion mark option
+                markAsCompletedToolStripMenuItem.Enabled = false;
+                markAsCompletedToolStripMenuItem.Visible = false;
             }
         }
 
@@ -549,7 +571,7 @@ namespace Class_Scheduler.Forms
             }
         }
 
-
+        //--Prescheduleing
         private void scheduleCoursesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //ensure only one selection
@@ -598,6 +620,29 @@ namespace Class_Scheduler.Forms
             }
         }
 
+        //--uncompleted/completed change
+        private void markAsCompletedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // get selected course
+            Course course = courseList[CourseView.SelectedItems[0].Index];
+
+            // if selected course is not in completed courses list. Add to completed courses list.
+            if (!previousCompletedCourses.Contains(course))
+            {
+                previousCompletedCourses.Add(course);
+            }
+                
+            // if selected course is in completed courses list. Remove from completed courses list.
+            else
+            {
+                previousCompletedCourses.Remove(course);
+            }
+                
+
+            //reload viewer
+            updateCourseViewer();
+        }
+
 
         // form behavior
 
@@ -631,13 +676,30 @@ namespace Class_Scheduler.Forms
         private void updateCourseViewer()
         {
             //sort the course list
-            courseList.Sort(new ClassViewCompare());
+            courseList.Sort(new ClassViewCompare(previousCompletedCourses));
 
             //clear the viewer
             CourseView.Items.Clear();
 
             //add elements to viewer
-            foreach (Course course in courseList) { CourseView.Items.Add(course.courseReference); }
+            foreach (Course course in courseList) 
+            {
+                // create List View Item and name it
+                ListViewItem courseReference = new ListViewItem();
+                courseReference.Text = course.courseReference;
+                // if the course is already scheduled, change the color to grey and italicize
+                if (previousCompletedCourses.Contains(course))
+                {
+                    courseReference.ForeColor = Color.Gray;
+                    courseReference.Font =
+                        new System.Drawing.Font("Microsoft Sans Serif", 8.25f, System.Drawing.FontStyle.Italic);
+                }
+
+
+                // Add to list
+                CourseView.Items.Add(courseReference);
+                
+            }
         }
 
         private void updateSemesterViewer()

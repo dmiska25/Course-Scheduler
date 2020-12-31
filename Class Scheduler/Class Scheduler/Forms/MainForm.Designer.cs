@@ -70,6 +70,7 @@
             this.generateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.semestersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.electivesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.markAsCompletedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsMenu.SuspendLayout();
             this.EditElementMenuStrip.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -241,36 +242,39 @@
             this.viewToolStripMenuItem,
             this.editToolStripMenuItem,
             this.deleteToolStripMenuItem,
-            this.scheduleCoursesToolStripMenuItem});
+            this.scheduleCoursesToolStripMenuItem,
+            this.markAsCompletedToolStripMenuItem});
             this.EditElementMenuStrip.Name = "EditElementMenuStrip";
-            this.EditElementMenuStrip.Size = new System.Drawing.Size(168, 92);
+            this.EditElementMenuStrip.Size = new System.Drawing.Size(181, 136);
             // 
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.viewToolStripMenuItem.Text = "View";
             this.viewToolStripMenuItem.Click += new System.EventHandler(this.viewToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.deleteToolStripMenuItem.Text = "Remove";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // scheduleCoursesToolStripMenuItem
             // 
+            this.scheduleCoursesToolStripMenuItem.Enabled = false;
             this.scheduleCoursesToolStripMenuItem.Name = "scheduleCoursesToolStripMenuItem";
-            this.scheduleCoursesToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.scheduleCoursesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.scheduleCoursesToolStripMenuItem.Text = "Schedule Courses";
+            this.scheduleCoursesToolStripMenuItem.Visible = false;
             this.scheduleCoursesToolStripMenuItem.Click += new System.EventHandler(this.scheduleCoursesToolStripMenuItem_Click);
             // 
             // addStripMenuItem
@@ -418,16 +422,25 @@
             // semestersToolStripMenuItem
             // 
             this.semestersToolStripMenuItem.Name = "semestersToolStripMenuItem";
-            this.semestersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.semestersToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.semestersToolStripMenuItem.Text = "Semesters";
             this.semestersToolStripMenuItem.Click += new System.EventHandler(this.semestersToolStripMenuItem_Click_1);
             // 
             // electivesToolStripMenuItem
             // 
             this.electivesToolStripMenuItem.Name = "electivesToolStripMenuItem";
-            this.electivesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.electivesToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.electivesToolStripMenuItem.Text = "Electives";
             this.electivesToolStripMenuItem.Click += new System.EventHandler(this.electivesToolStripMenuItem_Click_1);
+            // 
+            // markAsCompletedToolStripMenuItem
+            // 
+            this.markAsCompletedToolStripMenuItem.Enabled = false;
+            this.markAsCompletedToolStripMenuItem.Name = "markAsCompletedToolStripMenuItem";
+            this.markAsCompletedToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.markAsCompletedToolStripMenuItem.Text = "Mark as Completed";
+            this.markAsCompletedToolStripMenuItem.Visible = false;
+            this.markAsCompletedToolStripMenuItem.Click += new System.EventHandler(this.markAsCompletedToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -498,6 +511,7 @@
         private System.Windows.Forms.ToolStripMenuItem generateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem semestersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem electivesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem markAsCompletedToolStripMenuItem;
     }
 }
 
