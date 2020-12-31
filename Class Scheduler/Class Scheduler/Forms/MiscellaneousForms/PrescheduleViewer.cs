@@ -16,10 +16,11 @@ namespace Class_Scheduler.Forms.MiscellaneousForms
         private List<Semester> semesterList;
         private Dictionary<Semester, List<Course>> allPrescheduledCourses;
         private Semester semester;
+        private List<Course> completedCourses;
 
         public PrescheduleViewer(IEnumerable<Course> courses, List<Course> prescheduledCourses,
             List<Semester> semesterList, Dictionary<Semester, List<Course>> allPrescheduledCourses,
-            Semester semester) : 
+            Semester semester, List<Course> completedCourses) : 
             base(new List<Course>(courses), prescheduledCourses)
         {
             List<Course> test = new List<Course>();
@@ -29,6 +30,7 @@ namespace Class_Scheduler.Forms.MiscellaneousForms
             this.semesterList = semesterList;
             this.allPrescheduledCourses = allPrescheduledCourses;
             this.semester = semester;
+            this.completedCourses = completedCourses;
 
             //modify form
             this.upButton.Visible = false;
@@ -84,7 +86,7 @@ namespace Class_Scheduler.Forms.MiscellaneousForms
 
             foreach(Course prereq in course.dependencies)
             {
-                if (!priorCourses.Contains(prereq))
+                if (!priorCourses.Contains(prereq) && !completedCourses.Contains(prereq))
                 {
                     reqsMet = false;
                     coursesNotAlreadyScheduled.Add(prereq);
@@ -99,7 +101,7 @@ namespace Class_Scheduler.Forms.MiscellaneousForms
             priorCourses = priorCourses.Union(semesterCourses).ToList<Course>();
             foreach(Course coreq in course.copendencies)
             {
-                if(!priorCourses.Contains(coreq))
+                if(!priorCourses.Contains(coreq) && !completedCourses.Contains(coreq))
                 {
                     reqsMet = false;
                     coursesNotAlreadyScheduled.Add(coreq);
@@ -153,6 +155,14 @@ namespace Class_Scheduler.Forms.MiscellaneousForms
                     MessageBox.Show("Failed to schedule, course cannot be scheduled this year!");
                     return;
                 }
+            }
+
+
+            // check to ensure course is not already completed
+            if (completedCourses.Contains(course))
+            {
+                MessageBox.Show("Failed to schedule, course has already been completed!");
+                return;
             }
 
 

@@ -8,8 +8,22 @@ namespace Class_Scheduler.Objects
 {
     class ClassViewCompare : Comparer<Course>
     {
+        private List<Course> _completedList;
+
+
+        public ClassViewCompare(List<Course> completedList)
+        {
+            _completedList = completedList;
+        }
+
+
         public override int Compare(Course x, Course y)
         {
+            // if course has been completed, move to bottom of list
+            if(_completedList.Contains(x) ^ _completedList.Contains(y))
+                return _completedList.Contains(x).CompareTo(_completedList.Contains(y));
+
+            // sort courses alphebeticaly by course prefix/reference
             if (x.coursePrefix.CompareTo(y.coursePrefix) != 0)
             {
                 return x.coursePrefix.CompareTo(y.coursePrefix);

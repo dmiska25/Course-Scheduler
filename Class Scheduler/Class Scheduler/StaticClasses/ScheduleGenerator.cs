@@ -121,7 +121,8 @@ namespace Class_Scheduler.Objects
 
 
         public static bool scheduleSemesters(List<CourseContainer> courseList, List<Semester> semesters,
-            Dictionary<Semester, List<Course>> manualAddDictIn, CustumCoursePriority priority)
+            Dictionary<Semester, List<Course>> manualAddDictIn, CustumCoursePriority priority,
+            List<Course> previouslyCompletedCourses)
         {
             try
             {
@@ -135,6 +136,7 @@ namespace Class_Scheduler.Objects
                 HashSet<CourseContainer> copendeesToCheck = new HashSet<CourseContainer>();
                 Dictionary<Semester, List<CourseContainer>> manualAddDict =
                     new Dictionary<Semester, List<CourseContainer>>();
+                
 
                 //convert the dictionary, and remove all manual add courses from future courses
                 foreach(Semester sem in manualAddDictIn.Keys)
@@ -150,6 +152,30 @@ namespace Class_Scheduler.Objects
                     }
                     manualAddDict.Add(sem, output);
                 }
+
+
+                // remove all previously Completed Courses from future courses and move them to
+                // scheduled courses list. Additionally check if the courses de/copendees can
+                // be added.
+                List<CourseContainer> temp = new List<CourseContainer>();
+                foreach(CourseContainer course in futureCourses)
+                {
+                    if(previouslyCompletedCourses.Contains(course.Course))
+                    {
+                        temp.Add(course);
+                        scheduledCourses.Add(course);
+
+                        foreach (CourseContainer dependee in course.Dependees)
+                            dependeesToCheck.Add(dependee);
+                        foreach (CourseContainer copendee in course.Copendees)
+                            copendeesToCheck.Add(copendee);
+                    }
+                }
+                // remove courses from future courses (neccessary to avoid modifying collection)
+                foreach (CourseContainer course in temp)
+                    futureCourses.Remove(course);
+                // set temp to null
+                temp = null;
 
 
 
