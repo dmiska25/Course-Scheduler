@@ -45,7 +45,7 @@ namespace Class_Scheduler.Objects
                         if (!courseLookup.ContainsKey(dependent))
                         {
                             skip = true;
-                            continue;
+                            break;
                         } 
                     }
                     // skip course if pendents have not been processed yet
@@ -55,7 +55,7 @@ namespace Class_Scheduler.Objects
                         if (!courseLookup.ContainsKey(copendent))
                         {
                             skip = true;
-                            continue;
+                            break;
                         }                     
                     }
                     // skip course if pendents have not been processed yet
@@ -299,7 +299,7 @@ namespace Class_Scheduler.Objects
 
 
                     // add manualy scheduled courses
-                    while (semesterManualAdd.Count != 0)
+                    while (!(semesterManualAdd is null) && semesterManualAdd.Count != 0)
                     {
                         CourseContainer course = semesterManualAdd[0];
 
@@ -323,7 +323,7 @@ namespace Class_Scheduler.Objects
 
 
                     // Attempt to add courses to the current semester
-                    while (semester.TotalCredits < semester.MaxCredits && courseLineup.Count != 0)
+                    while ( courseLineup.Count != 0 )
                     {
                         CourseContainer course;
 
@@ -348,6 +348,27 @@ namespace Class_Scheduler.Objects
                                 }
                             }
                         }
+                        // attempt to overflow labpairs
+                        else if (semester.IsOverloadable && 
+                            semester.OverflowCourses.Count == 0 &&
+                            course.Course.courseDetails.LabPair)
+                        {
+                            semester.addOverflowCourse(course);
+                            scheduledCourses.Add(course);
+                            currentCourses.Remove(course);
+
+                            // add the courses dependees and their copendees to HashSets respectivly. This is done to check if these courses
+                            // requirements are satisfied and such be added to currentCourses list.
+                            foreach (CourseContainer dependee in course.Dependees)
+                            {
+                                dependeesToCheck.Add(dependee);     //add the dependee
+                                foreach (CourseContainer copendee in dependee.Copendees)
+                                {
+                                    copendeesToCheck.Add(copendee);     //add the copendee
+                                }
+                            }
+                        }
+
 
                         //regardless, remove the course from the lineup
                         courseLineup.RemoveAt(0);

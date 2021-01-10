@@ -17,13 +17,17 @@ namespace Class_Scheduler.Forms.AutoGen
         // field
         private List<Course> _courses;
         private List<Course> _genedElectives;
+        private int _genElectCount;
+        private int _majElectCount;
 
         // Property
         public List<Course> GeneratedElectives { get => _genedElectives; }
 
-        public AutoGenElectives(List<Course> courses)
+        public AutoGenElectives(List<Course> courses, int genElectCount, int majElectCount)
         {
             this._courses = courses;
+            _genElectCount = genElectCount;
+            _majElectCount = majElectCount;
             InitializeComponent();
         }
 
@@ -51,13 +55,15 @@ namespace Class_Scheduler.Forms.AutoGen
                 {
                     generalCourse = true;
                     electCourseNamePre = "General Ed ";
-                    electCoursePrefix = "Genr";
+                    electCoursePrefix = "GENR";
+                    electCourseID += _genElectCount;
                 }
                 else if(majorElectRB.Checked)
                 {
                     generalCourse = false;
                     electCourseNamePre = "Major Elect ";
-                    electCoursePrefix = "Majr";
+                    electCoursePrefix = "MAJR";
+                    electCourseID += _majElectCount;
                 }
                 else
                     throw new Exception("Invalid Elective Type Selected!");

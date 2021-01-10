@@ -30,6 +30,18 @@ namespace Class_Scheduler.Objects
         public int MaxCredits { get { return _maxCredits; } set { _maxCredits = value; } }
         public int MinCredits { get { return _minCredits; } set { _minCredits = value; } }
         public int TotalCredits { get { return _currentCreditsTotal; } }
+        public int SemesterWeight
+        {
+            get
+            {
+                int semWeight = 0;
+                foreach(CourseContainer course in Courses)
+                {
+                    semWeight += course.Course.CourseWeight;
+                }
+                return semWeight;
+            }
+        }
 
         //constructors
         public Semester(int year, TermEnums term)

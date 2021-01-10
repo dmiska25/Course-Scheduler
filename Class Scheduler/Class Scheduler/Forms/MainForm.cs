@@ -30,6 +30,8 @@ namespace Class_Scheduler.Forms
         private HashSet<String> coursePrefixes;
         private List<String> prioritisedCoursePrefixes;
         private Dictionary<Semester, List<Course>> preScheduleDict;
+        private int generalElectiveCount;
+        private int majorElectiveCount;
         private ToolTip overloadable;
 
         public MainForm()
@@ -41,6 +43,8 @@ namespace Class_Scheduler.Forms
             coursePrefixes = new HashSet<string>();
             prioritisedCoursePrefixes = new List<string>();
             preScheduleDict = new Dictionary<Semester, List<Course>>();
+            generalElectiveCount = 0;
+            majorElectiveCount = 0;
             
 
         }
@@ -326,34 +330,19 @@ namespace Class_Scheduler.Forms
         private void electivesToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             // open a new form
-            AutoGenElectives genElectWindow = new AutoGenElectives(courseList);
+            AutoGenElectives genElectWindow = new AutoGenElectives(courseList, generalElectiveCount, majorElectiveCount);
             genElectWindow.ShowDialog();
 
-            // override bool
-            bool containsDuplicates = false;
 
             // check if generated electives already exist
             if (genElectWindow.GeneratedElectives is null) return;
-            foreach (Course elective in genElectWindow.GeneratedElectives)
-            {
-                if (courseList.Contains(elective))
-                    containsDuplicates = true;
-            }
-
-            // if gened electives already exist, prompt to override
-            if (containsDuplicates)
-            {
-                // open prompt form
-                PromptWindow prompt = new PromptWindow("Generated Electives of this type already exist.\n" +
-                    "Override existing?");
-                prompt.ShowDialog();
-                if (!prompt.Result)
-                    return;
-            }
+            
 
             // add all generated electives to Course list and reload
             foreach (Course elective in genElectWindow.GeneratedElectives)
             {
+                if (elective.coursePrefix == "GENR") generalElectiveCount++;
+                else majorElectiveCount++;
                 courseList.Add(elective);
             }
             updateCourseViewer();
@@ -635,18 +624,102 @@ namespace Class_Scheduler.Forms
         private void markAsCompletedToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // get selected course
-            Course course = courseList[CourseView.SelectedItems[0].Index];
+            Course completedCourse = courseList[CourseView.SelectedItems[0].Index];
 
-            // if selected course is not in completed courses list. Add to completed courses list.
-            if (!previousCompletedCourses.Contains(course))
+            // if selected course is not in completed courses list. Add to completed courses list.   ----not implemented: check if dependents are marked as completed
+            if (!previousCompletedCourses.Contains(completedCourse))
             {
-                previousCompletedCourses.Add(course);
+                //find all dependees that depend on uncompletedCourse
+                List<Course> completedCourses = Course.getAllPendencies(completedCourse).ToList();
+
+
+                if (!(completedCourses.Count == 0))
+                {
+                    //prompt the user to ensure continue
+                    String message =
+                        "Warning: This will also mark the following courses that\n"
+                        + completedCourse.courseReference + " depends on as completed, Continue?\n"
+                        + "Course List: ";
+
+                    foreach (Course course in completedCourses) { message += course.courseReference + ", "; }
+                    message = message.TrimEnd(',');
+
+                    PromptWindow confirm = new PromptWindow(message);
+                    this.SuspendLayout();
+                    confirm.ShowDialog();
+
+                    // if ok, mark courses, else cancel
+                    if (confirm.Result)
+                    {
+                        foreach (Course course in completedCourses)
+                        {
+                            previousCompletedCourses.Add(course);
+                        }
+                    }
+                    else { return; }
+                }
+
+                //mark the course as completed
+                previousCompletedCourses.Add(completedCourse);
+
             }
-                
             // if selected course is in completed courses list. Remove from completed courses list.
+            // along with all courses that depend on the selected course.
             else
             {
-                previousCompletedCourses.Remove(course);
+                // change name to uncompleted
+                Course uncompletedCourse = completedCourse;
+
+                //find all dependees that depend on uncompletedCourse
+                List<Course> uncompletedCourses = new List<Course>();
+                uncompletedCourses.Add(uncompletedCourse);
+
+                int counter = 0;
+                while (counter < uncompletedCourses.Count)
+                {
+                    foreach (Course course in previousCompletedCourses)
+                    {
+                        if ((course.dependencies.Contains(uncompletedCourses[counter])
+                            || course.copendencies.Contains(uncompletedCourses[counter])))
+                        {
+                            uncompletedCourses.Add(course);
+                        }
+                    }
+                    counter++;
+                }
+
+                //remove seed course
+                uncompletedCourses.Remove(uncompletedCourse);
+
+
+                if (!(uncompletedCourses.Count == 0))
+                {
+                    //prompt the user to ensure continue
+                    String message =
+                        "Warning: This will also mark the following courses that\n"
+                        + "depend on " + uncompletedCourse.courseReference + " as uncompleted, Continue?\n"
+                        + "Course List: ";
+
+                    foreach (Course course in uncompletedCourses) { message += course.courseReference + ", "; }
+                    message = message.TrimEnd(',');
+
+                    PromptWindow confirm = new PromptWindow(message);
+                    this.SuspendLayout();
+                    confirm.ShowDialog();
+
+                    // if ok, mark courses, else cancel
+                    if (confirm.Result)
+                    {
+                        foreach (Course course in uncompletedCourses)
+                        {
+                            previousCompletedCourses.Remove(course);
+                        }
+                    }
+                    else { return; }
+                }
+
+                //mark the course as uncompleted
+                previousCompletedCourses.Remove(uncompletedCourse);
             }
                 
 

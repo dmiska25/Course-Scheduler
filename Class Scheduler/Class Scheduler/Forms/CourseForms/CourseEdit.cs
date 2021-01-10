@@ -94,6 +94,8 @@ namespace Class_Scheduler.Forms.CourseForms
                     if (courses.Contains(editedCourse)) { throw new Exception("Course already exists!"); }
                 }
 
+                //check to ensure editedCourse 
+
                 //find all dependees that will need there dependent ref updated
                 List<Course> dependenciesToModify = new List<Course>();
                 List<Course> copendenciesToModify = new List<Course>();
@@ -106,7 +108,7 @@ namespace Class_Scheduler.Forms.CourseForms
                     }
                     if (course.copendencies.Contains(editCourse))
                     {
-                        copendenciesToModify.Add(editCourse);
+                        copendenciesToModify.Add(course);
                     }
                 }
 

@@ -65,11 +65,13 @@ namespace Class_Scheduler.Comparers
             else if (compareTerms(x, y) != 0)
             {
                 return compareTerms(x, y);
-            }  
+            }
             else if (x.TotalPendees.CompareTo(y.TotalPendees) != 0)
             {
                 return -x.TotalPendees.CompareTo(y.TotalPendees);
             }
+
+
 
             // if graduate class, delay
             else if (delayGraduate &&

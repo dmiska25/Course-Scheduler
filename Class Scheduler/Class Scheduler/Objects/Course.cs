@@ -50,6 +50,30 @@ namespace Class_Scheduler.Objects
         { get { return _copendencies; } }
         public String courseReference
         { get { return coursePrefix + ' ' + courseID; } }
+        public int CourseWeight
+        {
+            get
+            {
+                // start each courses weight at its credit count
+                int weight = credits;
+
+                // subtract 1 if the course is a general elective
+                if (courseDetails.GeneralElective) weight -= 1;
+
+                // add 2 if course is a capstone
+                if (courseDetails.Capstone) weight += 2;
+
+                // add 2 if course is graduate level
+                if (courseDetails.GraduateLevel) weight += 2;
+
+                // must be at least 1
+                if (weight < 1) 
+                    return 1;
+
+                // else return 1
+                return weight;
+            }
+        }
 
 
         // Constructors
@@ -91,6 +115,39 @@ namespace Class_Scheduler.Objects
                 return false;
             }
             return true;
+        }
+
+        public static HashSet<Course> getAllPendencies(Course course)
+        {
+            // define hashsets and counter
+            HashSet<Course> allPendencies = new HashSet<Course>();
+            HashSet<Course> coursesToProcess = new HashSet<Course>();
+            int counter = 0;
+            // add the course to courses to process
+            coursesToProcess.Add(course);
+
+            while(counter < coursesToProcess.Count)
+            {
+                foreach(Course pendent in 
+                    coursesToProcess.ToList()[counter].dependencies
+                    .Union
+                    (coursesToProcess.ToList()[counter].copendencies))
+                {
+                    // attempt to add the course to pendencies list
+                    allPendencies.Add(pendent);
+
+                    // if the course is already has been/or is marked to be preocessed, continue
+                    if (coursesToProcess.Contains(pendent)) continue;
+
+                    // else add to coursesToProcess
+                    coursesToProcess.Add(pendent);
+                }
+
+                // increment counter
+                counter++;
+            }
+
+            return allPendencies;
         }
 
         public static String CourseListString(String prefix, params ICollection<CourseContainer>[] courseListings)
@@ -257,6 +314,8 @@ namespace Class_Scheduler.Objects
                 if (!courseLibrary.Contains(course)) throw new Exception("Course: "+course.courseReference+" not found in Library!");
                 if (_copendencies.Contains(course)) throw new Exception("Course: " + course.courseReference + " cannot be" +
                     "both a copendency and dependency!");
+                if (course.courseReference.Equals(_coursePrefix + ' ' + _courseID))
+                    throw new Exception("Course cannot be a dependency to itself!");
                 if (_dependencies.Contains(course)) return;
                 _dependencies.Add(course);
             }
@@ -270,6 +329,8 @@ namespace Class_Scheduler.Objects
                 if (!courseLibrary.Contains(course)) throw new Exception("Course: " + course.courseReference + " not found in Library!");
                 if (_dependencies.Contains(course)) throw new Exception("Course: " + course.courseReference + " cannot be" +
                     "both a copendency and dependency!");
+                if (course.courseReference.Equals(_coursePrefix + ' ' + _courseID))
+                    throw new Exception("Course cannot be a copendency to itself!");
                 if (_copendencies.Contains(course)) return;
                 _copendencies.Add(course);
             }
@@ -520,6 +581,9 @@ namespace Class_Scheduler.Objects
 
                 return valSemList;
             }
+
+
+
         }
     }
 }

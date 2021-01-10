@@ -63,7 +63,7 @@ namespace Class_Scheduler.StaticClasses
                 // if the semester contains a manually added course, cancel
                 List<Course> semManualListing = new List<Course>();
                 dictionary.TryGetValue(finalSemester, out semManualListing);
-                if (semManualListing.Count != 0)
+                if (!(semManualListing is null) && semManualListing.Count != 0)
                 {
                     failed = true;
                     break;
@@ -229,14 +229,17 @@ namespace Class_Scheduler.StaticClasses
                     moveToSemester.addOverflowCourse(sortedCourses.Values[i]);
                 }
 
-
-
-
                 //move final semester back one
                 finalSemester = 
                     sortedSemesterList.Values[sortedSemesterList.Values.IndexOf(finalSemester) - 1];
-
             }
+
+        }
+
+
+        public static void balanceSchedule(List<Semester> semesterList)
+        {
+            
 
 
 
@@ -251,5 +254,6 @@ namespace Class_Scheduler.StaticClasses
 
 
         }
+
     }
 }
