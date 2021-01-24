@@ -10,11 +10,11 @@ namespace Class_Scheduler.Comparers
     public class CustumCoursePriority : Comparer<CourseContainer>
     {
         // Properties
-        bool delayGraduate;
-        bool prioritizeLowerLevel;
-        bool prioritizePrefixes;
-        bool labPairGrouping;
-        List<String> prefixes;
+        readonly bool delayGraduate;
+        readonly bool prioritizeLowerLevel;
+        readonly bool prioritizePrefixes;
+        readonly bool labPairGrouping;
+        readonly List<String> prefixes;
 
 
 

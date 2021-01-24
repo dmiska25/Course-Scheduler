@@ -15,10 +15,10 @@ namespace Class_Scheduler.Forms.AutoGen
     public partial class AutoGenElectives : Form
     {
         // field
-        private List<Course> _courses;
+        private readonly List<Course> _courses;
         private List<Course> _genedElectives;
-        private int _genElectCount;
-        private int _majElectCount;
+        private readonly int _genElectCount;
+        private readonly int _majElectCount;
 
         // Property
         public List<Course> GeneratedElectives { get => _genedElectives; }

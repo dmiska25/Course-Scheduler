@@ -348,6 +348,7 @@ namespace Class_Scheduler.Objects
                                 }
                             }
                         }
+
                         // attempt to overflow labpairs
                         else if (semester.IsOverloadable && 
                             semester.OverflowCourses.Count == 0 &&
@@ -395,7 +396,6 @@ namespace Class_Scheduler.Objects
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
                 return false;
             }
         }

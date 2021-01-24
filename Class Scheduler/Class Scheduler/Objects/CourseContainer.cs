@@ -44,6 +44,66 @@ namespace Class_Scheduler.Objects
             _copendees = new HashSet<CourseContainer>();
         }
 
+        // methods
+        public HashSet<CourseContainer> getCoursePendencyList()
+        {
+            // retrieve all the course dependencies recursivly
+            HashSet<CourseContainer> depenList = new HashSet<CourseContainer>();
+            getCoursePendencyListRecurse(depenList, this);
+            return depenList;
+        } 
+
+        private static void getCoursePendencyListRecurse
+            (HashSet<CourseContainer> allDependentsList, CourseContainer course)
+        {
+            // skip if course is already in list
+            if (allDependentsList.Contains(course)) return;
+
+            // add this course to list
+            allDependentsList.Add(course);
+
+            // recurse for every dependency
+            foreach(CourseContainer dependent in course.Dependents)
+            {
+                getCoursePendencyListRecurse(allDependentsList, dependent);
+            }
+
+            // recurse for every copendency
+            foreach(CourseContainer copendent in course.Copendents)
+            {
+                getCoursePendencyListRecurse(allDependentsList, copendent);
+            }
+        }
+
+        public HashSet<CourseContainer> getAllCourseDependeeList()
+        {
+            // retrieve all the course dependees recursivly
+            HashSet<CourseContainer> dependeeList = new HashSet<CourseContainer>();
+            getAllCourseDependeeListRecurse(dependeeList, this);
+            return dependeeList;
+        }
+
+        private static void getAllCourseDependeeListRecurse
+            (HashSet<CourseContainer> allDependeeList, CourseContainer course)
+        {
+            // skip if course is already in list
+            if (allDependeeList.Contains(course)) return;
+
+            // add this course to list
+            allDependeeList.Add(course);
+
+            // recurse for ever dependee
+            foreach(CourseContainer dependee in course.Dependees)
+            {
+                getAllCourseDependeeListRecurse(allDependeeList, dependee);
+            }
+
+            // recurse for every copendee
+            foreach(CourseContainer copendee in course.Copendees)
+            {
+                getAllCourseDependeeListRecurse(allDependeeList, copendee);
+            }
+        }
 
         //tostring
         public override string ToString()
@@ -65,7 +125,7 @@ namespace Class_Scheduler.Objects
         }
 
 
-        //compare methods
+        //default compare methods
         public int CompareTo(CourseContainer other)
         {
             //compare the course container
@@ -87,10 +147,6 @@ namespace Class_Scheduler.Objects
                 CompareTo(other.Course.courseDetails.GraduateLevel) != 0)
                 return this.Course.courseDetails.GraduateLevel
                     .CompareTo(other.Course.courseDetails.GraduateLevel);
-
-            // 
-
-
 
 
             else

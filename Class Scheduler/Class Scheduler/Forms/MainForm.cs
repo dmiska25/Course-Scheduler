@@ -112,6 +112,9 @@ namespace Class_Scheduler.Forms
                 ScheduleOptimizer.checkOverflow(semesterList, preScheduleDict, previousCompletedCourses);
             }
 
+            // more testing
+            ScheduleOptimizer.balanceSchedule(semesterList);
+
 
             //create new form
             ScheduleResultView schedule = new ScheduleResultView();

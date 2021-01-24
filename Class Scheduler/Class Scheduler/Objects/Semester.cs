@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using static Class_Scheduler.Objects.Course;
 
 namespace Class_Scheduler.Objects
 {
@@ -63,8 +64,9 @@ namespace Class_Scheduler.Objects
         /// <param name="course"></param>
         public void addCourse(CourseContainer course)
         {
-            if (_currentCreditsTotal + course.Course.credits > MaxCredits) 
-            { throw new Exception("Max credits exceaded!"); }
+            // check course
+            if (!adableCourse(course))
+                throw new Exception("Course requirements have not been met! Cannot add course!");
             
             _courses.Add(course);
             _currentCreditsTotal += course.Course.credits;
@@ -81,6 +83,42 @@ namespace Class_Scheduler.Objects
             _overflowCourses.Add(course);
             _currentCreditsTotal += course.Course.credits;
         }
+
+        /// <summary>
+        /// Check to ensure requirements are met to add the selected course.
+        /// </summary>
+        /// <param name="course"></param>
+        /// <returns></returns>
+        public bool adableCourse(CourseContainer course)
+        {
+            // check credits count
+            if (_currentCreditsTotal + course.Course.credits > MaxCredits)
+                return false;
+
+            // check term
+            if (!course.Course.validTerms.Contains(Term))
+                return false;
+
+            // Get course details
+            CourseDetails details = course.Course.courseDetails;
+            int yearRemainder;
+
+            // check year multiple
+            if (details.YearBase.HasValue)
+            {
+                yearRemainder = Year - details.YearBase.Value;
+                if (yearRemainder % details.YearMultiple != 0)
+                    return false;
+            }
+
+            return true;
+        }
+
+
+
+
+
+
 
         /// <summary>
         /// removeCourse will accept a course reference and determine if the course is in the listing
@@ -106,12 +144,31 @@ namespace Class_Scheduler.Objects
             return false;
         }
 
+        /// <summary>
+        /// remove all courses in both courses list and overflow lists.
+        /// </summary>
         public void removeAllCourses()
         {
             _courses.Clear();
             _overflowCourses.Clear();
             _currentCreditsTotal = 0;
         }
+
+        /// <summary>
+        /// Get a empty copy of the given semester object.
+        /// </summary>
+        /// <param name="origSem"></param>
+        /// <returns></returns>
+        public static Semester copySemester(Semester origSem)
+        {
+            Semester newSemester = new Semester(origSem.Year, origSem.Term);
+            newSemester.MaxCredits = origSem.MaxCredits;
+            newSemester.MinCredits = origSem.MinCredits;
+            newSemester.IsOverloadable = origSem.IsOverloadable;
+
+            return newSemester;
+        }
+
 
         public override bool Equals(object obj)
         {
@@ -153,14 +210,7 @@ namespace Class_Scheduler.Objects
             _overflowCourses = new HashSet<CourseContainer>();
             _maxCredits = info.GetInt32("MaxCredits");
             _minCredits = info.GetInt32("MinCredits");
-            try
-            {
-                _isOverloadable = info.GetBoolean("IsOverloadable");
-            }
-            catch(Exception ex)
-            {
-                _isOverloadable = false;
-            }
+            _isOverloadable = info.GetBoolean("IsOverloadable");
         }
     }
 }

@@ -239,7 +239,11 @@ namespace Class_Scheduler.StaticClasses
 
         public static void balanceSchedule(List<Semester> semesterList)
         {
-            
+            SortedList<int, CourseContainer> movList = 
+                movabilityList(getMovabilityDictionary(semesterList));
+
+
+            Console.WriteLine("testing");
 
 
 
@@ -250,9 +254,171 @@ namespace Class_Scheduler.StaticClasses
 
 
 
+        }
+
+        public static SortedList<int, CourseContainer> movabilityList
+            (Dictionary<CourseContainer, List<Semester>> movabilityDict)
+        {
+            SortedList<int, CourseContainer> sortedMovabilityList = 
+                new SortedList<int, CourseContainer>(new CourseIntCompare());
+
+            // add and sort each course based on its number of valid semesters
+            foreach(CourseContainer CourseContainer in movabilityDict.Keys)
+            {
+                // try get value for course
+                movabilityDict.TryGetValue(CourseContainer, out List<Semester> validSems);
+
+                // add each course/key to the list
+                sortedMovabilityList.Add(validSems.Count, CourseContainer);
+
+                Console.WriteLine("test");
+            }
+
+            return sortedMovabilityList;
+        }
 
 
 
+        public static Dictionary<CourseContainer, List<Semester>> getMovabilityDictionary(List<Semester> semesterList)
+        {
+            // variables
+            Dictionary<CourseContainer, List<Semester>> movabilityDict = 
+                new Dictionary<CourseContainer, List<Semester>>();
+
+            // loop through each course and determine the number of valid semesters it can be scheduled in.
+            foreach(Semester semester in semesterList)
+            {
+                foreach(CourseContainer course in semester.Courses)
+                {
+                    // ensure the course has not already been calculated
+                    if (movabilityDict.Keys.Contains(course)) continue;
+
+                    // get the bounds of the valid semesters
+                    int startingIndex = getFirstScheduleableSemesterPos(semesterList, course);
+                    int endingIndex = getLastScheduleableSemesterPos(semesterList, course);
+                    List<Semester> validSemesters = new List<Semester>();
+                    List<Semester> semListTemp = new List<Semester>();
+                    // get a copy of the semester list
+                    foreach (Semester sem in semesterList)
+                    {
+                        semListTemp.Add(Semester.copySemester(sem));
+                    }
+
+                    // check requirements of course against each semester
+                    // inbetween the indexes given.
+                    for (int i = startingIndex; i <= endingIndex; i++)
+                    {
+                        if (semListTemp[i].adableCourse(course))
+                            validSemesters.Add(semListTemp[i]);
+                    }
+
+                    // add the valid semesters list to the dictionary
+                    movabilityDict.Add(course, validSemesters);
+                }
+            }
+
+            return movabilityDict;
+
+        }
+
+        public static int getFirstScheduleableSemesterPos
+            (List<Semester> semesterList, CourseContainer course)
+        {
+            // variables
+            List<Semester> semListTemp = new List<Semester>();
+
+            // get a copy of the semester list
+            foreach(Semester sem in semesterList)
+            {
+                semListTemp.Add(Semester.copySemester(sem));
+            }
+
+            // generate the course list based on recursivly retrieving all of the courses dependencies
+            List<CourseContainer> dependecyList = course.getCoursePendencyList().ToList();
+            //dependecyList.Add(course);
+
+            // simulate the scheduling of the course and its dependencies
+            ScheduleGenerator.scheduleSemesters(dependecyList, semListTemp,
+                new Dictionary<Semester, List<Course>>(),
+                new CustumCoursePriority( true, true, true, new List<string>() ),
+                new List<Course>()
+                );
+
+
+            // get the index of the semester that contains the course
+            for (int i = 0; i < semListTemp.Count; i++)
+            {
+                if (semListTemp[i].Courses.Contains(course))
+                    return i;
+            }
+
+            // if failed, return -1
+            return -1;
+        }
+
+
+        public static int getLastScheduleableSemesterPos
+            (List<Semester> semesterList, CourseContainer course)
+        {
+            // variables
+            List<Semester> semListTemp = new List<Semester>();
+            Semester prevFirstSem = new Semester(2099, TermEnums.FALL);  // assisgn boiler
+            HashSet<CourseContainer> dependeeDependentsList = new HashSet<CourseContainer>();
+
+            // get a copy of the semester list
+            foreach (Semester sem in semesterList)
+            {
+                semListTemp.Add(Semester.copySemester(sem));
+            }
+
+            // generate the course list based on recursivly retrieving all of the courses dependees
+            List<CourseContainer> dependeeList = course.getAllCourseDependeeList().ToList();
+
+            // for each of the dependees, get the dependee's dependents
+            foreach(CourseContainer dependee in dependeeList)
+            {
+                foreach(CourseContainer dependent in dependee.getCoursePendencyList())
+                {
+                    dependeeDependentsList.Add(dependent);
+                }
+            }
+
+            // simulate the scheduling of the course and its dependees
+            // for each successful scheduling, remove the first semester
+            // until failure. The semester position removed before failure
+            // will be returned.
+            while (
+                ScheduleGenerator.scheduleSemesters(dependeeDependentsList.ToList(), semListTemp,
+                new Dictionary<Semester, List<Course>>(),
+                new CustumCoursePriority(true, true, true, new List<string>()),
+                new List<Course>()
+                )
+                )
+            {
+                // keep track of the first semester
+                prevFirstSem = semListTemp[0];
+
+                // remove the first semester from the temp list
+                semListTemp.RemoveAt(0);
+
+                // clear the courses scheduled and attempt another schedule
+                foreach(Semester sem in semListTemp)
+                {
+                    sem.removeAllCourses();
+                }
+            }
+
+
+            // find the postion of the selected semester
+            for (int i = 0; i < semesterList.Count; i++)
+            {
+
+                if (semesterList[i].Equals(prevFirstSem))
+                    return i;
+            }
+
+            // if not found return -1
+            return -1;
         }
 
     }

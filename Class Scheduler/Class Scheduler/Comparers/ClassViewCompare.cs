@@ -8,7 +8,7 @@ namespace Class_Scheduler.Objects
 {
     class ClassViewCompare : Comparer<Course>
     {
-        private List<Course> _completedList;
+        private readonly List<Course> _completedList;
 
 
         public ClassViewCompare(List<Course> completedList)
