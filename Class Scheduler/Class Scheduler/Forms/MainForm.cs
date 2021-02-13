@@ -1,17 +1,11 @@
 ﻿using Class_Scheduler.Objects;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Collections;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Collections.ObjectModel;
 using Class_Scheduler.Comparers;
 using Class_Scheduler.Forms.MiscellaneousForms;
 using Class_Scheduler.Forms.CourseForms;
@@ -21,15 +15,20 @@ using Class_Scheduler.Forms.AutoGen;
 
 namespace Class_Scheduler.Forms
 {
+    /// <summary>
+    /// This is the Main Form for Class Scheduler. It contains the logic for the tool
+    /// strip, course list, semester list, and menu strip interactions. 
+    /// </summary>
     public partial class MainForm : Form
     {
-        //variables
-        private List<Course> courseList;
-        private List<Course> previousCompletedCourses;
-        private List<Semester> semesterList;
-        private HashSet<String> coursePrefixes;
-        private List<String> prioritisedCoursePrefixes;
-        private Dictionary<Semester, List<Course>> preScheduleDict;
+        // Variables
+        private List<Course> courseList;  // List of courses to be scheduled
+        private List<Course> previousCompletedCourses;  // List of previously completed courses
+        private List<Semester> semesterList;  // List of semesters that can have courses assigned to
+        private HashSet<String> coursePrefixes;  // List of Prefixes for all courses in courseList
+        private List<String> prioritisedCoursePrefixes;  // List of course Prefixes in prioritized order
+        private Dictionary<Semester, List<Course>> preScheduleDict;  // Dictionary containing Semester -> presheduled courses
+        // Tool Tips
         private ToolTip overloadable;
 
         public MainForm()
@@ -45,7 +44,7 @@ namespace Class_Scheduler.Forms
 
         }
 
-        //main load
+        // Main load
         private void Main_Load(object sender, EventArgs e)
         {
             //diable menu strip
@@ -62,7 +61,15 @@ namespace Class_Scheduler.Forms
         }
 
 
-        //generate schedules
+        /// <summary>
+        /// Main method to begin Scheduling courses. This method will wrap course objects in
+        /// Course Container objects used in the scheduling algorithm, then pass the course
+        /// objects and semesters list to the scheduling algorithm. Once scheduled, debug info
+        /// will be printed and, if selected, the optimization algorithm will be ran. Once
+        /// finished, a viewer form will be initiated, constructed, and opened for viewing.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void genSchedulesButton(object sender, EventArgs e)
         {
             // generate course containers for courses
@@ -153,11 +160,18 @@ namespace Class_Scheduler.Forms
 
 
 
-        //menu strip
+        // Menu Strip ---------------------------------------------------------------------
 
-        //-adding items from menu
+        // # Adding items from menu
 
-        //--Add course from menu
+        // ## Add course from menu
+
+        /// <summary>
+        /// The classToolStripMenuItem method is used to instantiate the CourseAdd
+        /// Form and handle some other functionality.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void classToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //suspend current window, load new course add window
@@ -181,8 +195,15 @@ namespace Class_Scheduler.Forms
             updatePrefixes();
         }
 
-        //--add semester from menu
-        private void semesterToolStripMenuItem1_Click(object sender, EventArgs e)
+        // ## add semester from menu
+
+        /// <summary>
+        /// The semesterToolStripMenuItem method is used to instantiate the SemesterAdd
+        /// Form and handle some other functionality.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void semesterToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //suspend current window, load new semester add window
             this.SuspendLayout();
@@ -205,9 +226,16 @@ namespace Class_Scheduler.Forms
             updateSemesterViewer();
         }
 
-        //-Loading data from txt file
+        // # Loading data from txt file
 
-        //--loading Classes from txt file
+        // ## loading Classes from txt file
+
+        /// <summary>
+        /// The classListFromTxtFileToolStripMenuItem method is used to handle loading
+        /// of courses from a file into the courseList.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void classListFromTxtFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -233,7 +261,14 @@ namespace Class_Scheduler.Forms
             }
         }
 
-        //--loading semester data from txt file
+        // ## loading semester data from txt file
+
+        /// <summary>
+        /// The semesterListFromTxtFileToolStripMenuItem method is used to handle loading
+        /// of semesters from a file into the semesterList.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void semesterListFromTxtFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -263,9 +298,16 @@ namespace Class_Scheduler.Forms
         }
 
 
-        //- saving data to text file
+        // # saving data to text file
 
-        //--saving course objects to txt file
+        // ## saving course objects to txt file
+
+        /// <summary>
+        /// The classListToTxtFileToolStripMenuItem method is used to handle saving
+        /// of courses from the courseList to a file.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void classListToTxtFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //define stream and formatter object
@@ -279,7 +321,14 @@ namespace Class_Scheduler.Forms
         }
 
 
-        //--saving semester objects to txt file
+        // ## saving semester objects to txt file
+
+        /// <summary>
+        /// The semesterListToTxtFileToolStripMenuItem method is used to handle saving
+        /// of semesters from the semesterList to a file.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void semesterListToTxtFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //define stream and formatter object
@@ -292,11 +341,18 @@ namespace Class_Scheduler.Forms
             stream.Close();
         }
 
-        //- Auto Generating
+        // # Auto Generating
 
-        //-- Auto Generating Semesters
+        // ## Auto Generating Semesters
 
-        private void semestersToolStripMenuItem_Click_1(object sender, EventArgs e)
+        /// <summary>
+        /// The semestersToolStripMenuItem method is used to handle autogening semesters
+        /// from the autogen menu. It will generate a collection of semesters and add them
+        /// to the semesterList.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void semestersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // open a new form
             AutoGenSemesters genSemWindow = new AutoGenSemesters();
@@ -321,9 +377,16 @@ namespace Class_Scheduler.Forms
         }
 
 
-        //-- Auto Generating Electives
+        // ## Auto Generating Electives
 
-        private void electivesToolStripMenuItem_Click_1(object sender, EventArgs e)
+        /// <summary>
+        /// The electivesToolStripMenuItem method is used to handle autogening course
+        /// elective placeholders. It can generate a list of eaither general or major
+        /// electives and add them to the courseList.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void electivesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // open a new form
             AutoGenElectives genElectWindow = new AutoGenElectives(courseList);
@@ -360,9 +423,16 @@ namespace Class_Scheduler.Forms
         }
 
 
-        // Mouse Actions
+        // Mouse Actions ------------------------------------------------------------
 
-        //- Double Click Course View element
+        // # Double Click Course View element
+
+        /// <summary>
+        /// The CourseView_DoubleClick method opens a course viewer form for
+        /// the selected course.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CourseView_DoubleClick(object sender, EventArgs e)
         {
             int index = CourseView.SelectedItems[0].Index;
@@ -370,7 +440,14 @@ namespace Class_Scheduler.Forms
             courseViewer(course);
         }
 
-        //- Double Click Semester View element
+        // # Double Click Semester View element
+
+        /// <summary>
+        /// The SemesterView_DoubleClick method opens a semester viewer form for
+        /// the selected semester.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SemesterViewer_DoubleClick(object sender, EventArgs e)
         {
             int index = SemesterViewer.SelectedItems[0].Index;
@@ -379,69 +456,16 @@ namespace Class_Scheduler.Forms
         }
 
 
-        //-Right Click Menu Strip Options (Course Viewer)
+        // # Right Click Menu Strip Options (Course Viewer)
 
-        //--Define when menu strip can be used for courseView
-        private void CourseView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
-        {
-            if(CourseView.SelectedItems.Count == 1)
-            {
-                //enable menu
-                EditElementMenuStrip.Enabled = true;
-                //disable pre-scheduling option
-                scheduleCoursesToolStripMenuItem.Enabled = false;
-                scheduleCoursesToolStripMenuItem.Visible = false;
-                //enable prior completion mark option and change the name
-                if (previousCompletedCourses.Contains(courseList[CourseView.SelectedItems[0].Index]))
-                    markAsCompletedToolStripMenuItem.Text = "Mark as Uncompleted";
-                else
-                    markAsCompletedToolStripMenuItem.Text = "Mark as Completed";
-                markAsCompletedToolStripMenuItem.Enabled = true;
-                markAsCompletedToolStripMenuItem.Visible = true;
-            }
-            else
-            {
-                //disable menu
-                EditElementMenuStrip.Enabled = false;
-                //disable pre-scheduling option
-                scheduleCoursesToolStripMenuItem.Enabled = false;
-                scheduleCoursesToolStripMenuItem.Visible = false;
-                //disable prior completion mark option
-                markAsCompletedToolStripMenuItem.Enabled = false;
-                markAsCompletedToolStripMenuItem.Visible = false;
-            }
-        }
-        //--Define when menu strip can be used for semesterView
-        private void SemesterViewer_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
-        {
-            if (SemesterViewer.SelectedItems.Count == 1)
-            {
-                //enable menu
-                EditElementMenuStrip.Enabled = true;
-                //enable pre-scheduling option
-                scheduleCoursesToolStripMenuItem.Enabled = true;
-                scheduleCoursesToolStripMenuItem.Visible = true;
-                //disable prior completion mark option
-                markAsCompletedToolStripMenuItem.Enabled = false;
-                markAsCompletedToolStripMenuItem.Visible = false;
-            }
-            else
-            {
-                //disable menu
-                EditElementMenuStrip.Enabled = false;
-                //disable pre-scheduling option
-                scheduleCoursesToolStripMenuItem.Enabled = false;
-                scheduleCoursesToolStripMenuItem.Visible = false;
-                //disable prior completion mark option
-                markAsCompletedToolStripMenuItem.Enabled = false;
-                markAsCompletedToolStripMenuItem.Visible = false;
-            }
-        }
+        // ## view
 
-
-
-
-        //--view
+        /// <summary>
+        /// The viewToolStripMenuItem will send a request to the respective
+        /// selected course/semester double click viewer method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void viewToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -461,7 +485,15 @@ namespace Class_Scheduler.Forms
             }
         }
 
-        //--edit
+        // ## edit
+
+        /// <summary>
+        /// The editToolStripMenuItem method will open a edit form for the 
+        /// selected course/semester element. It will update the respective
+        /// list and viewer.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
@@ -498,7 +530,16 @@ namespace Class_Scheduler.Forms
             }
         }
 
-        //--remove
+        // ## remove
+
+        /// <summary>
+        /// the deleteToolStripMenuItem will attempt to delete the selected course
+        /// from the viewer and courseList. It will find a list of all courses that
+        /// may depend on the selected course and warn the user that they will be
+        /// removed as well.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //course
@@ -582,14 +623,21 @@ namespace Class_Scheduler.Forms
             }
         }
 
-        //--Prescheduleing
+        // ## Prescheduleing
+
+        /// <summary>
+        /// The scheduleCoursesToolStripMenuItem method will find a list of valid courses
+        /// that can be prescheduled for the selected semester in semesterViewer. It will
+        /// then open the Preschedule viewer to allow the user to preschedule courses and
+        /// update the courseViewer when done.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void scheduleCoursesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //ensure only one selection
             if (SemesterViewer.SelectedItems.Count == 1)
             {
-
-
 
                 //generate remaining courses
                 List<Course> remainingCourses = new List<Course>(courseList);
@@ -631,7 +679,15 @@ namespace Class_Scheduler.Forms
             }
         }
 
-        //--uncompleted/completed change
+        // ## uncompleted/completed change
+
+        /// <summary>
+        /// The markAsCompletedToolStripMenuItem method will mark a selected uncompleted
+        /// course as completed or a selected completed course as uncompleted then updated
+        /// the course viewer window.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void markAsCompletedToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // get selected course
@@ -655,8 +711,37 @@ namespace Class_Scheduler.Forms
         }
 
 
-        // form behavior
 
+
+        // Options Pane ---------------------------------------------------------------------
+
+        // # Prefix Prioritization button click
+
+        /// <summary>
+        /// The prefixPrioritiesFormButton Method launches the prefix Prioritization
+        /// Viewer Form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void prefixPrioritiesFormButton_Click(object sender, EventArgs e)
+        {
+            PriorityViewer<String> viewer =
+                new PriorityViewer<String>(coursePrefixes, prioritisedCoursePrefixes);
+            this.SuspendLayout();
+            viewer.ShowDialog();
+        }
+
+
+        // Form behavior ---------------------------------------------------------------------
+
+        // # Define when options button is enabled
+
+        /// <summary>
+        /// The prioritizePrefixesCB_CheckedChanged method handles when the Prioritize options
+        /// button is enabled in the options pane according to prioritized prefixes CB.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void prioritizePrefixesCB_CheckedChanged(object sender, EventArgs e)
         {
             if (prioritizePrefixesCB.Checked)
@@ -674,16 +759,91 @@ namespace Class_Scheduler.Forms
             }
         }
 
-        private void prefixPrioritiesFormButton_Click(object sender, EventArgs e)
+
+        // # Define when menu strip can be used for courseView
+
+        /// <summary>
+        /// The CourseView_ItemSelectionChanged handles selection changes behavior in the
+        /// Course List View.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CourseView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            PriorityViewer<String> viewer = 
-                new PriorityViewer<String>(coursePrefixes, prioritisedCoursePrefixes);
-            this.SuspendLayout();
-            viewer.ShowDialog();
+            if (CourseView.SelectedItems.Count == 1)
+            {
+                //enable menu
+                EditElementMenuStrip.Enabled = true;
+                //disable pre-scheduling option
+                scheduleCoursesToolStripMenuItem.Enabled = false;
+                scheduleCoursesToolStripMenuItem.Visible = false;
+                //enable prior completion mark option and change the name
+                if (previousCompletedCourses.Contains(courseList[CourseView.SelectedItems[0].Index]))
+                    markAsCompletedToolStripMenuItem.Text = "Mark as Uncompleted";
+                else
+                    markAsCompletedToolStripMenuItem.Text = "Mark as Completed";
+                markAsCompletedToolStripMenuItem.Enabled = true;
+                markAsCompletedToolStripMenuItem.Visible = true;
+            }
+            else
+            {
+                //disable menu
+                EditElementMenuStrip.Enabled = false;
+                //disable pre-scheduling option
+                scheduleCoursesToolStripMenuItem.Enabled = false;
+                scheduleCoursesToolStripMenuItem.Visible = false;
+                //disable prior completion mark option
+                markAsCompletedToolStripMenuItem.Enabled = false;
+                markAsCompletedToolStripMenuItem.Visible = false;
+            }
+        }
+
+        // # Define when menu strip can be used for semesterView
+
+        /// <summary>
+        /// The SemesterView_ItemSelectionChanged handles selection changes behavior in the
+        /// Course List View.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SemesterViewer_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (SemesterViewer.SelectedItems.Count == 1)
+            {
+                //enable menu
+                EditElementMenuStrip.Enabled = true;
+                //enable pre-scheduling option
+                scheduleCoursesToolStripMenuItem.Enabled = true;
+                scheduleCoursesToolStripMenuItem.Visible = true;
+                //disable prior completion mark option
+                markAsCompletedToolStripMenuItem.Enabled = false;
+                markAsCompletedToolStripMenuItem.Visible = false;
+            }
+            else
+            {
+                //disable menu
+                EditElementMenuStrip.Enabled = false;
+                //disable pre-scheduling option
+                scheduleCoursesToolStripMenuItem.Enabled = false;
+                scheduleCoursesToolStripMenuItem.Visible = false;
+                //disable prior completion mark option
+                markAsCompletedToolStripMenuItem.Enabled = false;
+                markAsCompletedToolStripMenuItem.Visible = false;
+            }
         }
 
 
-        // Helper Methods
+
+
+
+        // Helper Methods -------------------------------------------------------------------
+
+        /// <summary>
+        /// The updateCourseViewer method will update the course viewer on the form.
+        /// It will clear the viewer, sort the courseList items, and add each back to
+        /// the viewer. It also contains logic to place previously completed courses
+        /// at the bottom of the viewer and grey/italic them.
+        /// </summary>
         private void updateCourseViewer()
         {
             //sort the course list
@@ -713,6 +873,11 @@ namespace Class_Scheduler.Forms
             }
         }
 
+        /// <summary>
+        /// The updateSemesterViewer method will update the semester viewer on the form.
+        /// It will clear the viewer, sort the semesterList items, and add each back to
+        /// the viewer.
+        /// </summary>
         private void updateSemesterViewer()
         {
             //sort the semester list
@@ -725,6 +890,64 @@ namespace Class_Scheduler.Forms
             foreach (Semester semester in semesterList) { SemesterViewer.Items.Add(semester.SemesterReference); }
         }
 
+
+        /// <summary>
+        /// The updatePrefixes method handles updateing both the current list of course
+        /// prefixes and the list of prioritized prefixes. First the coursePrefixes list
+        /// is cleared and then repopulated. Then The priorityPrefixes list is compared
+        /// against the new prefixes list to determine if/which prefixes are now extinct.
+        /// The found extinct prefixes are then removed from the prioritisedCoursePrefixes
+        /// list.
+        /// </summary>
+        private void updatePrefixes()
+        {
+            //update coursePrefix list
+            coursePrefixes.Clear();
+            foreach (Course course in courseList)
+            {
+                coursePrefixes.Add(course.coursePrefix);
+            }
+
+            //remove any removed prefixes from priority list
+            List<String> removeList = new List<string>();
+            foreach (String prefix in prioritisedCoursePrefixes)
+            {
+                if (!coursePrefixes.Contains(prefix))
+                    removeList.Add(prefix);
+            }
+            prioritisedCoursePrefixes.RemoveAll(t => removeList.Contains(t));
+        }
+
+        /// <summary>
+        /// The removePrescheduledCourse method will loop through the prescheduleDictionary,
+        /// find the selected course and remove it from the list.
+        /// </summary>
+        /// <param name="courseToDelete"></param>
+        private void removePrescheduledCourse(Course courseToDelete)
+        {
+            foreach (List<Course> courses in preScheduleDict.Values)
+            {
+                foreach (Course course in courses)
+                {
+                    if (course.Equals(courseToDelete))
+                    {
+                        courses.Remove(courseToDelete);
+                        return;
+                    }
+                }
+            }
+        }
+
+
+
+        // Viewers --------------------------------------------------------------------------
+
+
+        /// <summary>
+        /// The courseViewer method will instantiate, generate, and open a ElementViewer
+        /// Form to display the contents of a specified course object.
+        /// </summary>
+        /// <param name="course"></param>
         private void courseViewer(Course course)
         {
             // elements list
@@ -787,6 +1010,11 @@ namespace Class_Scheduler.Forms
             courseDetails.ShowDialog();
         }
 
+        /// <summary>
+        /// The semesterViewer method will instantiate, generate, and open a ElementViewer
+        /// Form to display the contents of a specified semester object.
+        /// </summary>
+        /// <param name="semester"></param>
         private void semesterViewer(Semester semester)
         {
             // elements list
@@ -805,41 +1033,6 @@ namespace Class_Scheduler.Forms
                 new ElementViewer(ref elements, semester.SemesterReference);
             semesterDetails.ShowDialog();
         }
-
-        private void updatePrefixes()
-        {
-            //update coursePrefix list
-            coursePrefixes.Clear();
-            foreach (Course course in courseList)
-            {
-                coursePrefixes.Add(course.coursePrefix);
-            }
-
-            //remove any removed prefixes from priority list
-            List<String> removeList = new List<string>();
-            foreach(String prefix in prioritisedCoursePrefixes)
-            {
-                if (!coursePrefixes.Contains(prefix))
-                    removeList.Add(prefix);
-            }
-            prioritisedCoursePrefixes.RemoveAll(t=>removeList.Contains(t));
-        }
-
-        private void removePrescheduledCourse(Course courseToDelete)
-        {
-            foreach(List<Course> courses in preScheduleDict.Values)
-            {
-                foreach(Course course in courses)
-                {
-                    if (course.Equals(courseToDelete))
-                    {
-                        courses.Remove(courseToDelete);
-                        return;
-                    } 
-                }
-            }
-        }
-
 
     }
 }
