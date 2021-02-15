@@ -33,14 +33,14 @@
             this.overloadableLabel = new System.Windows.Forms.Label();
             this.overloadableCB = new System.Windows.Forms.CheckBox();
             this.labPairGroupingCB = new System.Windows.Forms.CheckBox();
-            this.labpairLabel = new System.Windows.Forms.Label();
+            this.PrioritizeLabpairLabel = new System.Windows.Forms.Label();
             this.lowerLevelCB = new System.Windows.Forms.CheckBox();
             this.prioritizeLowerLevelCourcesLabel = new System.Windows.Forms.Label();
             this.prefixPrioritiesFormButton = new System.Windows.Forms.Button();
             this.prioritizePrefixesCB = new System.Windows.Forms.CheckBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.prioritizePrefixesLabel = new System.Windows.Forms.Label();
             this.delayGradCoursesCB = new System.Windows.Forms.CheckBox();
-            this.gradCoursesLabel = new System.Windows.Forms.Label();
+            this.delayGradCoursesLabel = new System.Windows.Forms.Label();
             this.PriorityLabel = new System.Windows.Forms.Label();
             this.genSchedules = new System.Windows.Forms.Button();
             this.CourseView = new System.Windows.Forms.ListView();
@@ -81,14 +81,14 @@
             this.optionsMenu.Controls.Add(this.overloadableLabel);
             this.optionsMenu.Controls.Add(this.overloadableCB);
             this.optionsMenu.Controls.Add(this.labPairGroupingCB);
-            this.optionsMenu.Controls.Add(this.labpairLabel);
+            this.optionsMenu.Controls.Add(this.PrioritizeLabpairLabel);
             this.optionsMenu.Controls.Add(this.lowerLevelCB);
             this.optionsMenu.Controls.Add(this.prioritizeLowerLevelCourcesLabel);
             this.optionsMenu.Controls.Add(this.prefixPrioritiesFormButton);
             this.optionsMenu.Controls.Add(this.prioritizePrefixesCB);
-            this.optionsMenu.Controls.Add(this.label2);
+            this.optionsMenu.Controls.Add(this.prioritizePrefixesLabel);
             this.optionsMenu.Controls.Add(this.delayGradCoursesCB);
-            this.optionsMenu.Controls.Add(this.gradCoursesLabel);
+            this.optionsMenu.Controls.Add(this.delayGradCoursesLabel);
             this.optionsMenu.Controls.Add(this.PriorityLabel);
             this.optionsMenu.Location = new System.Drawing.Point(588, 12);
             this.optionsMenu.Name = "optionsMenu";
@@ -125,14 +125,14 @@
             this.labPairGroupingCB.TabIndex = 9;
             this.labPairGroupingCB.UseVisualStyleBackColor = true;
             // 
-            // labpairLabel
+            // PrioritizeLabpairLabel
             // 
-            this.labpairLabel.AutoSize = true;
-            this.labpairLabel.Location = new System.Drawing.Point(13, 80);
-            this.labpairLabel.Name = "labpairLabel";
-            this.labpairLabel.Size = new System.Drawing.Size(140, 13);
-            this.labpairLabel.TabIndex = 8;
-            this.labpairLabel.Text = "Prioritize Lab Pair Grouping?";
+            this.PrioritizeLabpairLabel.AutoSize = true;
+            this.PrioritizeLabpairLabel.Location = new System.Drawing.Point(13, 80);
+            this.PrioritizeLabpairLabel.Name = "PrioritizeLabpairLabel";
+            this.PrioritizeLabpairLabel.Size = new System.Drawing.Size(140, 13);
+            this.PrioritizeLabpairLabel.TabIndex = 8;
+            this.PrioritizeLabpairLabel.Text = "Prioritize Lab Pair Grouping?";
             // 
             // lowerLevelCB
             // 
@@ -175,14 +175,14 @@
             this.prioritizePrefixesCB.UseVisualStyleBackColor = true;
             this.prioritizePrefixesCB.CheckedChanged += new System.EventHandler(this.prioritizePrefixesCB_CheckedChanged);
             // 
-            // label2
+            // prioritizePrefixesLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 50);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(92, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Prioritize Prefixes?";
+            this.prioritizePrefixesLabel.AutoSize = true;
+            this.prioritizePrefixesLabel.Location = new System.Drawing.Point(13, 50);
+            this.prioritizePrefixesLabel.Name = "prioritizePrefixesLabel";
+            this.prioritizePrefixesLabel.Size = new System.Drawing.Size(92, 13);
+            this.prioritizePrefixesLabel.TabIndex = 3;
+            this.prioritizePrefixesLabel.Text = "Prioritize Prefixes?";
             // 
             // delayGradCoursesCB
             // 
@@ -193,14 +193,14 @@
             this.delayGradCoursesCB.TabIndex = 2;
             this.delayGradCoursesCB.UseVisualStyleBackColor = true;
             // 
-            // gradCoursesLabel
+            // delayGradCoursesLabel
             // 
-            this.gradCoursesLabel.AutoSize = true;
-            this.gradCoursesLabel.Location = new System.Drawing.Point(10, 33);
-            this.gradCoursesLabel.Name = "gradCoursesLabel";
-            this.gradCoursesLabel.Size = new System.Drawing.Size(157, 13);
-            this.gradCoursesLabel.TabIndex = 1;
-            this.gradCoursesLabel.Text = "Delay Graduate Level Courses?";
+            this.delayGradCoursesLabel.AutoSize = true;
+            this.delayGradCoursesLabel.Location = new System.Drawing.Point(10, 33);
+            this.delayGradCoursesLabel.Name = "delayGradCoursesLabel";
+            this.delayGradCoursesLabel.Size = new System.Drawing.Size(157, 13);
+            this.delayGradCoursesLabel.TabIndex = 1;
+            this.delayGradCoursesLabel.Text = "Delay Graduate Level Courses?";
             // 
             // PriorityLabel
             // 
@@ -297,14 +297,14 @@
             // semesterToolStripMenuItem
             // 
             this.semesterToolStripMenuItem.Name = "semesterToolStripMenuItem";
-            this.semesterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.semesterToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.semesterToolStripMenuItem.Text = "Semester";
             this.semesterToolStripMenuItem.Click += new System.EventHandler(this.semesterToolStripMenuItem_Click);
             // 
             // classToolStripMenuItem
             // 
             this.classToolStripMenuItem.Name = "classToolStripMenuItem";
-            this.classToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.classToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.classToolStripMenuItem.Text = "Course";
             this.classToolStripMenuItem.Click += new System.EventHandler(this.classToolStripMenuItem_Click);
             // 
@@ -486,9 +486,9 @@
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.Button prefixPrioritiesFormButton;
         private System.Windows.Forms.CheckBox prioritizePrefixesCB;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label prioritizePrefixesLabel;
         private System.Windows.Forms.CheckBox delayGradCoursesCB;
-        private System.Windows.Forms.Label gradCoursesLabel;
+        private System.Windows.Forms.Label delayGradCoursesLabel;
         private System.Windows.Forms.Label PriorityLabel;
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem addStripMenuItem;
@@ -497,7 +497,7 @@
         private System.Windows.Forms.CheckBox lowerLevelCB;
         private System.Windows.Forms.Label prioritizeLowerLevelCourcesLabel;
         private System.Windows.Forms.CheckBox labPairGroupingCB;
-        private System.Windows.Forms.Label labpairLabel;
+        private System.Windows.Forms.Label PrioritizeLabpairLabel;
         private System.Windows.Forms.Label overloadableLabel;
         private System.Windows.Forms.CheckBox overloadableCB;
         private System.Windows.Forms.ToolStripMenuItem scheduleCoursesToolStripMenuItem;

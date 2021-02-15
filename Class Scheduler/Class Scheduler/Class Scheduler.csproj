@@ -137,6 +137,7 @@
     </Compile>
     <Compile Include="StaticClasses\ScheduleOptimizer.cs" />
     <Compile Include="StaticClasses\tools.cs" />
+    <Compile Include="Tooltips\MainTooltips.cs" />
     <EmbeddedResource Include="Forms\AutoGen\AutoGenElectives.resx">
       <DependentUpon>AutoGenElectives.cs</DependentUpon>
     </EmbeddedResource>

@@ -12,6 +12,7 @@ using Class_Scheduler.Forms.CourseForms;
 using Class_Scheduler.Forms.SemesterForms;
 using Class_Scheduler.StaticClasses;
 using Class_Scheduler.Forms.AutoGen;
+using Class_Scheduler.Tooltips;
 
 namespace Class_Scheduler.Forms
 {
@@ -29,7 +30,7 @@ namespace Class_Scheduler.Forms
         private List<String> prioritisedCoursePrefixes;  // List of course Prefixes in prioritized order
         private Dictionary<Semester, List<Course>> preScheduleDict;  // Dictionary containing Semester -> presheduled courses
         // Tool Tips
-        private ToolTip overloadable;
+        private ToolTip toolTips;
 
         public MainForm()
         {
@@ -51,12 +52,24 @@ namespace Class_Scheduler.Forms
             EditElementMenuStrip.Enabled = false;
 
             //tool tip laod
-            overloadable = new ToolTip();
-            overloadable.SetToolTip(overloadableLabel,
-                "Enabling Overloading will attempt to push up to one course into each semester\n" +
-                "going beyond the set maximum credits set for the semester. This will occur post\n" +
-                "schedule creation and can serve to balance the schedule if many simpler courses\n" +
-                "have been added to the end of the curiculum. Only valid for overloadable semesters.\n");
+            toolTips = new ToolTip();
+            
+            semesterToolStripMenuItem.ToolTipText = MainTooltips.addSemesterTT;
+            classToolStripMenuItem.ToolTipText = MainTooltips.addCourseTT;
+            classListToTxtFileToolStripMenuItem.ToolTipText = MainTooltips.saveCourseListTT;
+            semesterListToTxtFileToolStripMenuItem.ToolTipText = MainTooltips.saveSemesterListTT;
+            classListFromTxtFileToolStripMenuItem.ToolTipText = MainTooltips.loadCourseListTT;
+            semesterListFromTxtFileToolStripMenuItem.ToolTipText = MainTooltips.loadSemesterListTT;
+            semestersToolStripMenuItem.ToolTipText = MainTooltips.generatSemestersTT;
+            electivesToolStripMenuItem.ToolTipText = MainTooltips.generateElectiveTT;
+
+            toolTips.SetToolTip(delayGradCoursesLabel, MainTooltips.delayGradTT);
+            toolTips.SetToolTip(prioritizePrefixesLabel, MainTooltips.prioritizePrefixes);
+            toolTips.SetToolTip(prioritizeLowerLevelCourcesLabel, MainTooltips.prioritizeLowerLevelTT);
+            toolTips.SetToolTip(PrioritizeLabpairLabel, MainTooltips.prioritizeLabPairTT);
+            toolTips.SetToolTip(overloadableLabel, MainTooltips.overloadableTT);
+            toolTips.SetToolTip(genSchedules, MainTooltips.generateTT);
+
 
         }
 
